@@ -51,6 +51,9 @@ git checkout dev
 # pull the last version of dev
 git pull origin dev
 
+# add your branch to dev
+git merge <branch_name>
+
 # push to dev
 git push origin dev
 ```
