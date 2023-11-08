@@ -1,6 +1,16 @@
-sourceCompatibility = 1.7
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+apply plugin: "java"
 
-sourceSets.main.java.srcDirs = [ "src/" ]
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-eclipse.project.name = appName + "-core"
+dependencies {
+    implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+    implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+    implementation "org.apache.commons:commons-csv:1.5"
+}
+
+sourceSets.main.java.srcDirs = ["src/"]
+
+eclipse {
+    project.name = appName + "-core"
+}
