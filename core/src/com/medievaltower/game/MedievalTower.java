@@ -4,14 +4,13 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-
-import java.io.IOException;
+import com.medievaltower.levels.Map;
 
 public class MedievalTower extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 
-	MapManager mapManager;
+	Map mapManager;
 	
 	@Override
 	public void create () {
@@ -19,14 +18,8 @@ public class MedievalTower extends ApplicationAdapter {
 		img = new Texture("badlogic.jpg");
 
 		// Create the MapManager instance
-		mapManager = new MapManager();
-
-		// Try to create the map
-		try {
-			mapManager.create();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		mapManager = new Map();
+		mapManager.test();
 	}
 
 	@Override
