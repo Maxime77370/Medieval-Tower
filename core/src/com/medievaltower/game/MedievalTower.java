@@ -5,14 +5,28 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.io.IOException;
+
 public class MedievalTower extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
+
+	MapManager mapManager;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
+
+		// Create the MapManager instance
+		mapManager = new MapManager();
+
+		// Try to create the map
+		try {
+			mapManager.create();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

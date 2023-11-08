@@ -1,54 +1,64 @@
 package com.medievaltower.game;
 
 import com.badlogic.gdx.Gdx;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
 
 import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class MapManager {
 
-    private int[][][] map; // map[x][y][z], z for drawing decoration in another block
+    private int[][][] map; // map[x][y][z], where z = 0 for the base layer, z = 1 for the first decoration layer, and z = 2 for the second decoration layer
 
     public MapManager() {
         int xSize = 10; // Specify the size you need
         int ySize = 10; // Specify the size you need
         int zSize = 3; // Specify the size you need
-        map = new int[xSize][ySize][zSize];
     }
-
 
     public int[][][] getMap() {
         return this.map;
     }
 
-    public void setMap(String mapNumber) throws IOException{
-        String path = "Map/" + mapNumber + ".csv";
-        System.out.println(System.getProperty("user.dir"));
-        System.out.println(Gdx.files.internal(path));
-        try (
-                Reader reader = Files.newBufferedReader(Paths.get(path));
-                CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
-        ) {
-            for (CSVRecord csvRecord : csvParser) {
-                // Accessing Values by Column Index
-                String name = csvRecord.get(0);
-                String email = csvRecord.get(1);
-                String phone = csvRecord.get(2);
-                String country = csvRecord.get(3);
+    public void setMap(String mapNumber) {
 
-                System.out.println("Record No - " + csvRecord.getRecordNumber());
-                System.out.println("---------------");
-                System.out.println("Name : " + name);
-                System.out.println("Email : " + email);
-                System.out.println("Phone : " + phone);
-                System.out.println("Country : " + country);
-                System.out.println("---------------\n\n");
+        // get name of different map type
+        String[] paths = {"block", "decoration", "item"};
+
+        // reset map
+        this.map = null;
+
+        // load map each per each path
+        int z = 0;
+        for (String path : paths) {
+            String path_block = "Maps/" + mapNumber + "/" + path + ".csv";
+
+            // read map file
+            FileHandle handle = Gdx.files.internal(path_block);
+            String text = handle.readString();
+
+            // split map file into lines and elements
+            String[] lines = text.split("\\n");
+            String[] elements = lines[0].split(",");
+
+            // init map
+            if (this.map == null) {
+                this.map = new int[lines.length][elements.length][3];
             }
+
+            int x = 0;
+            int y = 0;
+
+            // set map
+            for (String line : lines) {
+                for (String element : elements) {
+                    map[y][x][z] = Integer.parseInt(element);
+                    x++;
+                }
+                x = 0;
+                y++;
+            }
+            z++;
         }
     }
 
@@ -60,9 +70,17 @@ public class MapManager {
         this.map[x][y][z] = elementId;
     }
 
-    public static void main(String[] args) throws IOException {
-        AssetManager assetManager = new AssetManager();
-        MapManager mapManager = new MapManager();
-        mapManager.setMap("1");
+    public void create() throws IOException {
+        // Create the asset manager
+        AssetManager assetManager = Assets.getInstance();
+
+        // Load the map data
+        setMap("1");
+
+        System.out.println(getElement(0, 0, 0));
+        System.out.println(getElement(0, 0, 1));
+        System.out.println(getElement(0, 0, 2));
+
+        System.out.println(getMap()[0][0][0]);
     }
 }
