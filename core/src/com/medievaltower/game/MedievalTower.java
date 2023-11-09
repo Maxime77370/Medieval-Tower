@@ -31,31 +31,29 @@ public class MedievalTower extends ApplicationAdapter {
 		camera.update();
 	}
 
-	@Override
-	public void render() {
-		// Effacez l'écran
-		ScreenUtils.clear(1, 0, 0, 1);
+		@Override
+		public void render () {
+			// Effacez l'écran
+			ScreenUtils.clear(1, 0, 0, 1);
 
-		// Mettez à jour la position de la caméra pour suivre le personnage
-		camera.position.set(personnage.getX() + personnage.getWidth() / 2, personnage.getY() + personnage.getHeight() / 2, 0);
-		camera.update();
+			// Mettez à jour la position de la caméra pour suivre le personnage
+			camera.position.set(personnage.getX() + personnage.getWidth() / 2, personnage.getY() + personnage.getHeight() / 2, 0);
+			camera.update();
 
-		// Passez la matrice de projection de la caméra au SpriteBatch
-		batch.setProjectionMatrix(camera.combined);
+			// Passez la matrice de projection de la caméra au SpriteBatch
+			batch.setProjectionMatrix(camera.combined);
 
-		// Commencez le dessin
-		batch.begin();
-		batch.draw(personnage.getSprite(), personnage.getX(), personnage.getY());
-		batch.end();
+			// Commencez le dessin
+			batch.begin();
+			batch.draw(personnage.getSprite(), personnage.getX(), personnage.getY());
+			batch.end();
+		}
+
+		@Override
+		public void dispose () {
+			batch.dispose();
+			img.dispose();
+			// N'oubliez pas de disposer de la texture du personnage lorsque vous en avez fini avec elle.
+			personnage.getSprite().getTexture().dispose();
+		}
 	}
-
-	@Override
-	public void dispose() {
-		batch.dispose();
-		img.dispose();
-		// N'oubliez pas de disposer de la texture du personnage lorsque vous en avez fini avec elle.
-		personnage.getSprite().getTexture().dispose();
-	}
-
-
-}
