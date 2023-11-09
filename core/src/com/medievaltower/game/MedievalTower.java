@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.medievaltower.core.EntityManager;
 import com.medievaltower.entities.Personnage;
+import com.medievaltower.entities.monster.Bat;
+import com.medievaltower.entities.monster.Zombie;
 
 
 public class MedievalTower extends ApplicationAdapter {
@@ -15,6 +17,8 @@ public class MedievalTower extends ApplicationAdapter {
 	// Déclarez la caméra
 	private Camera camera;
 	private Personnage personnage;
+	private Zombie zombie;
+	private Bat bat;
 
 	private EntityManager entityManager;
 	@Override
@@ -28,6 +32,14 @@ public class MedievalTower extends ApplicationAdapter {
 		personnage = new Personnage(0, 0);
 		entityManager.newEntitie(personnage);
 
+		// Créez un zombie avec une position initiale de (100, 100)
+		zombie = new Zombie(50, 50);
+		entityManager.newEntitie(zombie);
+
+		// Créez une chauve-souris avec une position initiale de (200, 200)
+		bat = new Bat(200, 200);
+		entityManager.newEntitie(bat);
+
 		camera = new Camera();
 
 	}
@@ -37,8 +49,8 @@ public class MedievalTower extends ApplicationAdapter {
 		// Effacez l'écran
 		ScreenUtils.clear(1, 0, 0, 1);
 
-		// Mettez à jour la position du personnage
-		personnage.update(); // Assurez-vous que vous avez une méthode pour mettre à jour la position du personnage
+		// Mettez à jour les entités
+		entityManager.update();
 
 		// Appelez camera.update() pour mettre à jour la matrice de projection de la caméra
 		camera.update();
@@ -49,6 +61,8 @@ public class MedievalTower extends ApplicationAdapter {
 		// Commencez le dessin
 		batch.begin();
 		batch.draw(personnage.getSprite(), personnage.getX(), personnage.getY());
+		batch.draw(zombie.getSprite(), zombie.getX(), zombie.getY());
+		batch.draw(bat.getSprite(), bat.getX(), bat.getY());
 		batch.end();
 
 	}
@@ -59,5 +73,7 @@ public class MedievalTower extends ApplicationAdapter {
 		img.dispose();
 		// N'oubliez pas de disposer de la texture du personnage lorsque vous en avez fini avec elle.
 		personnage.getSprite().getTexture().dispose();
+		zombie.getSprite().getTexture().dispose();
+		bat.getSprite().getTexture().dispose();
 	}
 }
