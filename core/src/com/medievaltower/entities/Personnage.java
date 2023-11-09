@@ -11,21 +11,22 @@ import com.medievaltower.core.AttackableEntity;
 import com.medievaltower.core.Direction;
 import com.medievaltower.core.Entity;
 import com.medievaltower.core.MovableEntity;
-import com.medievaltower.levels.Level;
 
 import java.util.WeakHashMap;
 
 public class Personnage extends Entity implements MovableEntity, AttackableEntity {
 
+    private static final int GRAVITY = 12;
+    private static final int JUMP_FORCE = 20;
     private static Personnage instance = null;
-
+    private final int speed = 20;
+    private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
+    private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
+    private boolean isJumping = false;
     private int health = 3;
-    private final int speed = 1;
     private Weapon weaponEquipped = null;
     private Potion potionEquipped = null;
     private Cle cleEquipped = null;
-    private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
-    private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
     private Direction currentDirection = Direction.NONE;
 
     public Personnage(int x, int y) {
@@ -54,13 +55,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         return instance;
     }
 
-    public static Personnage getInstance() {
-        if (instance == null) {
-            instance = new Personnage(0, 0);
-        }
-        return instance;
-    }
-
     public void move() {
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             this.currentDirection = Direction.UP;
@@ -75,16 +69,33 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         }
     }
 
-    public void updatePosition() {
-        if (this.currentDirection == Direction.UP) {
-            this.y += this.speed;
-        } else if (this.currentDirection == Direction.DOWN) {
-            this.y -= this.speed;
-        } else if (this.currentDirection == Direction.LEFT) {
+    public void update() {
+        // Move the personnage character based on the player's input and gravity
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             this.x -= this.speed;
-        } else if (this.currentDirection == Direction.RIGHT) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             this.x += this.speed;
         }
+
+        // Apply gravity to the personnage character
+        this.y -= this.gravity;
+
+        // Check if the personnage character is below the ground
+        if (this.y < 0) {
+            this.isJumping = false;
+            this.y = 0;
+        }
+
+        // Check for jumping
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            this.jump();
+        }
+    }
+
+    private void jump() {
+        // Simulate the jump by adjusting the y coordinate
+        this.isJumping = true;
+        this.y += this.jumpSpeed;
     }
 
     public void attack() {
