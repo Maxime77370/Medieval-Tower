@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.medievaltower.levels.Map;
 
+import com.medievaltower.game.Screen;
+
+import
+
 public class MedievalTower extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
@@ -14,9 +18,7 @@ public class MedievalTower extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-
+		Screen screen = new Screen();
 		// Create the MapManager instance
 		mapManager = new Map();
 		mapManager.test();
