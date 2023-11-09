@@ -1,4 +1,4 @@
-package com.medievaltower.entities;
+package com.medievaltower.entities.weapon;
 
 import com.medievaltower.core.CollectableEntity;
 

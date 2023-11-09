@@ -1,9 +1,10 @@
-package com.medievaltower.entities;
+package com.medievaltower.entities.monster;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.medievaltower.core.AttackableEntity;
 import com.medievaltower.core.Entity;
 import com.medievaltower.core.MovableEntity;
+import com.medievaltower.entities.Personnage;
 
 public abstract class Monstre extends Entity implements AttackableEntity, MovableEntity {
     private int speed = 1;
