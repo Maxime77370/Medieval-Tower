@@ -1,4 +1,4 @@
 package com.medievaltower.entities;
 
-public class Monstre {
+public abstract class Monstre {
 }

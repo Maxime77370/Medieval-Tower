@@ -1,4 +1,4 @@
 package com.medievaltower.entities;
 
-public class Potion {
+public abstract class Potion {
 }
