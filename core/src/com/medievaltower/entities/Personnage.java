@@ -31,6 +31,11 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private Potion potionEquipped = null;
     private Cle cleEquipped = null;
     private Direction currentDirection = Direction.NONE;
+    private boolean isSliding = false;
+    private boolean isSlow = false;
+    private boolean isInvincible = false;
+    private float invincibleTimer = 0;
+    private float invincibleDuration = 3;
 
     public Personnage(int x, int y) {
         super(x, y, 50, 50, new Sprite());
@@ -83,6 +88,10 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             this.x += this.speed;
         }
+        // Make th personnage down if the player is pressing the down key
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            this.y -= this.speed;
+        }
 
         if (isJumping) {
             // Si le personnage est en train de sauter, mettez à jour la position verticale
@@ -101,6 +110,13 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && !isJumping) {
             this.jump();
         }
+
+        if (isInvincible) {
+            invincibleTimer -= Gdx.graphics.getDeltaTime();
+            if (invincibleTimer <= 0) {
+                isInvincible = false; // Fin de l'invincibilité
+            }
+        }
     }
 
     private void jump() {
@@ -116,10 +132,20 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     public void receiveDamage(int damage) {
-        this.health -= damage;
-        if (this.health < 0) {
-            this.health = 0;
+        if (!this.isInvincible) {
+            this.health -= damage;
+            if (this.health < 0) {
+                this.health = 0;
+            }
+            // Active l'invincibilité après avoir subi des dégâts
+            activateInvincibility();
         }
+    }
+
+    // Méthode pour activer l'invincibilité
+    private void activateInvincibility() {
+        this.isInvincible = true;
+        this.invincibleTimer = invincibleDuration; // Réinitialise le timer pour la durée spécifiée
     }
 
     public void addWeapon(Weapon weapon) {
@@ -212,5 +238,25 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     public void setCleEquipped(Cle cle) {
         this.cleEquipped = cle;
+    }
+
+    public void setSliding(boolean b) {
+        this.isSliding = b;
+        if (b) {
+            // Upgrade the speed and make the personnage character slide
+            this.speed = 40;
+        } else {
+            this.speed = 20;
+        }
+    }
+
+    public void setSlow(boolean b) {
+        this.isSlow = b;
+        if (b) {
+            // Upgrade the speed and make the personnage character slide
+            this.speed = 10;
+        } else {
+            this.speed = 20;
+        }
     }
 }
