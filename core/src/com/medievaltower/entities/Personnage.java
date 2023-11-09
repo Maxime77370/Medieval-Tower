@@ -11,6 +11,7 @@ import com.medievaltower.core.AttackableEntity;
 import com.medievaltower.core.Direction;
 import com.medievaltower.core.Entity;
 import com.medievaltower.core.MovableEntity;
+import com.medievaltower.levels.Level;
 
 import java.util.WeakHashMap;
 

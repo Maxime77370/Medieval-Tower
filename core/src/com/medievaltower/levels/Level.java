@@ -1,4 +1,6 @@
 package com.medievaltower.levels;
 
-public class Level {
+import com.medievaltower.game.Game;
+
+public abstract class Level extends Game {
 }

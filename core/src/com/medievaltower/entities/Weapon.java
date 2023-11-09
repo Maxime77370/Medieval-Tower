@@ -1,5 +1,7 @@
 package com.medievaltower.entities;
 
-public class Weapon {
+import com.medievaltower.core.CollectableEntity;
+
+public abstract class Weapon implements CollectableEntity {
 
 }
