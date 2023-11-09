@@ -7,7 +7,7 @@ import com.medievaltower.core.Entity;
 public class Cle extends Entity implements CollectableEntity {
 
     public Cle(int x, int y) {
-        super(x, y, 1, 1, new Sprite());
+        super(x, y, 50, 50, new Sprite());
     }
 
     @Override
