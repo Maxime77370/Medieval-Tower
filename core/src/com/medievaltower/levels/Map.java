@@ -2,52 +2,53 @@ package com.medievaltower.levels;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.medievaltower.entities.Constant;
+import com.medievaltower.entities.bloc.Bloc;
 
 public class Map extends Level{
 
-    private int[][][] map; // map[x][y][z], where z = 0 for the base layer, z = 1 for the first decoration layer, and z = 2 for the second decoration layer
-
+    private String[] paths = {"block", "decoration", "item"}; // get name of different mapId type
+    private int[][][] mapId; // mapId[x][y][z], where z = 0 for the base layer, z = 1 for the first decoration layer, and z = 2 for the second decoration layer
+    private Bloc[][][] map; // mapId[x][y][z], where z = 0 for the base layer, z = 1 for the first decoration layer, and z = 2 for the second decoration layer
+    private Constant constantElements = new Constant();
     public Map() {
-        this.map = null;
+        this.mapId = null;
     }
 
-    public int[][][] getMap() {
-        return this.map;
+    public int[][][] getIdMap() {
+        return this.mapId;
     }
 
-    public void setMap(String mapNumber) {
+    public void setIdMap(String mapIdNumber) {
 
-        // get name of different map type
-        String[] paths = {"block", "decoration", "item"};
+        // reset mapId
+        this.mapId = null;
 
-        // reset map
-        this.map = null;
-
-        // load map each per each path
+        // load mapId each per each path
         int z = 0;
         for (String path : paths) {
-            String path_block = "Maps/" + mapNumber + "/" + path + ".csv";
+            String path_block = "mapIds/" + mapIdNumber + "/" + path + ".csv";
 
-            // read map file
+            // read mapId file
             FileHandle handle = Gdx.files.internal(path_block);
             String text = handle.readString();
 
-            // split map file into lines and elements
+            // split mapId file into lines and elements
             String[] lines = text.split("\\n");
             String[] elements = lines[0].split(",");
 
-            // init map
-            if (this.map == null) {
-                this.map = new int[lines.length][elements.length][3];
+            // init mapId
+            if (this.mapId == null) {
+                this.mapId = new int[lines.length][elements.length][3];
             }
 
             int x = 0;
             int y = 0;
 
-            // set map
+            // set mapId
             for (String line : lines) {
                 for (String element : elements) {
-                    map[y][x][z] = Integer.parseInt(element);
+                    mapId[y][x][z] = Integer.parseInt(element);
                     x++;
                 }
                 x = 0;
@@ -57,24 +58,61 @@ public class Map extends Level{
         }
     }
 
-    public int getElement(int x, int y, int z) {
-        return map[x][y][z];
+    public int getIdElement(int x, int y, int z) {
+        return mapId[y][x][z];
     }
 
-    public void setElement(int x, int y, int z, int elementId) {
-        this.map[x][y][z] = elementId;
+    public void setIdElement(int x, int y, int z, int elementId) {
+        this.mapId[y][x][z] = elementId;
     }
 
+    public void setMap(){
+        this.map = null;
+        this.map = new Bloc[mapId.length][mapId[0].length][3];
+        for(int y = 0; y < mapId.length; y++){
+            for(int x = 0; x < mapId[0].length; x++){
+                for(int z = 0; z < mapId[0][0].length; z++){
+                    this.map[y][x][0] = constantElements.newBloc(mapId[y][x][z], x, y);
+                }
+            }
+        }
+    }
+
+    public Bloc[][][] getMap(){
+        return this.map;
+    }
+
+    public void setElements(int x, int y, int z, int id){
+        this.map[y][x][z] = constantElements.newBloc(id, x, y);
+    }
+
+    public void setElements(int x, int y, int z, Bloc element){
+        this.map[y][x][z] = element;
+    }
+
+    public Bloc getElements(int x, int y, int z){
+        return this.map[y][x][z];
+    }
+
+    public void update(){
+        for(int y = 0; y < mapId.length; y++){
+            for(int x = 0; x < mapId[0].length; x++){
+                for(int z = 0; z < mapId[0][0].length; z++){
+                    this.map[y][x][0].update();
+                }
+            }
+        }
+    }
     public void test() {
 
-        // Load the map data
-        setMap("1");
+        // Load the mapId data
+        setIdMap("1");
 
-        System.out.println(getElement(0, 0, 0));
-        System.out.println(getElement(0, 0, 1));
-        System.out.println(getElement(0, 0, 2));
+        System.out.println(getIdElement(0, 0, 0));
+        System.out.println(getIdElement(0, 0, 1));
+        System.out.println(getIdElement(0, 0, 2));
 
-        setElement(0,0,0,1);
-        System.out.println(getMap()[0][0][0]);
+        setIdElement(0,0,0,1);
+        System.out.println(getIdMap()[0][0][0]);
     }
 }

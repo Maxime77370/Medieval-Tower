@@ -2,7 +2,6 @@ package com.medievaltower.entities.bloc;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.medievaltower.core.Entity;
-import com.medievaltower.entities.Personnage;
 
 public abstract class Bloc extends Entity {
 
