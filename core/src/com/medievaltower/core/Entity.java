@@ -2,6 +2,7 @@ package com.medievaltower.core;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
+
 public abstract class Entity {
 
     protected int x;
@@ -16,6 +17,8 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
         this.sprite = sprite;
+
+        EntityManager entityManager = EntityManager.getInstance();
     }
 
     public int getX() {
@@ -38,5 +41,5 @@ public abstract class Entity {
         return this.height;
     }
 
-
+    public abstract void update();
 }

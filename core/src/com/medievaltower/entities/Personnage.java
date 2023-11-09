@@ -2,7 +2,11 @@ package com.medievaltower.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.medievaltower.core.AttackableEntity;
 import com.medievaltower.core.Direction;
 import com.medievaltower.core.Entity;
@@ -25,7 +29,22 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     public Personnage(int x, int y) {
         super(x, y, 50, 50, new Sprite());
+
+        // Créez une texture 1x1 de couleur verte
+        Pixmap pixmap = new Pixmap(this.getWidth(), this.getHeight(), Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.GREEN);
+        pixmap.fill();
+
+        // Créez une texture à partir du pixmap
+        Texture texture = new Texture(pixmap);
+
+        // Définissez la texture du sprite
+        getSprite().setRegion(new TextureRegion(texture));
+
+        // N'oubliez pas de disposer du pixmap
+        pixmap.dispose();
     }
+
 
     public static Personnage getInstance() {
         if (instance == null) {
@@ -154,6 +173,11 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
                 this.potionInventory.remove(potion);
             }
         }
+    }
+
+    public void update() {
+        move();
+        updatePosition();
     }
 
     public Cle getCleEquipped() {
