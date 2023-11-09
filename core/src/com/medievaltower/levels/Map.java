@@ -3,7 +3,7 @@ package com.medievaltower.levels;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
-public class Map {
+public class Map extends Level{
 
     private int[][][] map; // map[x][y][z], where z = 0 for the base layer, z = 1 for the first decoration layer, and z = 2 for the second decoration layer
 

@@ -1,4 +1,6 @@
 package com.medievaltower.entities;
 
-public abstract class Potion {
+import com.medievaltower.core.CollectableEntity;
+
+public abstract class Potion implements CollectableEntity {
 }
