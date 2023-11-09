@@ -1,4 +1,4 @@
-package com.medievaltower.entities;
+package com.medievaltower.entities.bloc;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.medievaltower.core.Entity;

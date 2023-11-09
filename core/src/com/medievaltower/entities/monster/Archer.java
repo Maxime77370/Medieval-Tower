@@ -1,4 +1,4 @@
-package com.medievaltower.entities;
+package com.medievaltower.entities.monster;
 
 public class Archer extends Monstre {
 

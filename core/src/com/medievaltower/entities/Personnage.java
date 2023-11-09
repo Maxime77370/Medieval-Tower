@@ -11,6 +11,8 @@ import com.medievaltower.core.AttackableEntity;
 import com.medievaltower.core.Direction;
 import com.medievaltower.core.Entity;
 import com.medievaltower.core.MovableEntity;
+import com.medievaltower.entities.potion.Potion;
+import com.medievaltower.entities.weapon.Weapon;
 
 import java.util.WeakHashMap;
 

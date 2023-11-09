@@ -1,6 +1,6 @@
-package com.medievaltower.entities;
+package com.medievaltower.entities.monster;
 
-public class Bat extends Monstre{
+public class Bat extends Monstre {
     public Bat(int x, int y) {
         super(x, y);
     }
