@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.medievaltower.core.EntityManager;
 import com.medievaltower.entities.Personnage;
+import com.medievaltower.entities.monster.Archer;
 import com.medievaltower.entities.monster.Bat;
 import com.medievaltower.entities.monster.Zombie;
 
@@ -19,6 +20,7 @@ public class MedievalTower extends ApplicationAdapter {
 	private Personnage personnage;
 	private Zombie zombie;
 	private Bat bat;
+	private Archer archer;
 
 	private EntityManager entityManager;
 	@Override
@@ -39,6 +41,9 @@ public class MedievalTower extends ApplicationAdapter {
 		// Créez une chauve-souris avec une position initiale de (200, 200)
 		bat = new Bat(200, 200);
 		entityManager.newEntitie(bat);
+
+		archer = new Archer(500, 50);
+		entityManager.newEntitie(archer);
 
 		camera = new Camera();
 
@@ -63,6 +68,7 @@ public class MedievalTower extends ApplicationAdapter {
 		batch.draw(personnage.getSprite(), personnage.getX(), personnage.getY());
 		batch.draw(zombie.getSprite(), zombie.getX(), zombie.getY());
 		batch.draw(bat.getSprite(), bat.getX(), bat.getY());
+		batch.draw(archer.getSprite(), archer.getX(), archer.getY());
 		batch.end();
 
 	}
@@ -75,5 +81,6 @@ public class MedievalTower extends ApplicationAdapter {
 		personnage.getSprite().getTexture().dispose();
 		zombie.getSprite().getTexture().dispose();
 		bat.getSprite().getTexture().dispose();
+		archer.getSprite().getTexture().dispose();
 	}
 }

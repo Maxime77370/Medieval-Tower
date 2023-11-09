@@ -1,12 +1,42 @@
 package com.medievaltower.entities.monster;
 
-public class Archer extends Monstre {
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+public class Archer extends Monstre {
     public Archer(int x, int y) {
         super(x, y);
+
+        // Créez une texture 1x1 de couleur verte
+        Pixmap pixmap = new Pixmap(this.getWidth(), this.getHeight(), Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.WHITE);
+        pixmap.fill();
+
+        // Créez une texture à partir du pixmap
+        Texture texture = new Texture(pixmap);
+
+        // Définissez la texture du sprite
+        getSprite().setRegion(new TextureRegion(texture));
+
+        // N'oubliez pas de disposer du pixmap
+        pixmap.dispose();
+
     }
+
     @Override
     public void move() {
+        this.x += speed;
+        if (this.x >= 800) {
+            speed = -speed;
+        } else if (this.x <= 0) {
+            speed = Math.abs(speed);
+        }
+    }
+
+    public void ai() {
+        // TODO: Implémentez l'IA du zombie
     }
 
     @Override
@@ -21,6 +51,6 @@ public class Archer extends Monstre {
 
     @Override
     public void update() {
-
+        this.move();
     }
 }
