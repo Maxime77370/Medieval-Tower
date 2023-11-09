@@ -44,6 +44,12 @@ public class Bat extends Monstre {
         // Définissez la nouvelle position y
         this.y = (int) newY;
 
+        this.x += speed;
+        if (this.x >= 400) {
+            speed = -speed;
+        } else if (this.x <= 0) {
+            speed = Math.abs(speed);
+        }
         // Mettez à jour le temps écoulé
         timeElapsed += deltaTime;
     }
