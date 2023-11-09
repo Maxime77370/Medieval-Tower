@@ -21,7 +21,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private static final float JUMP_FORCE = 22f;
     private static final float GRAVITY = 0.9f;
     private static Personnage instance;
-    private final int speed = 20;
+    private int speed = 20;
     private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
     private boolean isJumping = false;
