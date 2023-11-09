@@ -7,7 +7,7 @@ import com.medievaltower.core.MovableEntity;
 import com.medievaltower.entities.Personnage;
 
 public abstract class Monstre extends Entity implements AttackableEntity, MovableEntity {
-    private int speed = 1;
+    protected int speed = 2;
     public Monstre(int x, int y) {
         super(x, y, 50, 50, new Sprite());
     }
@@ -15,13 +15,7 @@ public abstract class Monstre extends Entity implements AttackableEntity, Movabl
     public void update() {
     }
 
-    @Override
-    public void move() {
-        this.x += 5 + speed;
-        if (this.x >= 100) {
-            speed = -speed;
-        } else if
+    public void move(){ }
 
-        }
-    }
+
 }

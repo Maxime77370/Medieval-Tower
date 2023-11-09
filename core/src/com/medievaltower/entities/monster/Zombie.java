@@ -27,6 +27,16 @@ public class Zombie extends Monstre {
 
     @Override
     public void move() {
+        this.x += speed;
+        if (this.x >= 100) {
+            speed = -speed;
+        } else if (this.x <= 0) {
+            speed = Math.abs(speed);
+        }
+    }
+
+    public void ai() {
+        // TODO: Implémentez l'IA du zombie
     }
 
     @Override
@@ -41,6 +51,6 @@ public class Zombie extends Monstre {
 
     @Override
     public void update() {
-
+        this.move();
     }
 }
