@@ -8,4 +8,19 @@ public class Bat extends Monstre{
     @Override
     public void move() {
     }
+
+    @Override
+    public void attack() {
+
+    }
+
+    @Override
+    public void receiveDamage(int damage) {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
 }
