@@ -7,4 +7,8 @@ public abstract class Monstre extends Personnage implements AttackableEntity, Mo
     public Monstre(int x, int y) {
         super(x, y);
     }
+
+    @Override
+    public void move() {
+    }
 }
