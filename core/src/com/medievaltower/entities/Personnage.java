@@ -16,13 +16,14 @@ import java.util.WeakHashMap;
 
 public class Personnage extends Entity implements MovableEntity, AttackableEntity {
 
-    private static final int GRAVITY = 12;
-    private static final int JUMP_FORCE = 20;
+    private static final float JUMP_FORCE = 22f;
+    private static final float GRAVITY = 0.9f;
     private static Personnage instance = null;
     private final int speed = 20;
     private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
     private boolean isJumping = false;
+    private float yVelocity = 0;
     private int health = 3;
     private Weapon weaponEquipped = null;
     private Potion potionEquipped = null;
@@ -77,17 +78,21 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.x += this.speed;
         }
 
-        // Apply gravity to the personnage character
-        this.y -= Personnage.GRAVITY;
+        if (isJumping) {
+            // Si le personnage est en train de sauter, mettez à jour la position verticale
+            this.y += yVelocity;
+            yVelocity -= GRAVITY; // Applique la gravité pour modifier la vitesse de descente du saut
+        }
 
         // Check if the personnage character is below the ground
-        if (this.y < 0) {
+        if (this.y <= 0) { // Changement ici pour inclure le contact avec le sol
             this.isJumping = false;
             this.y = 0;
+            yVelocity = 0; // Réinitialise la vitesse de saut lorsque le personnage touche le sol
         }
 
         // Check for jumping
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && !isJumping) {
             this.jump();
         }
     }
@@ -95,7 +100,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private void jump() {
         // Simulate the jump by adjusting the y coordinate
         this.isJumping = true;
-        this.y += Personnage.JUMP_FORCE;
+        yVelocity = JUMP_FORCE; // Définit la vitesse initiale du saut
+        this.y += yVelocity; // Applique le mouvement initial du saut
     }
 
     public void attack() {
