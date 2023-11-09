@@ -2,6 +2,7 @@ package com.medievaltower.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
 import com.medievaltower.entities.Personnage;
 
 public class Camera {
@@ -25,8 +26,9 @@ public class Camera {
 
 
     public void update() {
+
         float range = 0.8f; // 80% de la largeur de l'écran
-        float smoothRange = 0.5f; // 50% de la largeur de l'écran
+        float cameraSpeed = 2.0f;
 
         // Empêchez la caméra de sortir de la zone de l'écran
         float xDelta = personnage.getX() - camera.position.x;
@@ -44,6 +46,10 @@ public class Camera {
         else if (yDelta > camera.viewportHeight / 2) {
             camera.position.y = personnage.getY() - camera.viewportHeight / 2 + personnage.getHeight();
         }
+
+        // Lissage de la caméra (interpolation linéaire)
+        camera.position.x = MathUtils.lerp(camera.position.x, personnage.getX() + personnage.getWidth() / 2, cameraSpeed * Gdx.graphics.getDeltaTime());
+        camera.position.y = MathUtils.lerp(camera.position.y, personnage.getY() + personnage.getHeight() / 2, cameraSpeed * Gdx.graphics.getDeltaTime());
 
         // Mettez à jour la caméra
         camera.update();
