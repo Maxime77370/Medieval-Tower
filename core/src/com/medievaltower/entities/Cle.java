@@ -17,4 +17,7 @@ public class Cle extends Entity implements CollectableEntity {
         }
     }
 
+    public void update() {
+    }
+
 }
