@@ -12,20 +12,29 @@ import java.util.WeakHashMap;
 
 public class Personnage extends Entity implements MovableEntity, AttackableEntity {
 
+    private static Personnage instance = null;
+
     private int health = 3;
-    private int speed = 1;
+    private final int speed = 1;
     private Weapon weaponEquipped = null;
     private Potion potionEquipped = null;
-    private WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
-    private WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
+    private Cle cleEquipped = null;
+    private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
+    private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
     private Direction currentDirection = Direction.NONE;
 
     public Personnage(int x, int y) {
         super(x, y, 50, 50, new Sprite());
     }
 
+    public static Personnage getInstance() {
+        if (instance == null) {
+            instance = new Personnage(0, 0);
+        }
+        return instance;
+    }
+
     public void move() {
-        // Gérer le mouvement sans mettre à jour directement les coordonnées
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             this.currentDirection = Direction.UP;
         } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
@@ -40,7 +49,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     public void updatePosition() {
-        // Mettre à jour la position en fonction de la direction
         if (this.currentDirection == Direction.UP) {
             this.y += this.speed;
         } else if (this.currentDirection == Direction.DOWN) {
@@ -53,9 +61,15 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     public void attack() {
+        // Depends on the weapon equipped by the character
+
     }
 
     public void receiveDamage(int damage) {
+        this.health -= damage;
+        if (this.health < 0) {
+            this.health = 0;
+        }
     }
 
     public void addWeapon(Weapon weapon) {
@@ -140,5 +154,13 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
                 this.potionInventory.remove(potion);
             }
         }
+    }
+
+    public Cle getCleEquipped() {
+        return this.cleEquipped;
+    }
+
+    public void setCleEquipped(Cle cle) {
+        this.cleEquipped = cle;
     }
 }
