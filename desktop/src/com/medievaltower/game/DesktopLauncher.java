@@ -19,6 +19,7 @@ public class DesktopLauncher {
 		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 		config.setForegroundFPS(60);
 		config.setTitle("MedievalTower");
+		config.useVsync(true);
 		new Lwjgl3Application(new MedievalTower(), config);
 	}
 

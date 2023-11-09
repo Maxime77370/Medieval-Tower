@@ -2,6 +2,7 @@ package com.medievaltower.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
 import com.medievaltower.entities.Personnage;
 
 public class Camera {
@@ -16,9 +17,6 @@ public class Camera {
         // Définissez la taille de la vue en fonction de la largeur et la hauteur de l'écran
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        // Positionnez la caméra au centre de la scène (ou à l'endroit que vous préférez)
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
-
         // Obtenir le personnage
         this.personnage = Personnage.getInstance();
 
@@ -26,14 +24,39 @@ public class Camera {
         update();
     }
 
+
     public void update() {
 
-        // Mettez à jour la position de la caméra pour suivre le personnage
-        camera.position.set(personnage.getX(), personnage.getY(), 0);
+        float range = 0.8f; // 80% de la largeur de l'écran
+        float cameraSpeed = 2.0f;
+
+        // Empêchez la caméra de sortir de la zone de l'écran
+        float xDelta = personnage.getX() - camera.position.x;
+        if (xDelta < -camera.viewportWidth / 2 * range) {
+            camera.position.x = personnage.getX() + camera.viewportWidth / 2 * range;
+        }
+        else if (xDelta + personnage.getWidth() > camera.viewportWidth / 2 * range) {
+            camera.position.x = personnage.getX() - camera.viewportWidth / 2 * range + personnage.getWidth();
+        }
+
+        float yDelta = personnage.getY() - camera.position.y;
+        if (yDelta < -camera.viewportHeight / 2) {
+            camera.position.y = personnage.getY() + camera.viewportHeight / 2;
+        }
+        else if (yDelta > camera.viewportHeight / 2) {
+            camera.position.y = personnage.getY() - camera.viewportHeight / 2 + personnage.getHeight();
+        }
+
+        // Lissage de la caméra (interpolation linéaire)
+        camera.position.x = MathUtils.lerp(camera.position.x, personnage.getX() + personnage.getWidth() / 2, cameraSpeed * Gdx.graphics.getDeltaTime());
+        camera.position.y = MathUtils.lerp(camera.position.y, personnage.getY() + personnage.getHeight() / 2, cameraSpeed * Gdx.graphics.getDeltaTime());
 
         // Mettez à jour la caméra
         camera.update();
     }
+
+
+
 
     public OrthographicCamera getCamera() {
         return camera;
