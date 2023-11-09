@@ -28,7 +28,8 @@ public class Camera {
 
     public void update() {
 
-
+        // Mettez à jour la position de la caméra pour suivre le personnage
+        camera.position.set(personnage.getX(), personnage.getY(), 0);
 
         // Mettez à jour la caméra
         camera.update();
