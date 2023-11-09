@@ -1,4 +1,4 @@
 package com.medievaltower.entities;
 
-public class Bloc {
+public abstract class Bloc {
 }

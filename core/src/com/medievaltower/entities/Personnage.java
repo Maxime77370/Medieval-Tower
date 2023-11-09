@@ -2,7 +2,11 @@ package com.medievaltower.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.medievaltower.core.AttackableEntity;
 import com.medievaltower.core.Direction;
 import com.medievaltower.core.Entity;
@@ -12,20 +16,44 @@ import java.util.WeakHashMap;
 
 public class Personnage extends Entity implements MovableEntity, AttackableEntity {
 
+    private static Personnage instance = null;
+
     private int health = 3;
-    private int speed = 1;
+    private final int speed = 1;
     private Weapon weaponEquipped = null;
     private Potion potionEquipped = null;
-    private WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
-    private WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
+    private Cle cleEquipped = null;
+    private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
+    private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
     private Direction currentDirection = Direction.NONE;
 
     public Personnage(int x, int y) {
         super(x, y, 50, 50, new Sprite());
+
+        // Créez une texture 1x1 de couleur verte
+        Pixmap pixmap = new Pixmap(this.getWidth(), this.getHeight(), Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.GREEN);
+        pixmap.fill();
+
+        // Créez une texture à partir du pixmap
+        Texture texture = new Texture(pixmap);
+
+        // Définissez la texture du sprite
+        getSprite().setRegion(new TextureRegion(texture));
+
+        // N'oubliez pas de disposer du pixmap
+        pixmap.dispose();
+    }
+
+
+    public static Personnage getInstance() {
+        if (instance == null) {
+            instance = new Personnage(0, 0);
+        }
+        return instance;
     }
 
     public void move() {
-        // Gérer le mouvement sans mettre à jour directement les coordonnées
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             this.currentDirection = Direction.UP;
         } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
@@ -40,7 +68,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     public void updatePosition() {
-        // Mettre à jour la position en fonction de la direction
         if (this.currentDirection == Direction.UP) {
             this.y += this.speed;
         } else if (this.currentDirection == Direction.DOWN) {
@@ -53,9 +80,15 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     public void attack() {
+        // Depends on the weapon equipped by the character
+
     }
 
     public void receiveDamage(int damage) {
+        this.health -= damage;
+        if (this.health < 0) {
+            this.health = 0;
+        }
     }
 
     public void addWeapon(Weapon weapon) {
@@ -140,5 +173,13 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
                 this.potionInventory.remove(potion);
             }
         }
+    }
+
+    public Cle getCleEquipped() {
+        return this.cleEquipped;
+    }
+
+    public void setCleEquipped(Cle cle) {
+        this.cleEquipped = cle;
     }
 }
