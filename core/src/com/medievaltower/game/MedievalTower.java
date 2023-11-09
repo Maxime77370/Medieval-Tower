@@ -37,18 +37,20 @@ public class MedievalTower extends ApplicationAdapter {
 		// Effacez l'écran
 		ScreenUtils.clear(1, 0, 0, 1);
 
-		// Mettez à jour la position de la caméra pour suivre le personnage
+		// Mettez à jour la position du personnage
+		personnage.update(); // Assurez-vous que vous avez une méthode pour mettre à jour la position du personnage
+
+		// Appelez camera.update() pour mettre à jour la matrice de projection de la caméra
 		camera.update();
 
 		// Passez la matrice de projection de la caméra au SpriteBatch
 		batch.setProjectionMatrix(camera.getCamera().combined);
 
-		entityManager.update();
-
 		// Commencez le dessin
 		batch.begin();
 		batch.draw(personnage.getSprite(), personnage.getX(), personnage.getY());
 		batch.end();
+
 	}
 
 	@Override

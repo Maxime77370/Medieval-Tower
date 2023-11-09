@@ -9,6 +9,7 @@ public class EntityManager<T extends Entity> {
 
     public EntityManager() {
         entities = new ArrayList<T>();
+        instance = this;
     }
 
     public static EntityManager getInstance() {

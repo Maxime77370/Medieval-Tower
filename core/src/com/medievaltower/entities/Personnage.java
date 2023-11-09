@@ -18,7 +18,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     private static final float JUMP_FORCE = 22f;
     private static final float GRAVITY = 0.9f;
-    private static Personnage instance = null;
+    private static Personnage instance;
     private final int speed = 20;
     private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
@@ -32,6 +32,9 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     public Personnage(int x, int y) {
         super(x, y, 50, 50, new Sprite());
+
+        // Définissez l'instance du personnage
+        instance = this;
 
         // Créez une texture 1x1 de couleur verte
         Pixmap pixmap = new Pixmap(this.getWidth(), this.getHeight(), Pixmap.Format.RGBA8888);
@@ -51,6 +54,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     public static Personnage getInstance() {
         if (instance == null) {
+            System.out.println("Personnage instance created");
             instance = new Personnage(0, 0);
         }
         return instance;
