@@ -53,6 +53,13 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         return instance;
     }
 
+    public static Personnage getInstance() {
+        if (instance == null) {
+            instance = new Personnage(0, 0);
+        }
+        return instance;
+    }
+
     public void move() {
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             this.currentDirection = Direction.UP;

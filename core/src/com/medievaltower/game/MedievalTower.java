@@ -6,14 +6,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+<<<<<<< HEAD
 import com.medievaltower.entities.Personnage;
 
 import com.badlogic.gdx.Gdx;
+=======
+>>>>>>> 056a154389485b5d76f72cb12073013d9b260769
 
 public class MedievalTower extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 
+<<<<<<< HEAD
 	// Déclarez la caméra
 	private Camera camera;
 	private Personnage personnage;
@@ -57,3 +61,25 @@ public class MedievalTower extends ApplicationAdapter {
 			personnage.getSprite().getTexture().dispose();
 		}
 	}
+=======
+	@Override
+	public void create () {
+		batch = new SpriteBatch();
+		img = new Texture("badlogic.jpg");
+	}
+
+	@Override
+	public void render () {
+		ScreenUtils.clear(1, 0, 0, 1);
+		batch.begin();
+		batch.draw(img, 0, 0);
+		batch.end();
+	}
+
+	@Override
+	public void dispose () {
+		batch.dispose();
+		img.dispose();
+	}
+}
+>>>>>>> 056a154389485b5d76f72cb12073013d9b260769
