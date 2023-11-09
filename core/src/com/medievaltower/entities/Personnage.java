@@ -78,7 +78,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         }
 
         // Apply gravity to the personnage character
-        this.y -= this.gravity;
+        this.y -= Personnage.GRAVITY;
 
         // Check if the personnage character is below the ground
         if (this.y < 0) {
@@ -95,7 +95,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private void jump() {
         // Simulate the jump by adjusting the y coordinate
         this.isJumping = true;
-        this.y += this.jumpSpeed;
+        this.y += Personnage.JUMP_FORCE;
     }
 
     public void attack() {
