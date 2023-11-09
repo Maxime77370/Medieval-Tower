@@ -5,7 +5,7 @@ import com.medievaltower.entities.Personnage;
 public class FireBloc extends Bloc {
 
 
-    protected FireBloc(int x, int y) {
+    public FireBloc(int x, int y) {
         super(x, y);
     }
 

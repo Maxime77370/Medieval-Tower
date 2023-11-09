@@ -4,7 +4,7 @@ import com.medievaltower.entities.Personnage;
 
 public class BlocNormal extends Bloc {
 
-    protected BlocNormal(int x, int y) {
+    public BlocNormal(int x, int y) {
         super(x, y);
     }
 
