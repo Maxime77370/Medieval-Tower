@@ -1,5 +1,7 @@
 package com.medievaltower.entities.bloc;
 
+import com.medievaltower.entities.Personnage;
+
 public class BlocNormal extends Bloc {
 
     protected BlocNormal(int x, int y) {
@@ -8,6 +10,7 @@ public class BlocNormal extends Bloc {
 
     @Override
     public void effect() {
-        // Nothing to do
+        Personnage.getInstance().setSliding(false);
+        Personnage.getInstance().setSlow(false);
     }
 }
