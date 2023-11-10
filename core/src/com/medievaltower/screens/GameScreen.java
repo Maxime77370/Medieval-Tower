@@ -1,0 +1,110 @@
+package com.medievaltower.game;
+
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.ScreenUtils;
+import com.medievaltower.core.EntityManager;
+import com.medievaltower.entities.Personnage;
+import com.medievaltower.entities.monster.Archer;
+import com.medievaltower.entities.monster.Bat;
+import com.medievaltower.entities.monster.Zombie;
+
+public class GameScreen implements Screen {
+
+    private SpriteBatch batch;
+    private Texture img;
+
+    private Camera camera;
+    private EntityManager entityManager;
+    private Personnage personnage;
+    private Zombie zombie;
+    private Bat bat;
+    private Archer archer;
+
+    public GameScreen() {
+        batch = new SpriteBatch();
+        img = new Texture("badlogic.jpg");
+
+        entityManager = EntityManager.getInstance();
+
+        personnage = new Personnage(0, 0);
+        entityManager.newEntity(personnage);
+
+        zombie = new Zombie(50, 50);
+        entityManager.newEntity(zombie);
+
+        bat = new Bat(200, 200);
+        entityManager.newEntity(bat);
+
+        archer = new Archer(500, 50);
+        entityManager.newEntity(archer);
+
+        camera = new Camera();
+    }
+
+    @Override
+    public void show() {
+        // Initialization code (if any) when the screen is shown
+    }
+
+    @Override
+    public void render(float delta) {
+        // Clear the screen
+        ScreenUtils.clear(1, 0, 0, 1);
+
+        // Update entities
+        entityManager.update();
+
+        // Update camera matrix
+        camera.update();
+
+        // Set the projection matrix to the SpriteBatch
+        batch.setProjectionMatrix(camera.getCamera().combined);
+
+        // Begin drawing
+        batch.begin();
+
+        // Draw entities
+        batch.draw(personnage.getSprite(), personnage.getX(), personnage.getY());
+        batch.draw(zombie.getSprite(), zombie.getX(), zombie.getY());
+        batch.draw(bat.getSprite(), bat.getX(), bat.getY());
+        batch.draw(archer.getSprite(), archer.getX(), archer.getY());
+
+        // End drawing
+        batch.end();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        // Resize logic
+    }
+
+    @Override
+    public void pause() {
+        // Pause logic
+    }
+
+    @Override
+    public void resume() {
+        // Resume logic
+    }
+
+    @Override
+    public void hide() {
+        // Hide logic (if any) when the screen is hidden
+    }
+
+    @Override
+    public void dispose() {
+        // Dispose of resources when the screen is disposed
+        batch.dispose();
+        img.dispose();
+
+        // Dispose of entity textures
+        personnage.getSprite().getTexture().dispose();
+        zombie.getSprite().getTexture().dispose();
+        bat.getSprite().getTexture().dispose();
+        archer.getSprite().getTexture().dispose();
+    }
+}
