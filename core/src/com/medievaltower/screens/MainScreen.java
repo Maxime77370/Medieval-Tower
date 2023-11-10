@@ -140,25 +140,18 @@ public class MainScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (this.playButton.isOver()) {
-            // Change the cursor to a hand cursor
             Gdx.graphics.setSystemCursor(com.badlogic.gdx.graphics.Cursor.SystemCursor.Hand);
             this.playButton.getLabel().setFontScale(1.2f);
-        } else {
-            // Change the cursor back to the default arrow cursor
-            Gdx.graphics.setSystemCursor(com.badlogic.gdx.graphics.Cursor.SystemCursor.Arrow);
-            this.playButton.getLabel().setFontScale(1f);
-        }
-
-        if (this.optionButton.isOver()) {
-
+        } else if (this.optionButton.isOver()) {
+            Gdx.graphics.setSystemCursor(com.badlogic.gdx.graphics.Cursor.SystemCursor.Hand);
             this.optionButton.getLabel().setFontScale(1.2f);
-        } else {
-            this.optionButton.getLabel().setFontScale(1f);
-        }
-
-        if (this.exitButton.isOver()) {
+        } else if (this.exitButton.isOver()) {
+            Gdx.graphics.setSystemCursor(com.badlogic.gdx.graphics.Cursor.SystemCursor.Hand);
             this.exitButton.getLabel().setFontScale(1.2f);
         } else {
+            Gdx.graphics.setSystemCursor(com.badlogic.gdx.graphics.Cursor.SystemCursor.Arrow);
+            this.playButton.getLabel().setFontScale(1f);
+            this.optionButton.getLabel().setFontScale(1f);
             this.exitButton.getLabel().setFontScale(1f);
         }
 
