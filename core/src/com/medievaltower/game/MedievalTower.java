@@ -65,10 +65,12 @@ public class MedievalTower extends ApplicationAdapter {
 
 		// Commencez le dessin
 		batch.begin();
+
 		batch.draw(personnage.getSprite(), personnage.getX(), personnage.getY());
 		batch.draw(zombie.getSprite(), zombie.getX(), zombie.getY());
 		batch.draw(bat.getSprite(), bat.getX(), bat.getY());
 		batch.draw(archer.getSprite(), archer.getX(), archer.getY());
+
 		batch.end();
 
 	}

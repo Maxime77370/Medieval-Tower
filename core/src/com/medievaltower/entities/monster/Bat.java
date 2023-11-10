@@ -15,7 +15,7 @@ public class Bat extends Monstre {
         super(x, y);
 
         // Créez une texture 1x1 de couleur verte
-        Pixmap pixmap = new Pixmap(this.getWidth(), this.getHeight(), Pixmap.Format.RGBA8888);
+        Pixmap pixmap = new Pixmap((int) this.getWidth(), (int) this.getHeight(), Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.BLUE);
         pixmap.fill();
 

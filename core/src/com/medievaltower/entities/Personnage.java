@@ -38,24 +38,11 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private float invincibleDuration = 3;
 
     public Personnage(int x, int y) {
-        super(x, y, 50, 50, new Sprite());
+        super(x, y, 50, 50, new Texture("paix.jpg"));
 
         // Définissez l'instance du personnage
         instance = this;
 
-        // Créez une texture 1x1 de couleur verte
-        Pixmap pixmap = new Pixmap(this.getWidth(), this.getHeight(), Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.GREEN);
-        pixmap.fill();
-
-        // Créez une texture à partir du pixmap
-        Texture texture = new Texture(pixmap);
-
-        // Définissez la texture du sprite
-        getSprite().setRegion(new TextureRegion(texture));
-
-        // N'oubliez pas de disposer du pixmap
-        pixmap.dispose();
     }
 
 
