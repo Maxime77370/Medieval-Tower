@@ -1,5 +1,7 @@
 package com.medievaltower.core;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+
 import java.util.ArrayList;
 
 /**
@@ -70,5 +72,13 @@ public class EntityManager<T extends Entity> {
         for (T entity : entities) {
             entity.update();
         }
+    }
+
+    public void draw(Batch batch) {
+        batch.begin();
+        for (T entity : entities) {
+            entity.draw(batch);
+        }
+        batch.end();
     }
 }

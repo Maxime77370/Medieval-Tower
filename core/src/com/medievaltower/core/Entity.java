@@ -1,7 +1,9 @@
 package com.medievaltower.core;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
 /**
@@ -26,6 +28,8 @@ public abstract class Entity extends Sprite {
     protected int width;
     protected int height;
 
+    protected Sprite sprite;
+
     /**
      * Entity constructor
      * <p>
@@ -43,11 +47,11 @@ public abstract class Entity extends Sprite {
      * @param texture : the texture of the entity
      */
     protected Entity(int x, int y, int width, int height, Texture texture) {
-        super(texture);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.sprite = new Sprite(texture);
 
         EntityManager entityManager = EntityManager.getInstance();
     }
@@ -90,6 +94,14 @@ public abstract class Entity extends Sprite {
      */
     public Sprite getSprite() {
         return this;
+    }
+
+    public void updateTexture(TextureRegion texture) {
+        this.sprite.setRegion(texture);
+    }
+
+    public void draw(Batch batch) {
+        batch.draw(this.sprite, this.x, this.y, this.width, this.height);
     }
 
     /**

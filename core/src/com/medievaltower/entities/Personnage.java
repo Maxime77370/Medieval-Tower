@@ -9,6 +9,7 @@ import com.medievaltower.core.Entity;
 import com.medievaltower.core.MovableEntity;
 import com.medievaltower.entities.potion.Potion;
 import com.medievaltower.entities.weapon.Weapon;
+import com.medievaltower.game.Tileset;
 
 import java.util.WeakHashMap;
 
@@ -61,6 +62,11 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private float invincibleTimer = 0;
     private final float invincibleDuration = 3;
 
+    private Tileset runTile = new Tileset("2D_SL_Knight_v1.0/Run.png", 128, 64);
+    private Tileset AttackTile = new Tileset("2D_SL_Knight_v1.0/Attacks.png", 128, 64);
+    private Tileset JumpTile = new Tileset("2D_SL_Knight_v1.0/Jump.png", 128, 64);
+    private Tileset SlideTile = new Tileset("2D_SL_Knight_v1.0/Slide.png", 128, 64);
+
     /**
      * Personnage constructor
      *
@@ -68,11 +74,11 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      * @param y : the y position of the personnage
      */
     public Personnage(int x, int y) {
-        super(x, y, 50, 50, new Texture("paix.jpg"));
-
+        super(x, y, 128*2, 64*2, new Texture("Texture/2D_SL_Knight_v1.0/Run.png"));
         // Définissez l'instance du personnage
         instance = this;
 
+        this.updateTexture(AttackTile.getTexture(0, 0));
     }
 
     /**
@@ -144,6 +150,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
                 isInvincible = false; // Fin de l'invincibilité
             }
         }
+
+        //change Texture
     }
 
     /**
@@ -337,4 +345,5 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.speed = 20;
         }
     }
+
 }
