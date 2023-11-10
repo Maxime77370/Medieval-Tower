@@ -41,15 +41,15 @@ public class Camera {
 
         float yDelta = personnage.getY() - camera.position.y;
         if (yDelta < -camera.viewportHeight / 2) {
-            camera.position.y = personnage.getY() + camera.viewportHeight / 2;
+            camera.position.y = personnage.getY() + camera.viewportHeight / 4;
         }
         else if (yDelta > camera.viewportHeight / 2) {
-            camera.position.y = personnage.getY() - camera.viewportHeight / 2 + personnage.getHeight();
+            camera.position.y = personnage.getY() - camera.viewportHeight / 4 + personnage.getHeight();
         }
 
         // Lissage de la caméra (interpolation linéaire)
         camera.position.x = MathUtils.lerp(camera.position.x, personnage.getX() + personnage.getWidth() / 2, cameraSpeed * Gdx.graphics.getDeltaTime());
-        camera.position.y = MathUtils.lerp(camera.position.y, personnage.getY() + personnage.getHeight() / 2, cameraSpeed * Gdx.graphics.getDeltaTime());
+        camera.position.y = MathUtils.lerp(camera.position.y, personnage.getY() + personnage.getHeight() / 4, cameraSpeed * Gdx.graphics.getDeltaTime());
 
         // Mettez à jour la caméra
         camera.update();

@@ -32,18 +32,18 @@ public class MedievalTower extends ApplicationAdapter {
 
 		// Créez un personnage avec une position initiale de (50, 50)
 		personnage = new Personnage(0, 0);
-		entityManager.newEntitie(personnage);
+		entityManager.newEntity(personnage);
 
 		// Créez un zombie avec une position initiale de (100, 100)
 		zombie = new Zombie(50, 50);
-		entityManager.newEntitie(zombie);
+		entityManager.newEntity(zombie);
 
 		// Créez une chauve-souris avec une position initiale de (200, 200)
 		bat = new Bat(200, 200);
-		entityManager.newEntitie(bat);
+		entityManager.newEntity(bat);
 
 		archer = new Archer(500, 50);
-		entityManager.newEntitie(archer);
+		entityManager.newEntity(archer);
 
 		camera = new Camera();
 
