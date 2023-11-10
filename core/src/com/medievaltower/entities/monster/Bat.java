@@ -1,40 +1,45 @@
 package com.medievaltower.entities.monster;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Bat class
+ * <p>
+ *     This class is a subclass class of monster in the game.
+ *     It contains the position, the size and the texture of the monster.
+ *     It also contains the update method.
+ *     This entity move sinusoidally.
+ *     It extends the Monstre class.
+ * </p>
+ * @see Monstre
+ */
 public class Bat extends Monstre {
-    protected float amplitude = 10f; // Ajustez l'amplitude selon vos besoins
-    protected float frequency = 1f; // Ajustez la fréquence selon vos besoins
+    protected float amplitude = 10f;
+    protected float frequency = 1f;
     private float timeElapsed = 0;
 
+    /**
+     * Bat constructor
+     * @param x : the x position of the monster
+     * @param y : the y position of the monster
+     */
     public Bat(int x, int y) {
-        super(x, y);
-
-        // Créez une texture 1x1 de couleur verte
-        Pixmap pixmap = new Pixmap((int) this.getWidth(), (int) this.getHeight(), Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.BLUE);
-        pixmap.fill();
-
-        // Créez une texture à partir du pixmap
-        Texture texture = new Texture(pixmap);
-
-        // Définissez la texture du sprite
-        getSprite().setRegion(new TextureRegion(texture));
-
-        // N'oubliez pas de disposer du pixmap
-        pixmap.dispose();
-
+        super(x, y, 20, 20, new Texture("paix.jpg"));
     }
 
+    /**
+     * Move the monster
+     * This method contains the sinusoidal move of the monster
+     */
     @Override
     public void move() {
         this.sinusoidalMove();
     }
 
+    /**
+     * Sinusoidal move of the monster
+     */
     private void sinusoidalMove() {
         // Utilisez la fonction sinus pour moduler la position y en fonction du temps
         float deltaTime = Gdx.graphics.getDeltaTime();
@@ -54,10 +59,16 @@ public class Bat extends Monstre {
         timeElapsed += deltaTime;
     }
 
+    /**
+     * Move the bat with the AI
+     */
     public void ai() {
         // TODO: Implémentez l'IA du zombie
     }
 
+    /**
+     * Attack the personnage
+     */
     @Override
     public void attack() {
 

@@ -10,7 +10,14 @@ import com.medievaltower.entities.monster.Archer;
 import com.medievaltower.entities.monster.Bat;
 import com.medievaltower.entities.monster.Zombie;
 
-
+/**
+ * MedievalTower class
+ * <p>
+ *     This class is the main class of the game.
+ *     It contains the create, render and dispose methods.
+ *     It extends the ApplicationAdapter class.
+ * </p>
+ */
 public class MedievalTower extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;

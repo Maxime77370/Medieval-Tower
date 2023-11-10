@@ -2,6 +2,18 @@ package com.medievaltower.entities;
 
 import com.medievaltower.entities.bloc.*;
 
+/**
+ * Constant class
+ * <p>
+ *     This class is used to create all constants.
+ *     It is used in the Map class.
+ * </p>
+ * @see Bloc
+ * @see IceBloc
+ * @see SandBloc
+ * @see FireBloc
+ * @see BlocNormal
+ */
 public class Constant {
 
     public Bloc newBloc(int id, int x, int y){

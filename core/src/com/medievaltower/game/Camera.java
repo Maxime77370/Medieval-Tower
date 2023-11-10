@@ -5,11 +5,22 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.medievaltower.entities.Personnage;
 
+/**
+ * Camera class
+ * <p>
+ *     This class is a singleton that contains the camera.
+ * </p>
+ * @see OrthographicCamera
+ */
 public class Camera {
     // Déclarez la caméra
     private OrthographicCamera camera;
     private Personnage personnage;
 
+    /**
+     * Camera constructor
+     * Initialize the camera
+     */
     public Camera() {
         // Initialisez la caméra
         camera = new OrthographicCamera();
