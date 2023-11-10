@@ -17,9 +17,9 @@ public class Map extends Level{
 
     private Tileset[] tilesets = new Tileset[4];
 
-    public Map() {
+    public Map(int mapIdNumber) {
         this.mapId = null;
-        setIdMap("1");
+        setIdMap(Integer.toString(mapIdNumber));
         setMap();
         loadTile();
     }

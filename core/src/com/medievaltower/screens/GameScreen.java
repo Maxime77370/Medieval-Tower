@@ -1,4 +1,4 @@
-package com.medievaltower.game;
+package com.medievaltower.screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,6 +9,8 @@ import com.medievaltower.entities.Personnage;
 import com.medievaltower.entities.monster.Archer;
 import com.medievaltower.entities.monster.Bat;
 import com.medievaltower.entities.monster.Zombie;
+import com.medievaltower.game.Camera;
+import com.medievaltower.levels.Map;
 
 public class GameScreen implements Screen {
 
@@ -17,6 +19,7 @@ public class GameScreen implements Screen {
 
     private Camera camera;
     private EntityManager entityManager;
+    private Map map;
     private Personnage personnage;
     private Zombie zombie;
     private Bat bat;
@@ -27,6 +30,7 @@ public class GameScreen implements Screen {
         img = new Texture("badlogic.jpg");
 
         entityManager = EntityManager.getInstance();
+        map = new Map(1);
 
         personnage = new Personnage(0, 0);
         entityManager.newEntity(personnage);
@@ -62,17 +66,11 @@ public class GameScreen implements Screen {
         // Set the projection matrix to the SpriteBatch
         batch.setProjectionMatrix(camera.getCamera().combined);
 
-        // Begin drawing
-        batch.begin();
-
+        // Draw map
+        map.draw(batch);
         // Draw entities
-        batch.draw(personnage.getSprite(), personnage.getX(), personnage.getY());
-        batch.draw(zombie.getSprite(), zombie.getX(), zombie.getY());
-        batch.draw(bat.getSprite(), bat.getX(), bat.getY());
-        batch.draw(archer.getSprite(), archer.getX(), archer.getY());
+        entityManager.draw(batch);
 
-        // End drawing
-        batch.end();
     }
 
     @Override
