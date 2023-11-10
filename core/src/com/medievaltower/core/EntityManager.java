@@ -19,11 +19,11 @@ public class EntityManager<T extends Entity> {
         return instance;
     }
 
-    public void newEntitie(T entity) {
+    public void newEntity(T entity) {
         entities.add(entity);
     }
 
-    public void remove(T entity) {
+    public void removeEntity(T entity) {
         entities.remove(entity);
     }
 
