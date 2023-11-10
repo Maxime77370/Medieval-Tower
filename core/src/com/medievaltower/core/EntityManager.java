@@ -17,8 +17,8 @@ public class EntityManager<T extends Entity> {
      * @see EntityManager#instance
      * @see EntityManager#getInstance()
      * @see EntityManager#entities
-     * @see EntityManager#newEntitie(Entity)
-     * @see EntityManager#remove(Entity)
+     * @see EntityManager#newEntity(Entity) (Entity)
+     * @see EntityManager#removeEntity(Entity) (Entity)
      * @see EntityManager#getEntities()
      * @see EntityManager#update()
      * @see Entity
