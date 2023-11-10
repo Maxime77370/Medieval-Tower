@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.medievaltower.game.GameScreen;
 import com.medievaltower.game.MedievalTower;
 
 import java.util.Locale;
@@ -142,12 +141,18 @@ public class MainScreen implements Screen {
         if (this.playButton.isOver()) {
             Gdx.graphics.setSystemCursor(com.badlogic.gdx.graphics.Cursor.SystemCursor.Hand);
             this.playButton.getLabel().setFontScale(1.2f);
+            this.optionButton.getLabel().setFontScale(1f);
+            this.exitButton.getLabel().setFontScale(1f);
         } else if (this.optionButton.isOver()) {
             Gdx.graphics.setSystemCursor(com.badlogic.gdx.graphics.Cursor.SystemCursor.Hand);
             this.optionButton.getLabel().setFontScale(1.2f);
+            this.playButton.getLabel().setFontScale(1f);
+            this.exitButton.getLabel().setFontScale(1f);
         } else if (this.exitButton.isOver()) {
             Gdx.graphics.setSystemCursor(com.badlogic.gdx.graphics.Cursor.SystemCursor.Hand);
             this.exitButton.getLabel().setFontScale(1.2f);
+            this.playButton.getLabel().setFontScale(1f);
+            this.optionButton.getLabel().setFontScale(1f);
         } else {
             Gdx.graphics.setSystemCursor(com.badlogic.gdx.graphics.Cursor.SystemCursor.Arrow);
             this.playButton.getLabel().setFontScale(1f);
