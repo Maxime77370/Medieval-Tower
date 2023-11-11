@@ -70,6 +70,7 @@ public class EntityManager<T extends Entity> {
      */
     public void update() {
         for (T entity : entities) {
+
             entity.update();
         }
     }

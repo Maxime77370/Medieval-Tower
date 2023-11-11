@@ -7,6 +7,7 @@ import com.medievaltower.core.AttackableEntity;
 import com.medievaltower.core.Direction;
 import com.medievaltower.core.Entity;
 import com.medievaltower.core.MovableEntity;
+import com.medievaltower.entities.annimation.AnimationPersonnage;
 import com.medievaltower.entities.potion.Potion;
 import com.medievaltower.entities.weapon.Weapon;
 import com.medievaltower.game.Tileset;
@@ -46,6 +47,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private static final float JUMP_FORCE = 22f;
     private static final float GRAVITY = 0.9f;
     private static Personnage instance;
+
+    private AnimationPersonnage animation = new AnimationPersonnage();
     private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
     private int speed = 20;
@@ -78,7 +81,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         // Définissez l'instance du personnage
         instance = this;
 
-        this.updateTexture(AttackTile.getTexture(0, 0));
     }
 
     /**
@@ -116,32 +118,51 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      */
     public void update() {
         // Move the personnage character based on the player's input and gravity
+        this.animation.setStateLocal("Breath");
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             this.x -= this.speed;
+            this.animation.setStateLocal("Run", true);
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             this.x += this.speed;
-        }
-        // Make th personnage down if the player is pressing the down key
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            this.y -= this.speed;
+            this.animation.setStateLocal("Run", false);
         }
 
         if (isJumping) {
             // Si le personnage est en train de sauter, mettez à jour la position verticale
             this.y += yVelocity;
             yVelocity -= GRAVITY; // Applique la gravité pour modifier la vitesse de descente du saut
+            this.animation.setStateLocal("InJump");
+        }
+
+        // Make th personnage down if the player is pressing the down key
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            this.y -= this.speed;
+            if (this.isJumping){
+                this.animation.setStateLocal("AttackFromAir");
+            }
         }
 
         // Check if the personnage character is below the ground
         if (this.y <= 0) { // Changement ici pour inclure le contact avec le sol
-            this.isJumping = false;
+            if (this.isJumping){
+                if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                    this.animation.setStateLocal("EndAttackFromAir");
+                    this.isJumping = false;
+                }
+                else {
+                    this.animation.setStateLocal("EndJump");
+                    this.isJumping = false;
+                }
+            }
             this.y = 0;
             yVelocity = 0; // Réinitialise la vitesse de saut lorsque le personnage touche le sol
+
         }
 
         // Check for jumping
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && !isJumping) {
             this.jump();
+            this.animation.setStateLocal("StartJump");
         }
 
         if (isInvincible) {
@@ -152,6 +173,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         }
 
         //change Texture
+        updateTexture(animation);
     }
 
     /**

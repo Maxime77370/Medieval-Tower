@@ -22,17 +22,21 @@ public class Tileset {
 
 
     public TextureRegion[][] getTextures() {
-        return Textures;
+        return Textures.clone();
     }
 
     public TextureRegion getTexture(int row, int col) {
-        return Textures[row][col];
+        return Textures.clone()[row][col];
     }
 
     public TextureRegion getTexture(int id) {
         int row = id / Textures[0].length;
         int col = id % Textures[0].length;
-        return Textures[row][col];
+        return Textures.clone()[row][col];
+    }
+
+    public int getNbTexture() {
+        return Textures.length * Textures[0].length;
     }
 }
 

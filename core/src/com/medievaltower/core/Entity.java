@@ -3,7 +3,7 @@ package com.medievaltower.core;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.medievaltower.entities.annimation.Animation;
 
 
 /**
@@ -96,8 +96,8 @@ public abstract class Entity extends Sprite {
         return this;
     }
 
-    public void updateTexture(TextureRegion texture) {
-        this.sprite.setRegion(texture);
+    public void updateTexture(Animation animation) {
+        this.sprite.setRegion(animation.update());
     }
 
     public void draw(Batch batch) {
