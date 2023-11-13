@@ -1,0 +1,76 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "map_1.tmx",
+    "expandedProjectPaths": [
+        "tiled",
+        "."
+    ],
+    "fileStates": {
+        "/Users/maximecarpentier/Library/Mobile Documents/com~apple~CloudDocs/Epitech/T-JAV-501/T-JAV-501-LIL_10/assets/Texture/Legacy-Fantasy - High Forest 2.3/Tiles.tsx": {
+            "scaleInDock": 1
+        },
+        "Buildings.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1.7433,
+            "scaleInEditor": 1
+        },
+        "Tiles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1.5286,
+            "scaleInEditor": 1.2449
+        },
+        "map_1.tmx": {
+            "scale": 1.2178,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 278.37083264903924,
+                "y": 226.22762358351127
+            }
+        },
+        "tiled/Buildings.tsx": {
+            "scaleInDock": 1.456,
+            "scaleInEditor": 1
+        },
+        "tiled/Tiles.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1.4032
+        },
+        "untitled.tmx": {
+            "scale": 0.6312,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.8111533586819,
+                "y": 34.06210392902409
+            }
+        }
+    },
+    "last.imagePath": "/Users/maximecarpentier/Library/Mobile Documents/com~apple~CloudDocs/Epitech/T-JAV-501/T-JAV-501-LIL_10/assets/Texture/Legacy-Fantasy - High Forest 2.3/Assets",
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": "3",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "untitled.tmx",
+        "map_1.tmx",
+        "tiled/Buildings.tsx",
+        "tiled/Tiles.tsx"
+    ],
+    "project": "Map.tiled-project",
+    "recentFiles": [
+        "untitled.tmx",
+        "tiled/Tiles.tsx",
+        "tiled/Buildings.tsx",
+        "map_1.tmx",
+        "Tiles.tsx",
+        "Buildings.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
