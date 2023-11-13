@@ -60,10 +60,6 @@ public class Map extends Level{
             for (int line = 0; line < lines.length; line++){
                 elements = lines[lines.length-line-1].split(",");
                 for (String element : elements) {
-                    System.out.println("x : " + x);
-                    System.out.println("y : " + y);
-                    System.out.println("z : " + z);
-                    System.out.println(mapId.length);
                     mapId[y][x][z] = Integer.parseInt(element);
                     x++;
                 }
@@ -143,7 +139,6 @@ public class Map extends Level{
             for(int x = 0; x < mapId[0].length; x++){
                 for(int z = 0; z < mapId[0][0].length; z++){
                     int id = mapId[y][x][z];
-                    System.out.println(id);
                     batch.draw(tilesets[id/625].getTexture(id%625), x * 16 * 2, y * 16 * 2, 16 * 2, 16 * 2);
                 }
             }

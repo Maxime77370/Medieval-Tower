@@ -1,6 +1,7 @@
 package com.medievaltower.entities.monster;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.medievaltower.entities.animation.AnimationArcher;
 
 /**
  * Class Archer
@@ -20,8 +21,9 @@ public class Archer extends Monstre {
      * @param x : the x position of the monster
      * @param y : the y position of the monster
      */
+    private AnimationArcher animation = new AnimationArcher();
     public Archer(int x, int y) {
-        super(x, y, 50, 50, new Texture("paix.jpg"));
+        super(x, y, 64*2, 64*2, new Texture("paix.jpg"));
     }
 
     /**
@@ -30,12 +32,14 @@ public class Archer extends Monstre {
      */
     @Override
     public void move() {
+        animation.setStateLocal("Run");
         this.x += speed;
         if (this.x >= 800) {
             speed = -speed;
         } else if (this.x <= 0) {
             speed = Math.abs(speed);
         }
+        updateTexture(animation);
     }
 
     /**
