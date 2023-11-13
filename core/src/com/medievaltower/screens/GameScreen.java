@@ -54,11 +54,12 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        // Clear the screen
-        ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
 
         // Update entities
         entityManager.update();
+
+        // Clear the screen
+        ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
 
         // Update camera matrix
         camera.update();
@@ -67,16 +68,16 @@ public class GameScreen implements Screen {
         batch.setProjectionMatrix(camera.getCamera().combined);
 
         // Draw map
-        map.render();
+        map.render(camera.getCamera()); // Pass the camera to the render method
 
         // Draw entities
         entityManager.draw(batch);
-
     }
 
     @Override
     public void resize(int width, int height) {
         // Resize logic
+        map.resize(width, height); // Add map
     }
 
     @Override
