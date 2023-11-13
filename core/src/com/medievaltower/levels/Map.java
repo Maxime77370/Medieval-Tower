@@ -2,152 +2,58 @@ package com.medievaltower.levels;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.medievaltower.entities.Constant;
-import com.medievaltower.entities.bloc.Bloc;
-import com.medievaltower.game.Tileset;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.medievaltower.game.Camera;
 
-public class Map extends Level{
+public class Map {
+    private TiledMap tiledMap;
+    private OrthogonalTiledMapRenderer tiledMapRenderer;
+    private Camera camera;
+    private Viewport viewport;
 
-    private String[] paths = {"block", "decoration", "item"}; // get name of different mapId type
-    private int[][][] mapId; // mapId[x][y][z], where z = 0 for the base layer, z = 1 for the first decoration layer, and z = 2 for the second decoration layer
-    private Bloc[][][] map; // mapId[x][y][z], where z = 0 for the base layer, z = 1 for the first decoration layer, and z = 2 for the second decoration layer
-    private Constant constantElements = new Constant();
+    private final int mapId;
 
-    private Tileset[] tilesets = new Tileset[3];
-
-    private TextureRegion mapSprite;
-
-    public Map(int mapIdNumber) {
-        this.mapId = null;
-        setIdMap(Integer.toString(mapIdNumber));
-        setMap();
-        loadTile();
+    public Map(int id) {
+        this.mapId = id;
+        loadMap();
+        camera = Camera.getInstance();
+        createViewport();
     }
 
-    public int[][][] getIdMap() {
-        return this.mapId;
+    private void createViewport() {
+        // Utilisez FitViewport avec la taille de votre choix (par exemple, 800x600)
+        viewport = new FitViewport(1920, 1080, camera.getCamera());
+        viewport.apply();
     }
 
-    public void setIdMap(String mapIdNumber) {
-
-        // reset mapId
-        this.mapId = null;
-
-        // load mapId each per each path
-        int z = 0;
-        for (String path : paths) {
-            String path_block = "Maps/" + mapIdNumber + "/" + path + ".csv";
-
-            // read mapId file
-            FileHandle handle = Gdx.files.internal(path_block);
-            String text = handle.readString();
-
-            // split mapId file into lines and elements
-            String[] lines = text.split("\\n");
-            String[] elements = lines[0].split(",");
-
-            // init mapId
-            if (this.mapId == null) {
-                this.mapId = new int[lines.length][elements.length][3];
-            }
-
-            int x = 0;
-            int y = 0;
-
-            // set mapId
-            for (int line = 0; line < lines.length; line++){
-                elements = lines[lines.length-line-1].split(",");
-                for (String element : elements) {
-                    System.out.println("x : " + x);
-                    System.out.println("y : " + y);
-                    System.out.println("z : " + z);
-                    System.out.println(mapId.length);
-                    mapId[y][x][z] = Integer.parseInt(element);
-                    x++;
-                }
-                x = 0;
-                y++;
-            }
-            z++;
-        }
+    private void loadMap() {
+        TmxMapLoader mapLoader = new TmxMapLoader();
+        FileHandle mapFileHandle = Gdx.files.internal("Maps/map_" + mapId + ".tmx");
+        this.tiledMap = mapLoader.load(mapFileHandle.path());
+        this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
     }
 
-    public int getIdElement(int x, int y, int z) {
-        return mapId[y][x][z];
+    public void render() {
+        // Mise à jour de la vue
+        Gdx.app.log("Map", "Camera position: " + camera.getCamera().position);
+        viewport.apply();
+
+        // Rendu de la carte avec la caméra et le viewport
+        tiledMapRenderer.setView(camera.getCamera());
+        tiledMapRenderer.render();
     }
 
-    public void setIdElement(int x, int y, int z, int elementId) {
-        this.mapId[y][x][z] = elementId;
+    public void resize(int width, int height) {
+        // Mise à jour du viewport lors du redimensionnement de la fenêtre
+        viewport.update(width, height);
     }
 
-    public void setMap(){
-        this.map = null;
-        this.map = new Bloc[mapId.length][mapId[0].length][3];
-        for(int y = 0; y < mapId.length; y++){
-            for(int x = 0; x < mapId[0].length; x++){
-                for(int z = 0; z < mapId[0][0].length; z++){
-                    this.map[y][x][0] = constantElements.newBloc(mapId[y][x][z], x, y);
-                }
-            }
-        }
-    }
-
-    public Bloc[][][] getMap(){
-        return this.map;
-    }
-
-    public void setElements(int x, int y, int z, int id){
-        this.map[y][x][z] = constantElements.newBloc(id, x, y);
-    }
-
-    public void setElements(int x, int y, int z, Bloc element){
-        this.map[y][x][z] = element;
-    }
-
-    public Bloc getElements(int x, int y, int z){
-        return this.map[y][x][z];
-    }
-
-    public void update(){
-        for(int y = 0; y < mapId.length; y++){
-            for(int x = 0; x < mapId[0].length; x++){
-                for(int z = 0; z < mapId[0][0].length; z++){
-                    this.map[y][x][0].update();
-                }
-            }
-        }
-    }
-    public void test() {
-
-        // Load the mapId data
-        setIdMap("1");
-
-        System.out.println(getIdElement(0, 0, 0));
-        System.out.println(getIdElement(0, 0, 1));
-        System.out.println(getIdElement(0, 0, 2));
-
-        setIdElement(0,0,0,1);
-        System.out.println(getIdMap()[0][0][0]);
-    }
-
-
-    public void loadTile(){
-        this.tilesets[0] = new Tileset("Legacy-Fantasy - High Forest 2.3/Assets/Buildings.png", 16, 16);
-        this.tilesets[1] = new Tileset("Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png", 16, 16);
-    }
-    public void draw(Batch batch){
-        batch.begin();
-        for(int y = 0; y < mapId.length; y++){
-            for(int x = 0; x < mapId[0].length; x++){
-                for(int z = 0; z < mapId[0][0].length; z++){
-                    int id = mapId[y][x][z];
-                    System.out.println(id);
-                    batch.draw(tilesets[id/625].getTexture(id%625), x * 16 * 2, y * 16 * 2, 16 * 2, 16 * 2);
-                }
-            }
-        }
-        batch.end();
+    public void dispose() {
+        tiledMap.dispose();
+        tiledMapRenderer.dispose();
     }
 }

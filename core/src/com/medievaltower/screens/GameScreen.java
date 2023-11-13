@@ -55,7 +55,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         // Clear the screen
-        ScreenUtils.clear(1, 0, 0, 1);
+        ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
 
         // Update entities
         entityManager.update();
@@ -67,7 +67,8 @@ public class GameScreen implements Screen {
         batch.setProjectionMatrix(camera.getCamera().combined);
 
         // Draw map
-        map.draw(batch);
+        map.render();
+
         // Draw entities
         entityManager.draw(batch);
 
@@ -97,7 +98,8 @@ public class GameScreen implements Screen {
     public void dispose() {
         // Dispose of resources when the screen is disposed
         batch.dispose();
-        img.dispose();
+
+        map.dispose();
 
         // Dispose of entity textures
         personnage.getSprite().getTexture().dispose();

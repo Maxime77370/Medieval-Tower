@@ -17,11 +17,16 @@ public class Camera {
     private OrthographicCamera camera;
     private Personnage personnage;
 
+    private static Camera instance;
+
     /**
      * Camera constructor
      * Initialize the camera
      */
     public Camera() {
+        // Initialisez le singleton
+        instance = this;
+
         // Initialisez la caméra
         camera = new OrthographicCamera();
 
@@ -35,6 +40,12 @@ public class Camera {
         update();
     }
 
+    public static Camera getInstance() {
+        if (instance == null) {
+            instance = new Camera();
+        }
+        return instance;
+    }
 
     public void update() {
 
