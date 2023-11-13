@@ -1,4 +1,4 @@
-package com.medievaltower.entities.annimation;
+package com.medievaltower.entities.animation;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 

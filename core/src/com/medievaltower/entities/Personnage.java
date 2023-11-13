@@ -7,7 +7,7 @@ import com.medievaltower.core.AttackableEntity;
 import com.medievaltower.core.Direction;
 import com.medievaltower.core.Entity;
 import com.medievaltower.core.MovableEntity;
-import com.medievaltower.entities.annimation.AnimationPersonnage;
+import com.medievaltower.entities.animation.AnimationPersonnage;
 import com.medievaltower.entities.potion.Potion;
 import com.medievaltower.entities.weapon.Weapon;
 import com.medievaltower.game.Tileset;
@@ -44,14 +44,14 @@ import java.util.WeakHashMap;
  */
 public class Personnage extends Entity implements MovableEntity, AttackableEntity {
 
-    private static final float JUMP_FORCE = 22f;
+    private static final float JUMP_FORCE = 18;
     private static final float GRAVITY = 0.9f;
     private static Personnage instance;
 
     private AnimationPersonnage animation = new AnimationPersonnage();
     private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
-    private int speed = 20;
+    private int speed = 12;
     private boolean isJumping = false;
     private float yVelocity = 0;
     private int health = 3;
@@ -142,6 +142,10 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             }
         }
 
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            this.attack();
+        }
+
         // Check if the personnage character is below the ground
         if (this.y <= 0) { // Changement ici pour inclure le contact avec le sol
             if (this.isJumping){
@@ -191,7 +195,17 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      */
     public void attack() {
         // Depends on the weapon equipped by the character
+        this.attackAnimation();
 
+    }
+
+    private void attackAnimation() {
+        if (this.isJumping){
+            this.animation.setStateLocal("AttackFromAir");
+        }
+        else {
+            this.animation.setStateLocal("Attack");
+        }
     }
 
     /**

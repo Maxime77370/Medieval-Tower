@@ -1,10 +1,10 @@
-package com.medievaltower.entities.annimation;
+package com.medievaltower.entities.animation;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.medievaltower.game.Tileset;
 
-public class AnimationPersonnage extends Animation{
+public class AnimationPersonnage extends Animation {
 
     private Tileset RunTile = new Tileset("2D_SL_Knight_v1.0/Run.png", 128, 64);
     private Tileset AttackTile = new Tileset("2D_SL_Knight_v1.0/Attacks.png", 128, 64);
@@ -81,8 +81,10 @@ public class AnimationPersonnage extends Animation{
     }
 
     public TextureRegion animationAttack() {
-        if (frame >= AttackTile.getNbTexture()) {
+        forceState = "Attack";
+        if (frame >= AttackTile.getNbTexture() / 2) {
             frame = 0;
+            forceState = null;
         }
         frame++;
         return AttackTile.getTexture(frame - 1);

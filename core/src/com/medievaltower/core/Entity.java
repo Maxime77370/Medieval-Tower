@@ -3,7 +3,7 @@ package com.medievaltower.core;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.medievaltower.entities.annimation.Animation;
+import com.medievaltower.entities.animation.Animation;
 
 
 /**
