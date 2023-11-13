@@ -3,6 +3,7 @@ package com.medievaltower.levels;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.medievaltower.entities.Constant;
 import com.medievaltower.entities.bloc.Bloc;
 import com.medievaltower.game.Tileset;
@@ -14,8 +15,9 @@ public class Map extends Level{
     private Bloc[][][] map; // mapId[x][y][z], where z = 0 for the base layer, z = 1 for the first decoration layer, and z = 2 for the second decoration layer
     private Constant constantElements = new Constant();
 
+    private Tileset[] tilesets = new Tileset[3];
 
-    private Tileset[] tilesets = new Tileset[4];
+    private TextureRegion mapSprite;
 
     public Map(int mapIdNumber) {
         this.mapId = null;
@@ -58,6 +60,10 @@ public class Map extends Level{
             for (int line = 0; line < lines.length; line++){
                 elements = lines[lines.length-line-1].split(",");
                 for (String element : elements) {
+                    System.out.println("x : " + x);
+                    System.out.println("y : " + y);
+                    System.out.println("z : " + z);
+                    System.out.println(mapId.length);
                     mapId[y][x][z] = Integer.parseInt(element);
                     x++;
                 }
@@ -129,15 +135,16 @@ public class Map extends Level{
 
     public void loadTile(){
         this.tilesets[0] = new Tileset("Legacy-Fantasy - High Forest 2.3/Assets/Buildings.png", 16, 16);
-        this.tilesets[1] = new Tileset("Legacy-Fantasy - High Forest 2.3/Assets/Hive.png", 16, 16);
-        this.tilesets[2] = new Tileset("Legacy-Fantasy - High Forest 2.3/Assets/Interior-01.png", 16, 16);
+        this.tilesets[1] = new Tileset("Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png", 16, 16);
     }
     public void draw(Batch batch){
         batch.begin();
         for(int y = 0; y < mapId.length; y++){
             for(int x = 0; x < mapId[0].length; x++){
                 for(int z = 0; z < mapId[0][0].length; z++){
-                    batch.draw(tilesets[0].getTexture(mapId[y][x][z]), x * 16 * 2, y * 16 * 2, 16 * 2, 16 * 2);
+                    int id = mapId[y][x][z];
+                    System.out.println(id);
+                    batch.draw(tilesets[id/625].getTexture(id%625), x * 16 * 2, y * 16 * 2, 16 * 2, 16 * 2);
                 }
             }
         }
