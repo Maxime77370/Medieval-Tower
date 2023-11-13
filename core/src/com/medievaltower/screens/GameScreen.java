@@ -104,5 +104,6 @@ public class GameScreen implements Screen {
         zombie.getSprite().getTexture().dispose();
         bat.getSprite().getTexture().dispose();
         archer.getSprite().getTexture().dispose();
+        archer.getCurrentArrow().getSprite().getTexture().dispose();
     }
 }

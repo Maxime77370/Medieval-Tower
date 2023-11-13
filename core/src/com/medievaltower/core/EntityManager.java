@@ -11,6 +11,7 @@ public class EntityManager<T extends Entity> {
 
     private static EntityManager instance;
     private ArrayList<T> entities;
+    private ArrayList<T> entitiesToAdd;
 
     /**
      * Constructor
@@ -27,6 +28,7 @@ public class EntityManager<T extends Entity> {
      */
     public EntityManager() {
         entities = new ArrayList<T>();
+        entitiesToAdd = new ArrayList<T>();
         instance = this;
     }
 
@@ -46,7 +48,7 @@ public class EntityManager<T extends Entity> {
      * @param entity : the entity to add
      */
     public void newEntity(T entity) {
-        entities.add(entity);
+        entitiesToAdd.add(entity);
     }
 
      /**
@@ -69,8 +71,11 @@ public class EntityManager<T extends Entity> {
      * Update all the entities
      */
     public void update() {
+        for (Entity entity : entitiesToAdd) {
+            entities.add((T) entity);
+        }
+        entitiesToAdd.clear();
         for (T entity : entities) {
-
             entity.update();
         }
     }
