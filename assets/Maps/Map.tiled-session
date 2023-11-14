@@ -26,8 +26,16 @@
             "scale": 1.2178,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 278.37083264903924,
-                "y": 226.22762358351127
+                "x": 121.94120545245528,
+                "y": 180.65363770734115
+            }
+        },
+        "premiere_map.tmx": {
+            "scale": 0.3226041666666667,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1201.1624152405552,
+                "y": 322.37649338069104
             }
         },
         "tiled/Buildings.tsx": {
@@ -39,16 +47,20 @@
             "scaleInDock": 1,
             "scaleInEditor": 1.4032
         },
+        "tiled/Tiles_deux.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "untitled.tmx": {
             "scale": 0.6312,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.8111533586819,
-                "y": 34.06210392902409
+                "x": 240.01901140684407,
+                "y": 33.26996197718631
             }
         }
     },
-    "last.imagePath": "/Users/maximecarpentier/Library/Mobile Documents/com~apple~CloudDocs/Epitech/T-JAV-501/T-JAV-501-LIL_10/assets/Texture/Legacy-Fantasy - High Forest 2.3/Assets",
+    "last.imagePath": "/home/olivierpakosz/Piscines/JAVA/T-JAV-501-LIL_10/assets/Texture/Legacy-Fantasy - High Forest 2.3/Assets",
     "map.lastUsedFormat": "tmx",
     "map.layerDataFormat": "3",
     "map.tileHeight": 16,
@@ -61,6 +73,7 @@
     ],
     "project": "Map.tiled-project",
     "recentFiles": [
+        "tiled/Tiles_deux.tsx",
         "untitled.tmx",
         "tiled/Tiles.tsx",
         "tiled/Buildings.tsx",
