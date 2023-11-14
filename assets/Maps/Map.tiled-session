@@ -3,13 +3,34 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map_1.tmx",
+    "activeFile": "map_3.tmx",
     "expandedProjectPaths": [
         "tiled",
         "."
     ],
     "fileStates": {
         "/Users/maximecarpentier/Library/Mobile Documents/com~apple~CloudDocs/Epitech/T-JAV-501/T-JAV-501-LIL_10/assets/Texture/Legacy-Fantasy - High Forest 2.3/Tiles.tsx": {
+            "scaleInDock": 1
+        },
+        "/home/olivierpakosz/Desktop/Tiles.tsx": {
+            "scaleInDock": 1
+        },
+        "/home/olivierpakosz/Desktop/Tree-Assets.tsx": {
+            "scaleInDock": 1
+        },
+        "/home/olivierpakosz/Desktop/map_tiled_projet/Background_1.tsx": {
+            "scaleInDock": 1
+        },
+        "/home/olivierpakosz/Desktop/map_tiled_projet/Background_2.tsx": {
+            "scaleInDock": 1
+        },
+        "/home/olivierpakosz/Desktop/map_tiled_projet/Buildings.tsx": {
+            "scaleInDock": 1
+        },
+        "/home/olivierpakosz/Desktop/map_tiled_projet/Props-Rocks.tsx": {
+            "scaleInDock": 1
+        },
+        "/home/olivierpakosz/Desktop/map_tiled_projet/Tiles.tsx": {
             "scaleInDock": 1
         },
         "Buildings.tsx": {
@@ -26,8 +47,28 @@
             "scale": 1.2178,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 121.94120545245528,
-                "y": 180.65363770734115
+                "x": 240.59779931023158,
+                "y": 160.1248152405978
+            }
+        },
+        "map_2.tmx": {
+            "expandedObjectLayers": [
+                3,
+                13
+            ],
+            "scale": 0.75,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 352.6666666666667,
+                "y": 432
+            }
+        },
+        "map_3.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 484.6666666666666,
+                "y": 396
             }
         },
         "premiere_map.tmx": {
@@ -35,20 +76,40 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 1201.1624152405552,
-                "y": 322.37649338069104
+                "y": 319.27671940587675
             }
         },
+        "tiled/Background_1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiled/Background_2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "tiled/Buildings.tsx": {
-            "scaleInDock": 1.456,
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "tiled/Rocks.tsx": {
+            "scaleInDock": 1.5,
             "scaleInEditor": 1
         },
         "tiled/Tiles.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
+            "scaleInDock": 1.5,
             "scaleInEditor": 1.4032
         },
         "tiled/Tiles_deux.tsx": {
             "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiled/Tree-Assets.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "tiled/toitRouge.tsx": {
+            "scaleInDock": 0.75,
             "scaleInEditor": 1
         },
         "untitled.tmx": {
@@ -61,25 +122,38 @@
         }
     },
     "last.imagePath": "/home/olivierpakosz/Piscines/JAVA/T-JAV-501-LIL_10/assets/Texture/Legacy-Fantasy - High Forest 2.3/Assets",
+    "map.height": 40,
     "map.lastUsedFormat": "tmx",
     "map.layerDataFormat": "3",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
+    "map.width": 200,
     "openFiles": [
-        "untitled.tmx",
         "map_1.tmx",
         "tiled/Buildings.tsx",
-        "tiled/Tiles.tsx"
+        "tiled/Tiles.tsx",
+        "tiled/toitRouge.tsx",
+        "tiled/Rocks.tsx",
+        "tiled/Background_1.tsx",
+        "tiled/Background_2.tsx",
+        "tiled/Tree-Assets.tsx",
+        "map_2.tmx",
+        "map_3.tmx"
     ],
     "project": "Map.tiled-project",
     "recentFiles": [
-        "tiled/Tiles_deux.tsx",
-        "untitled.tmx",
-        "tiled/Tiles.tsx",
-        "tiled/Buildings.tsx",
         "map_1.tmx",
-        "Tiles.tsx",
-        "Buildings.tsx"
+        "tiled/Buildings.tsx",
+        "tiled/Tiles.tsx",
+        "tiled/toitRouge.tsx",
+        "tiled/Rocks.tsx",
+        "tiled/Background_1.tsx",
+        "tiled/Background_2.tsx",
+        "tiled/Tree-Assets.tsx",
+        "map_2.tmx",
+        "map_3.tmx",
+        "untitled.tmx",
+        "premiere_map.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
