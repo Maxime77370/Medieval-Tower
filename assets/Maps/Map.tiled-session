@@ -5,8 +5,8 @@
     },
     "activeFile": "map_3.tmx",
     "expandedProjectPaths": [
-        "tiled",
-        "."
+        ".",
+        "tiled"
     ],
     "fileStates": {
         "/Users/maximecarpentier/Library/Mobile Documents/com~apple~CloudDocs/Epitech/T-JAV-501/T-JAV-501-LIL_10/assets/Texture/Legacy-Fantasy - High Forest 2.3/Tiles.tsx": {
@@ -47,8 +47,8 @@
             "scale": 1.2178,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 240.59779931023158,
-                "y": 160.1248152405978
+                "x": 274.26506815569064,
+                "y": 97.3066184923633
             }
         },
         "map_2.tmx": {
@@ -57,18 +57,21 @@
                 13
             ],
             "scale": 0.75,
-            "selectedLayer": 6,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 352.6666666666667,
-                "y": 432
+                "x": 1492,
+                "y": 208.66666666666669
             }
         },
         "map_3.tmx": {
-            "scale": 0.75,
-            "selectedLayer": 1,
+            "expandedObjectLayers": [
+                10
+            ],
+            "scale": 4,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 484.6666666666666,
-                "y": 396
+                "x": 3742.25,
+                "y": 489.625
             }
         },
         "premiere_map.tmx": {
@@ -97,7 +100,7 @@
         },
         "tiled/Tiles.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1.5,
+            "scaleInDock": 2,
             "scaleInEditor": 1.4032
         },
         "tiled/Tiles_deux.tsx": {
@@ -105,7 +108,7 @@
             "scaleInEditor": 1
         },
         "tiled/Tree-Assets.tsx": {
-            "scaleInDock": 0.75,
+            "scaleInDock": 1.5,
             "scaleInEditor": 1
         },
         "tiled/toitRouge.tsx": {
