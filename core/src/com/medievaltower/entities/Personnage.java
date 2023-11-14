@@ -46,14 +46,14 @@ import java.util.WeakHashMap;
  */
 public class Personnage extends Entity implements MovableEntity, AttackableEntity {
 
-    private static final float JUMP_FORCE = 18;
+    private static final float JUMP_FORCE = 12;
     private static final float GRAVITY = 20f;
     private static Personnage instance;
 
     private AnimationPersonnage animation = new AnimationPersonnage();
     private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
-    private int speed = 12;
+    private int speed = 8;
     private boolean isJumping = false;
     private float xVelocity = 0;
     private float yVelocity = 0;
@@ -235,9 +235,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.attack();
         }
 
-        if (isJumping) {
-            this.yVelocity -= GRAVITY * Gdx.graphics.getDeltaTime();
-        }
+
+        this.yVelocity -= GRAVITY * Gdx.graphics.getDeltaTime();
 
         if (isInvincible) {
             invincibleTimer -= Gdx.graphics.getDeltaTime();
@@ -463,7 +462,16 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     @Override
     public void setBoundingBox() {
-        boundingBox.setSize(width - 96, height); // Assurez-vous que width et height sont les dimensions de la boîte de collision
-        boundingBox.setPosition(x + 48, y); // Assurez-vous que x et y sont les coordonnées actuelles du joueur
+        // Set the bounding box of the personnage character
+        boundingBox.setSize(width - 202, height - 34);
+        boundingBox.setPosition(x + 103, y);
+    }
+
+    public void setJumping(boolean b) {
+        this.isJumping = b;
+    }
+
+    public void setVelocityY(int i) {
+        this.yVelocity = i;
     }
 }

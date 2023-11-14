@@ -91,6 +91,14 @@ public class EntityManager<T extends Entity> {
         batch.end();
     }
 
+    public void drawDebug(Batch batch) {
+        batch.begin();
+        for (T entity : entities) {
+            entity.drawDebug(batch);
+        }
+        batch.end();
+    }
+
     public int getNumberOfMonsters() {
         int count = 0;
         for (T entity : entities) {

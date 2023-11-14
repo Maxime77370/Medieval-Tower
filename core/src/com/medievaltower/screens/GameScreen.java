@@ -46,7 +46,7 @@ public class GameScreen implements Screen {
         entityManager = EntityManager.getInstance();
         map = new Map(2);
 
-        personnage = new Personnage(0, 0);
+        personnage = new Personnage(0, 200);
         entityManager.newEntity(personnage);
 
         zombie = new Zombie(50, 50);
@@ -194,6 +194,9 @@ public class GameScreen implements Screen {
         // Draw map
         map.render(camera.getCamera()); // Pass the camera to the render method
 
+        // Draw the debug entities
+        entityManager.drawDebug(batch);
+
         // Draw entities
         entityManager.draw(batch);
 
@@ -206,6 +209,10 @@ public class GameScreen implements Screen {
 
         // Draw the HUD
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+
+        // Display square with debug
+        stage.setDebugAll(true);
+
         stage.draw();
     }
 

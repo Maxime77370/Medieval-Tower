@@ -1,11 +1,14 @@
 package com.medievaltower.core;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
+import com.medievaltower.entities.Personnage;
 import com.medievaltower.entities.animation.Animation;
 import com.medievaltower.levels.Map;
 
@@ -38,17 +41,18 @@ public abstract class Entity extends Sprite {
     /**
      * Entity constructor
      * <p>
-     *     This constructor is used to create an entity.
-     *     It takes the position, the size and the texture of the entity as parameters.
-     *     It also adds the entity to the entity manager.
-     *     It is protected because it is not supposed to be used outside of the package.
-     *     It is used by the child classes.
-     *     It extends the Sprite class from libGDX.
+     * This constructor is used to create an entity.
+     * It takes the position, the size and the texture of the entity as parameters.
+     * It also adds the entity to the entity manager.
+     * It is protected because it is not supposed to be used outside of the package.
+     * It is used by the child classes.
+     * It extends the Sprite class from libGDX.
      * </p>
-     * @param x : the x position of the entity
-     * @param y : the y position of the entity
-     * @param width : the width of the entity
-     * @param height : the height of the entity
+     *
+     * @param x       : the x position of the entity
+     * @param y       : the y position of the entity
+     * @param width   : the width of the entity
+     * @param height  : the height of the entity
      * @param texture : the texture of the entity
      */
     protected Entity(int x, int y, int width, int height, Texture texture) {
@@ -65,6 +69,7 @@ public abstract class Entity extends Sprite {
 
     /**
      * Get the x position of the entity
+     *
      * @return the x position of the entity
      */
     public float getX() {
@@ -73,6 +78,7 @@ public abstract class Entity extends Sprite {
 
     /**
      * Get the y position of the entity
+     *
      * @return the y position of the entity
      */
     public float getY() {
@@ -81,6 +87,7 @@ public abstract class Entity extends Sprite {
 
     /**
      * Get the width of the entity
+     *
      * @return the width of the entity
      */
     public float getWidth() {
@@ -89,6 +96,7 @@ public abstract class Entity extends Sprite {
 
     /**
      * Get the height of the entity
+     *
      * @return the height of the entity
      */
     public float getHeight() {
@@ -97,6 +105,7 @@ public abstract class Entity extends Sprite {
 
     /**
      * Get the sprite of the entity
+     *
      * @return the sprite of the entity
      */
     public Sprite getSprite() {
@@ -118,41 +127,43 @@ public abstract class Entity extends Sprite {
 
                 if (this.getBoundingBox().overlaps(platformRect)) {
                     // Calculate the overlap on both X and Y axes
-                    float overlapX = Math.min(getBoundingBox().x + getBoundingBox().width, platformRect.x + platformRect.width) -
-                            Math.max(getBoundingBox().x, platformRect.x);
-                    float overlapY = Math.min(getBoundingBox().y + getBoundingBox().height, platformRect.y + platformRect.height) -
-                            Math.max(getBoundingBox().y, platformRect.y);
+                    float overlapX = Math.min(getBoundingBox().x + getBoundingBox().width, platformRect.x + platformRect.width) - Math.max(getBoundingBox().x, platformRect.x);
+                    float overlapY = Math.min(getBoundingBox().y + getBoundingBox().height, platformRect.y + platformRect.height) - Math.max(getBoundingBox().y, platformRect.y);
 
-                    // Determine the direction of the collision
                     boolean horizontalCollision = overlapX < overlapY;
 
-                    // Adjust the character's position based on the direction of collision
+                    // Horizontal collision (left or right)
                     if (horizontalCollision) {
-                        // Horizontal collision (left or right)
+                        // Adjust to the left of the platform
                         if (x < platformRect.x) {
-                            // Adjust to the left of the platform
-                            x = (int) (platformRect.x - width);
+                            x = (int) (platformRect.x - this.boundingBox.width);
                         } else {
                             // Adjust to the right of the platform
-                            x = (int) (platformRect.x + platformRect.width);
+                            x = (int) -100;
                         }
                     } else {
                         // Vertical collision (top or bottom)
                         if (y < platformRect.y) {
                             // Adjust to the top of the platform
-                            y = (int) (platformRect.y - height);
+                            y = (int) (platformRect.y - this.boundingBox.height);
                         } else {
                             // Adjust to the bottom of the platform
                             y = (int) (platformRect.y + platformRect.height);
+                            // Stay on the platform, don't fall, stop the jump and velocity
+                            Personnage personnage = Personnage.getInstance();
+
+                            personnage.setJumping(false);
+                            personnage.setVelocityY(0);
                         }
                     }
-
-                    // Update the bounding box with the new position
-                    setBoundingBox();
                 }
+
+                // Update the bounding box with the new position
+                setBoundingBox();
             }
         }
     }
+
 
     public void update() {
         // Check for collisions
@@ -165,9 +176,9 @@ public abstract class Entity extends Sprite {
     /**
      * Update the entity
      * <p>
-     *     This method is used to update the entity.
-     *     It is abstract because it is not supposed to be used outside of the package.
-     *     It is used by the child classes.
+     * This method is used to update the entity.
+     * It is abstract because it is not supposed to be used outside of the package.
+     * It is used by the child classes.
      * </p>
      */
 
@@ -178,5 +189,17 @@ public abstract class Entity extends Sprite {
     public void setBoundingBox() {
         boundingBox.setSize(width, height); // Assurez-vous que width et height sont les dimensions de la boîte de collision
         boundingBox.setPosition(x, y); // Assurez-vous que x et y sont les coordonnées actuelles du joueur
+    }
+
+    public void drawDebug(Batch batch) {
+        // Create a Pixmap
+        Pixmap pixmap = new Pixmap((int) boundingBox.getWidth(), (int) boundingBox.getHeight(), Pixmap.Format.RGBA8888);
+        // Fill it red
+        pixmap.setColor(Color.RED);
+        pixmap.fill();
+        // Draw a box around the player
+        batch.draw(new Texture(pixmap), boundingBox.x, boundingBox.y);
+        // Dispose of the pixmap to avoid memory leaks
+        pixmap.dispose();
     }
 }
