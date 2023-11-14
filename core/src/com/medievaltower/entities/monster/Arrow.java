@@ -40,8 +40,6 @@ public class Arrow extends Entity {
 
         // Calculate the current rotation angle based on the arrow's velocity vector
         rotation = (float) Math.toDegrees(Math.atan2(-speed_y, speed_x));
-        System.out.println(rotation);
-
         // Set the rotation of the arrow's sprite
         sprite.setRotation(rotation);
 

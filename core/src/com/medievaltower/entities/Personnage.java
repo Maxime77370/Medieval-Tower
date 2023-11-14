@@ -145,22 +145,17 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         for (Map.Entry<String, Boolean> entry : Actions.entrySet()) {
             entry.setValue(false);
         }
+
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            this.currentDirection = Direction.UP;
             this.Actions.put("Up", true);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            this.currentDirection = Direction.DOWN;
+        }if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             this.Actions.put("Down", true);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            this.currentDirection = Direction.LEFT;
+        }if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             this.Actions.put("Left", true);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            this.currentDirection = Direction.RIGHT;
+        }if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             this.Actions.put("Right", true);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+        }if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             this.Actions.put("Space", true);
-        } else {
-            this.currentDirection = Direction.NONE;
         }
     }
 
@@ -173,21 +168,54 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
         move();
 
+        // run left : left
+        // slide left : left + down
+        // run right : right
+        // slide right : right + down
+        // jump : up
+        // jump attack : down + isJumping
+        // attack : space
+
         this.animation.setStateLocal("Breath");
 
         if (Actions.get("Left")){
-            this.xVelocity = -speed;
-            this.animation.setStateLocal("Run", true);
-        }
 
+            if (Actions.get("Down") && !isJumping){
+                if (!isSliding) {
+                    this.xVelocity *= 2f;
+                }
+                this.isSliding = true;
+                this.animation.setStateLocal("Slide", true);
+            }
+            else{
+                this.animation.setStateLocal("Run", true);
+                this.xVelocity = -speed;
+            }
+        }
         else if (Actions.get("Right")){
-            this.xVelocity = speed;
-            this.animation.setStateLocal("Run", false);
+
+            if (Actions.get("Down") && !isJumping){
+                if (!isSliding) {
+                    this.xVelocity *= 2f;
+                }
+                this.isSliding = true;
+                this.animation.setStateLocal("Slide", false);
+            }
+            else{
+                this.animation.setStateLocal("Run", false);
+                this.xVelocity = speed;
+            }
+
         }
 
         else {
             this.xVelocity = 0;
         }
+
+        if (!Actions.get("Down") && isSliding){
+            this.isSliding = false;
+        }
+
 
         if (Actions.get("Up")){
             if (!isJumping){
@@ -198,7 +226,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
         if (Actions.get("Down")){
             if (isJumping) {
-                this.yVelocity = speed * Gdx.graphics.getDeltaTime();
+                this.yVelocity -= speed * Gdx.graphics.getDeltaTime() / 2;
+                this.animation.setStateLocal("AttackFromAir");
             }
         }
 
@@ -227,6 +256,9 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         this.x += xVelocity;
         this.y += yVelocity;
 
+
+        //verify event
+        setSliding();
         //change Texture
         updateTexture(animation);
         setBoundingBox();
@@ -408,25 +440,20 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     /**
      * Make the personnage character slide
-     * @param b
      */
-    public void setSliding(boolean b) {
-        this.isSliding = b;
-        if (b) {
+    public void setSliding() {
+        if (this.isSliding) {
             // Upgrade the speed and make the personnage character slide
-            this.speed = 40;
-        } else {
-            this.speed = 20;
+            this.xVelocity -= this.xVelocity * 1.5f * Gdx.graphics.getDeltaTime();
         }
     }
 
+
     /**
      * Make the personnage character slow
-     * @param b
      */
-    public void setSlow(boolean b) {
-        this.isSlow = b;
-        if (b) {
+    public void setSlow() {
+        if (this.isSlow) {
             // Upgrade the speed and make the personnage character slide
             this.speed = 10;
         } else {
@@ -439,5 +466,4 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         boundingBox.setSize(width - 96, height); // Assurez-vous que width et height sont les dimensions de la boîte de collision
         boundingBox.setPosition(x + 48, y); // Assurez-vous que x et y sont les coordonnées actuelles du joueur
     }
-
 }

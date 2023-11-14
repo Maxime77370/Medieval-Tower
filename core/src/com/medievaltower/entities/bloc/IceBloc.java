@@ -25,6 +25,6 @@ public class IceBloc extends Bloc {
     @Override
     public void effect() {
         // Make the player slide
-        Personnage.getInstance().setSliding(true);
+        Personnage.getInstance().setSliding();
     }
 }

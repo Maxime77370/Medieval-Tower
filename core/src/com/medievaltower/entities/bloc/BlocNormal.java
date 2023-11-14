@@ -20,12 +20,12 @@ public class BlocNormal extends Bloc {
     /**
      * Effect of the bloc
      * Set the sliding and the slow of the player to false
-     * @see Personnage#setSliding(boolean)
-     * @see Personnage#setSlow(boolean)
+     * @see Personnage#setSliding()
+     * @see Personnage#setSlow()
      */
     @Override
     public void effect() {
-        Personnage.getInstance().setSliding(false);
-        Personnage.getInstance().setSlow(false);
+        Personnage.getInstance().setSliding();
+        Personnage.getInstance().setSlow();
     }
 }

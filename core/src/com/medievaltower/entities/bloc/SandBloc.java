@@ -20,11 +20,11 @@ public class SandBloc extends Bloc {
     /**
      * Effect of the bloc
      * Make the player slow
-     * @see Personnage#setSlow(boolean)
+     * @see Personnage#setSlow()
      */
     @Override
     public void effect() {
         // Make the player slow
-        Personnage.getInstance().setSlow(true);
+        Personnage.getInstance().setSlow();
     }
 }

@@ -57,6 +57,9 @@ public class AnimationPersonnage extends Animation {
                 case "Attack":
                     sprite = new TextureRegion(animationAttack());
                     break;
+                    case "Slide":
+                    sprite = new TextureRegion(animationSlide());
+                    break;
 
             }
             ifInverseSprit(sprite);
@@ -118,18 +121,15 @@ public class AnimationPersonnage extends Animation {
 
     public TextureRegion animationStartAttackFromAir() {
         forceState = "AttackFromAir";
-        if (frame >= 3) {
-            frame = 0;
-            forceState = null;
-        }
         frame++;
         return AttackFromAirTile.getTexture(frame - 1);
     }
 
     public TextureRegion animationAttackFromAir(){
-        if (frame == 0){
-            animationStartAttackFromAir();
+        if (frame <= 2){
+            return animationStartAttackFromAir();
         }
+        forceState = null;
         frame++;
         return AttackFromAirTile.getTexture(frame%2);
     }
@@ -140,5 +140,24 @@ public class AnimationPersonnage extends Animation {
         }
         frame++;
         return AttackFromAirTile.getTexture(frame + 2);
+    }
+
+    public TextureRegion animationStartSlide() {
+        forceState = "Slide";
+        if (frame >= 3) {
+            frame = 0;
+            forceState = null;
+        }
+        frame++;
+        return SlideTile.getTexture(frame - 1);
+    }
+
+    public TextureRegion animationSlide() {
+        if (frame <= 2) {
+            return animationStartSlide();
+        }
+        forceState = null;
+        frame++;
+        return SlideTile.getTexture(frame%6 + 2);
     }
 }
