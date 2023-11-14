@@ -44,7 +44,7 @@ public class GameScreen implements Screen {
         img = new Texture("badlogic.jpg");
 
         entityManager = EntityManager.getInstance();
-        map = new Map(1);
+        map = new Map(2);
 
         personnage = new Personnage(0, 0);
         entityManager.newEntity(personnage);
@@ -178,8 +178,12 @@ public class GameScreen implements Screen {
         // Update entities
         entityManager.update();
 
+        float red = 31f/255f;
+        float green = 28f/255f;
+        float blue = 18f/255f;
+
         // Clear the screen
-        ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
+        ScreenUtils.clear(red, green, blue, 1);
 
         // Update camera matrix
         camera.update();
