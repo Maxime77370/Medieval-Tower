@@ -33,6 +33,7 @@ public abstract class Entity extends Sprite {
     protected int height;
 
     protected Sprite sprite;
+    protected Rectangle boundingBox = new Rectangle();
 
     /**
      * Entity constructor
@@ -56,6 +57,8 @@ public abstract class Entity extends Sprite {
         this.width = width;
         this.height = height;
         this.sprite = new Sprite(texture);
+
+        setBoundingBox();
 
         EntityManager entityManager = EntityManager.getInstance();
     }
@@ -113,13 +116,52 @@ public abstract class Entity extends Sprite {
             if (platform instanceof RectangleMapObject) {
                 Rectangle platformRect = ((RectangleMapObject) platform).getRectangle();
 
-                if (this.getBoundingRectangle().overlaps(platformRect)) {
-                    // Ajuster la position du joueur pour qu'il reste juste au-dessus de la plate-forme
-                    this.y = (int) (platformRect.y + platformRect.height);
+                if (this.getBoundingBox().overlaps(platformRect)) {
+                    // Calculate the overlap on both X and Y axes
+                    float overlapX = Math.min(getBoundingBox().x + getBoundingBox().width, platformRect.x + platformRect.width) -
+                            Math.max(getBoundingBox().x, platformRect.x);
+                    float overlapY = Math.min(getBoundingBox().y + getBoundingBox().height, platformRect.y + platformRect.height) -
+                            Math.max(getBoundingBox().y, platformRect.y);
+
+                    // Determine the direction of the collision
+                    boolean horizontalCollision = overlapX < overlapY;
+
+                    // Adjust the character's position based on the direction of collision
+                    if (horizontalCollision) {
+                        // Horizontal collision (left or right)
+                        if (x < platformRect.x) {
+                            // Adjust to the left of the platform
+                            x = (int) (platformRect.x - width);
+                        } else {
+                            // Adjust to the right of the platform
+                            x = (int) (platformRect.x + platformRect.width);
+                        }
+                    } else {
+                        // Vertical collision (top or bottom)
+                        if (y < platformRect.y) {
+                            // Adjust to the top of the platform
+                            y = (int) (platformRect.y - height);
+                        } else {
+                            // Adjust to the bottom of the platform
+                            y = (int) (platformRect.y + platformRect.height);
+                        }
+                    }
+
+                    // Update the bounding box with the new position
+                    setBoundingBox();
                 }
             }
         }
     }
+
+    public void update() {
+        // Check for collisions
+        checkCollidePlatform();
+
+        // Update the sprite or animation
+        // updateTexture(animation);
+    }
+
     /**
      * Update the entity
      * <p>
@@ -128,5 +170,13 @@ public abstract class Entity extends Sprite {
      *     It is used by the child classes.
      * </p>
      */
-    public abstract void update();
+
+    public Rectangle getBoundingBox() {
+        return boundingBox;
+    }
+
+    public void setBoundingBox() {
+        boundingBox.setSize(width, height); // Assurez-vous que width et height sont les dimensions de la boîte de collision
+        boundingBox.setPosition(x, y); // Assurez-vous que x et y sont les coordonnées actuelles du joueur
+    }
 }

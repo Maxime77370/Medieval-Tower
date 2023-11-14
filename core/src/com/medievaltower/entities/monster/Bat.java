@@ -2,6 +2,7 @@ package com.medievaltower.entities.monster;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.medievaltower.entities.animation.AnimationBat;
 
 /**
  * Bat class
@@ -18,6 +19,7 @@ public class Bat extends Monstre {
     protected float amplitude = 10f;
     protected float frequency = 1f;
     private float timeElapsed = 0;
+    private AnimationBat animation = new AnimationBat();
 
     /**
      * Bat constructor
@@ -25,7 +27,7 @@ public class Bat extends Monstre {
      * @param y : the y position of the monster
      */
     public Bat(int x, int y) {
-        super(x, y, 20, 20, new Texture("paix.jpg"));
+        super(x, y, 30, 30, new Texture("paix.jpg"));
     }
 
     /**
@@ -35,6 +37,7 @@ public class Bat extends Monstre {
     @Override
     public void move() {
         this.sinusoidalMove();
+        updateTexture(animation);
     }
 
     /**

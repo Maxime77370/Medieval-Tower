@@ -1,8 +1,15 @@
 package com.medievaltower.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.medievaltower.core.EntityManager;
 import com.medievaltower.entities.Personnage;
@@ -11,19 +18,26 @@ import com.medievaltower.entities.monster.Bat;
 import com.medievaltower.entities.monster.Zombie;
 import com.medievaltower.game.Camera;
 import com.medievaltower.levels.Map;
+import com.badlogic.gdx.graphics.Pixmap;
 
 public class GameScreen implements Screen {
 
-    private SpriteBatch batch;
-    private Texture img;
+    private final SpriteBatch batch;
+    private final Texture img;
 
-    private Camera camera;
-    private EntityManager entityManager;
-    private Map map;
-    private Personnage personnage;
-    private Zombie zombie;
-    private Bat bat;
-    private Archer archer;
+    private final Camera camera;
+    private final EntityManager entityManager;
+    private final Map map;
+    private final Personnage personnage;
+    private final Zombie zombie;
+    private final Bat bat;
+    private final Archer archer;
+    private final Label fpsLabel; // Label for FPS
+    private final Stage stage; // Stage for HUD
+    private final Table table; // Table to organize HUD elements
+    private final BitmapFont font; // BitmapFont for Label
+    private final Label monsterCountLabel; // Label for monster count
+    private final ProgressBar expBar; // Progress bar for experience points
 
     public GameScreen() {
         batch = new SpriteBatch();
@@ -45,6 +59,113 @@ public class GameScreen implements Screen {
         entityManager.newEntity(archer);
 
         camera = new Camera();
+
+        // Initialize the HUD
+        stage = new Stage();
+        table = new Table();
+        table.setFillParent(true);
+        table.top().left();
+        stage.addActor(table);
+
+        font = new BitmapFont();
+
+        // FPS Label (Top right corner)
+        Table fpsTable = new Table();
+        fpsTable.top().right();
+        fpsTable.setFillParent(true);
+        fpsLabel = new Label("FPS: " + Gdx.graphics.getFramesPerSecond(), new Label.LabelStyle(font, Color.WHITE));
+        fpsTable.add(fpsLabel).pad(10);
+        stage.addActor(fpsTable);
+
+        Skin skin = new Skin();
+        Pixmap pixmap = new Pixmap(10, 10, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.WHITE);
+        pixmap.fill();
+        skin.add("white", new Texture(pixmap));
+
+        pixmap.setColor(Color.GREEN);
+        pixmap.fill();
+        skin.add("green", new Texture(pixmap));
+
+        // Customize the progress bar style
+        ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
+        progressBarStyle.knob = skin.getDrawable("white"); // Set knob to white color
+        progressBarStyle.knobBefore = skin.getDrawable("green"); // Set knobBefore to green color
+
+        // Create a background drawable for the progress bar
+        ProgressBar.ProgressBarStyle backgroundStyle = new ProgressBar.ProgressBarStyle();
+        backgroundStyle.knobBefore = skin.getDrawable("white");
+
+        // Set the background style to the progress bar
+        progressBarStyle.background = skin.getDrawable("white");
+
+        expBar = new ProgressBar(0, 325, 1, false, progressBarStyle);
+        expBar.setPosition(10, 10);
+        expBar.setSize(290, expBar.getPrefHeight());
+        expBar.setValue(personnage.getExp());
+
+        // Label to show the player's level
+        Label levelLabel = new Label("Niv. " + personnage.getLevel(), new Label.LabelStyle(font, Color.WHITE));
+
+        // Label to show the experience points progress
+        Label expLabel = new Label("Exp restante  : " + (325 - personnage.getExp()), new Label.LabelStyle(font, Color.WHITE));
+
+        // Arrange the widgets in a table
+        Table expTable = new Table();
+        expTable.center().top();
+        expTable.setFillParent(true);
+        expTable.add(expBar).pad(10); // Add the exp bar to the expTable
+        expTable.row(); // Move to the next row
+        expTable.add(levelLabel).padTop(5); // Add the level label
+        expTable.row(); // Move to the next row
+        expTable.add(expLabel).padTop(5); // Add the exp label
+
+        stage.addActor(expTable);
+
+
+        // Load textures for HUD elements
+        Texture heartTexture = new Texture("heart.png");
+        Texture inventoryTexture = new Texture("inventory.png"); // Replace with your inventory icon
+        Texture potionTexture = new Texture("potion.png"); // Replace with your potion icon
+        Texture monsterTexture = new Texture("monster.png"); // Replace with your monster icon
+
+        // Display health using Image widgets
+        for (int i = 0; i < personnage.getHealth(); i++) {
+            Image heartImage = new Image(heartTexture);
+            table.add(heartImage).pad(5).width(50).height(50);
+        }
+
+        // Add a separator
+        table.row().padTop(5);
+
+        // Display inventory icon
+        Image inventoryImage = new Image(inventoryTexture);
+        table.add(inventoryImage).pad(5).width(50).height(50);
+
+        // Display inventory count (replace with the actual count)
+        Label inventoryCountLabel = new Label("x" + personnage.getWeaponInventory().size(), new Label.LabelStyle(font, Color.WHITE));
+        table.add(inventoryCountLabel).pad(5);
+
+        // Add another separator
+        table.row().padTop(10);
+
+        // Display potion icon
+        Image potionImage = new Image(potionTexture);
+        table.add(potionImage).pad(5).width(50).height(50);
+
+        // Display potion count (replace with the actual count)
+        Label potionCountLabel = new Label("x" + personnage.getPotionInventory().size(), new Label.LabelStyle(font, Color.WHITE));
+        table.add(potionCountLabel).pad(5);
+
+        // Add information about monsters (replace with the actual count)
+        table.row().padTop(10);
+
+        Image monsterImage = new Image(monsterTexture);
+        table.add(monsterImage).pad(5).width(50).height(50);
+        monsterCountLabel = new Label("x3" + entityManager.getNumberOfMonsters(), new Label.LabelStyle(font, Color.WHITE));
+        table.add(monsterCountLabel).pad(5);
+
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -54,12 +175,15 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
         // Update entities
         entityManager.update();
 
+        float red = 31f/255f;
+        float green = 28f/255f;
+        float blue = 18f/255f;
+
         // Clear the screen
-        ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
+        ScreenUtils.clear(red, green, blue, 1);
 
         // Update camera matrix
         camera.update();
@@ -72,6 +196,17 @@ public class GameScreen implements Screen {
 
         // Draw entities
         entityManager.draw(batch);
+
+        // Update the HUD
+        fpsLabel.setText("FPS: " + Gdx.graphics.getFramesPerSecond());
+        monsterCountLabel.setText("x" + entityManager.getNumberOfMonsters());
+
+        // Update the progress bar
+        expBar.setValue(personnage.getExp());
+
+        // Draw the HUD
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.draw();
     }
 
     @Override
@@ -99,7 +234,6 @@ public class GameScreen implements Screen {
     public void dispose() {
         // Dispose of resources when the screen is disposed
         batch.dispose();
-
         map.dispose();
 
         // Dispose of entity textures
@@ -108,5 +242,10 @@ public class GameScreen implements Screen {
         bat.getSprite().getTexture().dispose();
         archer.getSprite().getTexture().dispose();
         archer.getCurrentArrow().getSprite().getTexture().dispose();
+
+        stage.dispose();
+
+        // Dispose of the font
+        font.dispose();
     }
 }

@@ -1,7 +1,8 @@
 package com.medievaltower.core;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import jdk.tools.jlink.internal.Platform;
+
+import com.medievaltower.entities.monster.Monstre;
 
 import java.util.ArrayList;
 
@@ -88,5 +89,15 @@ public class EntityManager<T extends Entity> {
             entity.draw(batch);
         }
         batch.end();
+    }
+
+    public int getNumberOfMonsters() {
+        int count = 0;
+        for (T entity : entities) {
+            if (entity instanceof Monstre) {
+                count++;
+            }
+        }
+        return count;
     }
 }
