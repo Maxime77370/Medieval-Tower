@@ -1,6 +1,7 @@
 package com.medievaltower.core;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import jdk.tools.jlink.internal.Platform;
 
 import java.util.ArrayList;
 
@@ -77,6 +78,7 @@ public class EntityManager<T extends Entity> {
         entitiesToAdd.clear();
         for (T entity : entities) {
             entity.update();
+            entity.checkCollidePlatform();
         }
     }
 

@@ -3,7 +3,11 @@ package com.medievaltower.core;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.medievaltower.entities.animation.Animation;
+import com.medievaltower.levels.Map;
 
 
 /**
@@ -104,6 +108,18 @@ public abstract class Entity extends Sprite {
         batch.draw(this.sprite, this.x, this.y, this.width, this.height);
     }
 
+    public void checkCollidePlatform() {
+        for (MapObject platform : Map.getInstance().getPlatforms()) {
+            if (platform instanceof RectangleMapObject) {
+                Rectangle platformRect = ((RectangleMapObject) platform).getRectangle();
+
+                if (this.getBoundingRectangle().overlaps(platformRect)) {
+                    // Ajuster la position du joueur pour qu'il reste juste au-dessus de la plate-forme
+                    this.y = (int) (platformRect.y + platformRect.height);
+                }
+            }
+        }
+    }
     /**
      * Update the entity
      * <p>

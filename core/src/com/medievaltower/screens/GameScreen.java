@@ -30,7 +30,7 @@ public class GameScreen implements Screen {
         img = new Texture("badlogic.jpg");
 
         entityManager = EntityManager.getInstance();
-        map = new Map(1);
+        map = new Map(2);
 
         personnage = new Personnage(0, 0);
         entityManager.newEntity(personnage);
