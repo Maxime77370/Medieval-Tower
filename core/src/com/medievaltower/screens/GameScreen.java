@@ -220,7 +220,7 @@ public class GameScreen implements Screen {
 
 
         // Display square with debug
-        stage.setDebugAll(true);
+        //stage.setDebugAll(true);
 
         stage.draw();
     }

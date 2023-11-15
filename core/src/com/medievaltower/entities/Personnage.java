@@ -46,7 +46,7 @@ import java.util.WeakHashMap;
  */
 public class Personnage extends Entity implements MovableEntity, AttackableEntity {
 
-    private static final float JUMP_FORCE = 12;
+    private static final float JUMP_FORCE = 9;
     private static final float GRAVITY = 20f;
     private static Personnage instance;
     private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
@@ -68,7 +68,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private final Tileset AttackTile = new Tileset("2D_SL_Knight_v1.0/Attacks.png", 128, 64);
     private final Tileset JumpTile = new Tileset("2D_SL_Knight_v1.0/Jump.png", 128, 64);
     private final Tileset SlideTile = new Tileset("2D_SL_Knight_v1.0/Slide.png", 128, 64);
-    private int speed = 8;
+    private int speed = 4;
     private boolean isJumping = false;
     private float xVelocity = 0;
     private float yVelocity = 0;
@@ -475,8 +475,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     @Override
     public void setBoundingBox() {
         // Set the bounding box of the personnage character
-        boundingBox.setSize(width, height);
-        boundingBox.setPosition(x, y);
+        boundingBox.setSize(width - 101, height - 17);
+        boundingBox.setPosition(x + 50, y);
     }
 
     public void setJumping(boolean b) {
