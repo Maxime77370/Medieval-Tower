@@ -63,8 +63,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 436.3333333333333,
-                "y": 357.3333333333333
+                "x": 687.9999999999999,
+                "y": 356
             }
         },
         "map_3.tmx": {
@@ -77,10 +77,10 @@
                 14
             ],
             "scale": 1,
-            "selectedLayer": 9,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 3014.5,
-                "y": 409
+                "x": 3404,
+                "y": 279
             }
         },
         "premiere_map.tmx": {
