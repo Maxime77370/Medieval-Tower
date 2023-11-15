@@ -5,8 +5,8 @@
     },
     "activeFile": "map_3.tmx",
     "expandedProjectPaths": [
-        "tiled",
-        "."
+        ".",
+        "tiled"
     ],
     "fileStates": {
         "/Users/maximecarpentier/Library/Mobile Documents/com~apple~CloudDocs/Epitech/T-JAV-501/T-JAV-501-LIL_10/assets/Texture/Legacy-Fantasy - High Forest 2.3/Tiles.tsx": {
@@ -53,34 +53,34 @@
         },
         "map_2.tmx": {
             "expandedObjectLayers": [
-                15,
-                14,
-                17,
                 16,
                 3,
+                17,
+                14,
+                15,
                 13
             ],
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 406,
-                "y": 470
+                "x": 187,
+                "y": 468
             }
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
-                15,
                 14,
-                11,
-                10,
+                15,
+                12,
                 13,
-                12
+                10,
+                11
             ],
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1032,
-                "y": 333
+                "x": 1556.3333333333333,
+                "y": 397.33333333333326
             }
         },
         "premiere_map.tmx": {
