@@ -47,31 +47,31 @@
             "scale": 1.2178,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 274.26506815569064,
-                "y": 97.3066184923633
+                "x": 240.59779931023158,
+                "y": 160.1248152405978
             }
         },
         "map_2.tmx": {
             "expandedObjectLayers": [
-                3,
-                13
+                13,
+                3
             ],
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1492,
-                "y": 208.66666666666669
+                "x": 1490.6666666666665,
+                "y": 208
             }
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
                 10
             ],
-            "scale": 4,
+            "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 3742.25,
-                "y": 489.625
+                "x": 189.5,
+                "y": 471
             }
         },
         "premiere_map.tmx": {
