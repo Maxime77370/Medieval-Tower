@@ -42,12 +42,7 @@ public class Bat extends Monstre {
 
 
         this.sinusoidalMove();
-        super.move();
-    }
-
-    @Override
-    public void collide_floor() {
-
+        setBoundingBox();
     }
 
     @Override

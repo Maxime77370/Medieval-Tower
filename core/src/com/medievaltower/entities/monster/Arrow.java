@@ -56,11 +56,6 @@ public class Arrow extends Entity {
     }
 
     @Override
-    public void collide_floor() {
-
-    }
-
-    @Override
     public void update() {
     }
 

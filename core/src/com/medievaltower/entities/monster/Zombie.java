@@ -29,7 +29,7 @@ public class Zombie extends Monstre {
      */
     private AnimationZombie animation = new AnimationZombie();
     public Zombie(int x, int y) {
-        super(x, y, 75, 75, new Texture("paix.jpg"));
+        super(x, y, 32, 32, new Texture("paix.jpg"));
     }
 
     /**
@@ -42,15 +42,9 @@ public class Zombie extends Monstre {
         this.xLast = this.x;
         this.yLast = this.y;
 
-        this.yVelocity -= GRAVITY * Gdx.graphics.getDeltaTime();
-
         animation.setStateLocal("Run");
-        this.x += speed;
-        if (this.x >= 100) {
-            speed = -speed;
-        } else if (this.x <= 0) {
-            speed = Math.abs(speed);
-        }
+
+        this.x += speed * Gdx.graphics.getDeltaTime();
 
         super.move();
     }
@@ -84,7 +78,15 @@ public class Zombie extends Monstre {
      */
     @Override
     public void update() {
+        System.out.println(yVelocity);
+        System.out.println(y);
         updateTexture(animation);
     }
 
+    @Override
+    public void setBoundingBox() {
+        // Set the bounding box of the personnage character
+        boundingBox.setSize(width - 9, height - 5 );
+        boundingBox.setPosition(x + 5, y);
+    }
 }

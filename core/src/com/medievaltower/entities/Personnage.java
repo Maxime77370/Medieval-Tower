@@ -48,7 +48,7 @@ import java.util.WeakHashMap;
  */
 public class Personnage extends Entity implements MovableEntity, AttackableEntity {
 
-    private static final float JUMP_FORCE = 9;
+    private static final float JUMP_FORCE = 600;
     private static Personnage instance;
     private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
@@ -69,7 +69,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private final Tileset AttackTile = new Tileset("2D_SL_Knight_v1.0/Attacks.png", 128, 64);
     private final Tileset JumpTile = new Tileset("2D_SL_Knight_v1.0/Jump.png", 128, 64);
     private final Tileset SlideTile = new Tileset("2D_SL_Knight_v1.0/Slide.png", 128, 64);
-    private int speed = 4;
+    private int speed = 256;
     private boolean isJumping = false;
     private int health = 3;
     private Weapon weaponEquipped = null;
@@ -236,9 +236,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.attack();
         }
 
-
-        this.yVelocity -= this.GRAVITY * Gdx.graphics.getDeltaTime();
-
         if (isInvincible) {
             invincibleTimer -= Gdx.graphics.getDeltaTime();
             if (invincibleTimer <= 0) {
@@ -251,11 +248,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.yVelocity = 0;
             this.isJumping = false;
         }
-
-        //change position
-        this.x += xVelocity;
-        this.y += yVelocity;
-
 
         //verify event
         setSliding();
@@ -487,12 +479,19 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     @Override
     public void collide_floor(){
         this.isJumping = false;
-        this.yVelocity = 0;
+        super.collide_floor();
     }
 
     @Override
-    public void collide_ceiling(){
-        this.yVelocity = 0;
+    public void collide_left(){
+        this.isJumping = false;
+        super.collide_left();
+    }
+
+    @Override
+    public void collide_right(){
+        this.isJumping = false;
+        super.collide_right();
     }
 
     public void collide_wall(){

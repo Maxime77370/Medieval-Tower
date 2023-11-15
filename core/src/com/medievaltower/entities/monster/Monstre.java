@@ -18,7 +18,7 @@ import com.medievaltower.core.MovableEntity;
  * @see Texture
  */
 public abstract class Monstre extends Entity implements AttackableEntity, MovableEntity {
-    protected int speed = 2;
+    protected int speed = 5;
 
     /**
      * Monstre constructor
