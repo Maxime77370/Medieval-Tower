@@ -47,31 +47,36 @@
             "scale": 1.2178,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 239.7766464115618,
-                "y": 155.19789784857937
+                "x": 240.59779931023158,
+                "y": 160.1248152405978
             }
         },
         "map_2.tmx": {
             "expandedObjectLayers": [
                 3,
+                17,
+                16,
+                15,
+                14,
                 13
             ],
-            "scale": 9.5803,
-            "selectedLayer": 3,
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1199.962422888636,
-                "y": 319.9273509180297
+                "x": 406.6666666666667,
+                "y": 470.66666666666663
             }
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
+                11,
                 10
             ],
-            "scale": 1.1965,
-            "selectedLayer": 3,
+            "scale": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 160.46803175929796,
-                "y": 510.6560802340159
+                "x": 184.66666666666663,
+                "y": 479.66666666666663
             }
         },
         "premiere_map.tmx": {
@@ -145,7 +150,6 @@
     ],
     "project": "Map.tiled-project",
     "recentFiles": [
-        "map_2.tmx",
         "map_1.tmx",
         "tiled/Buildings.tsx",
         "tiled/Tiles.tsx",
@@ -154,6 +158,7 @@
         "tiled/Background_1.tsx",
         "tiled/Background_2.tsx",
         "tiled/Tree-Assets.tsx",
+        "map_2.tmx",
         "map_3.tmx",
         "untitled.tmx",
         "premiere_map.tmx"
