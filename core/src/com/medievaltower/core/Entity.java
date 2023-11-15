@@ -121,47 +121,50 @@ public abstract class Entity extends Sprite {
     }
 
     public void checkCollidePlatform() {
-        for (MapObject platform : Map.getInstance().getPlatforms()) {
-            if (platform instanceof RectangleMapObject) {
-                Rectangle platformRect = ((RectangleMapObject) platform).getRectangle();
-
-                if (this.getBoundingBox().overlaps(platformRect)) {
-                    // Calculate the overlap on both X and Y axes
-                    float overlapX = Math.min(getBoundingBox().x + getBoundingBox().width, platformRect.x + platformRect.width) - Math.max(getBoundingBox().x, platformRect.x);
-                    float overlapY = Math.min(getBoundingBox().y + getBoundingBox().height, platformRect.y + platformRect.height) - Math.max(getBoundingBox().y, platformRect.y);
-
-                    boolean horizontalCollision = overlapX < overlapY;
-
-                    // Horizontal collision (left or right)
-                    if (horizontalCollision) {
-                        // Adjust to the left of the platform
-                        if (x < platformRect.x) {
-                            x = (int) (platformRect.x - this.boundingBox.width);
-                        } else {
-                            // Adjust to the right of the platform
-                            x = (int) -100;
-                        }
-                    } else {
-                        // Vertical collision (top or bottom)
-                        if (y < platformRect.y) {
-                            // Adjust to the top of the platform
-                            y = (int) (platformRect.y - this.boundingBox.height);
-                        } else {
-                            // Adjust to the bottom of the platform
-                            y = (int) (platformRect.y + platformRect.height);
-                            // Stay on the platform, don't fall, stop the jump and velocity
-                            Personnage personnage = Personnage.getInstance();
-
-                            personnage.setJumping(false);
-                            personnage.setVelocityY(0);
-                        }
-                    }
+    for (MapObject platformObject : Map.getInstance().getPlatforms()) {
+        if (platformObject instanceof RectangleMapObject) {
+            Rectangle platform = ((RectangleMapObject) platformObject).getRectangle();
+            if (boundingBox.overlaps(platform)) {
+                // Déterminer le type de collision
+                if (isVerticalCollision(platform)) {
+                    handleVerticalCollision(platform);
+                } else {
+                    handleHorizontalCollision(platform);
                 }
-
-                // Update the bounding box with the new position
-                setBoundingBox();
             }
         }
+    }
+}
+
+    private boolean isVerticalCollision(Rectangle platform) {
+        float playerY = Personnage.getInstance().getY();
+        float playerHeight = Personnage.getInstance().getHeight();
+        float platformY = platform.y;
+        float platformHeight = platform.height;
+
+        return playerY + playerHeight > platformY && playerY < platformY + platformHeight;
+    }
+
+    private void handleVerticalCollision(Rectangle platform) {
+        if (Personnage.getInstance().getyVelocity() > 0) { // Si l'entité se déplace vers le haut
+            y = (int) (platform.y - this.boundingBox.height); // Positionnez l'entité juste en dessous de la plateforme
+        } else { // Si l'entité se déplace vers le bas
+            y = (int) (platform.y + platform.height); // Positionnez l'entité juste au-dessus de la plateforme
+        }
+
+        Personnage.getInstance().setVelocityY(0);
+        setBoundingBox(); // Mettez à jour la bounding box après avoir changé la position
+    }
+
+    private void handleHorizontalCollision(Rectangle platform) {
+        if (Personnage.getInstance().getxVelocity() > 0) { // Si l'entité se déplace vers la droite
+            x = (int) (platform.x - this.boundingBox.width); // Positionnez l'entité juste à gauche de la plateforme
+        } else { // Si l'entité se déplace vers la gauche
+            x = (int) (platform.x + platform.width); // Positionnez l'entité juste à droite de la plateforme
+        }
+
+        Personnage.getInstance().setVelocityX(0); // Arrêtez le mouvement horizontal
+        setBoundingBox(); // Mettez à jour la bounding box après avoir changé la position
     }
 
 

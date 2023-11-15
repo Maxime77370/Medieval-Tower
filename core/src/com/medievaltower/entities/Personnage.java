@@ -49,18 +49,62 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private static final float JUMP_FORCE = 12;
     private static final float GRAVITY = 20f;
     private static Personnage instance;
-
-    private AnimationPersonnage animation = new AnimationPersonnage();
     private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
+    private final float invincibleDuration = 3;
+    private final AnimationPersonnage animation = new AnimationPersonnage();
+    private final float exp = 120f;
+    private final int level = 1;
+    private final Direction currentDirection = Direction.NONE;
+    private final boolean isSlow = false;
+    private final Map<String, Boolean> Actions = new HashMap<String, Boolean>() {{
+        put("Left", false);
+        put("Right", false);
+        put("Up", false);
+        put("Down", false);
+        put("Space", false);
+    }};
+    private final Tileset runTile = new Tileset("2D_SL_Knight_v1.0/Run.png", 128, 64);
+    private final Tileset AttackTile = new Tileset("2D_SL_Knight_v1.0/Attacks.png", 128, 64);
+    private final Tileset JumpTile = new Tileset("2D_SL_Knight_v1.0/Jump.png", 128, 64);
+    private final Tileset SlideTile = new Tileset("2D_SL_Knight_v1.0/Slide.png", 128, 64);
     private int speed = 8;
     private boolean isJumping = false;
     private float xVelocity = 0;
     private float yVelocity = 0;
     private int health = 3;
-    private float exp = 120f;
-    private int level = 1;
     private Weapon weaponEquipped = null;
+    private Potion potionEquipped = null;
+    private Cle cleEquipped = null;
+    private boolean isSliding = false;
+    private boolean isInvincible = false;
+    private float invincibleTimer = 0;
+
+    /**
+     * Personnage constructor
+     *
+     * @param x : the x position of the personnage
+     * @param y : the y position of the personnage
+     */
+    public Personnage(int x, int y) {
+        super(x, y, 128 * 2, 64 * 2, new Texture("Texture/2D_SL_Knight_v1.0/Run.png"));
+        // Définissez l'instance du personnage
+        instance = this;
+
+    }
+
+    /**
+     * Get the instance of the personnage
+     *
+     * @return the instance of the personnage
+     */
+    public static Personnage getInstance() {
+        if (instance == null) {
+            System.out.println("Personnage instance created");
+            instance = new Personnage(0, 0);
+        }
+        return instance;
+    }
 
     public WeakHashMap<Weapon, Integer> getWeaponInventory() {
         return weaponInventory;
@@ -90,52 +134,12 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         return potionEquipped;
     }
 
-    private Potion potionEquipped = null;
-    private Cle cleEquipped = null;
-    private Direction currentDirection = Direction.NONE;
-    private boolean isSliding = false;
-    private boolean isSlow = false;
-    private boolean isInvincible = false;
-    private float invincibleTimer = 0;
-    private final float invincibleDuration = 3;
-
-    private Map<String, Boolean> Actions = new HashMap<String, Boolean>() {{
-        put("Left", false);
-        put("Right", false);
-        put("Up", false);
-        put("Down", false);
-        put("Space", false);
-    }};
-
-    private Tileset runTile = new Tileset("2D_SL_Knight_v1.0/Run.png", 128, 64);
-    private Tileset AttackTile = new Tileset("2D_SL_Knight_v1.0/Attacks.png", 128, 64);
-    private Tileset JumpTile = new Tileset("2D_SL_Knight_v1.0/Jump.png", 128, 64);
-    private Tileset SlideTile = new Tileset("2D_SL_Knight_v1.0/Slide.png", 128, 64);
-
-    /**
-     * Personnage constructor
-     *
-     * @param x : the x position of the personnage
-     * @param y : the y position of the personnage
-     */
-    public Personnage(int x, int y) {
-        super(x, y, 128*2, 64*2, new Texture("Texture/2D_SL_Knight_v1.0/Run.png"));
-        // Définissez l'instance du personnage
-        instance = this;
-
+    public float getxVelocity() {
+        return xVelocity;
     }
 
-    /**
-     * Get the instance of the personnage
-     *
-     * @return the instance of the personnage
-     */
-    public static Personnage getInstance() {
-        if (instance == null) {
-            System.out.println("Personnage instance created");
-            instance = new Personnage(0, 0);
-        }
-        return instance;
+    public float getyVelocity() {
+        return yVelocity;
     }
 
     /**
@@ -148,13 +152,17 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             this.Actions.put("Up", true);
-        }if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             this.Actions.put("Down", true);
-        }if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             this.Actions.put("Left", true);
-        }if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             this.Actions.put("Right", true);
-        }if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             this.Actions.put("Space", true);
         }
     }
@@ -178,60 +186,59 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
         this.animation.setStateLocal("Breath");
 
-        if (Actions.get("Left")){
+        if (Actions.get("Left")) {
 
-            if (Actions.get("Down") && !isJumping){
+            if (Actions.get("Down") && !isJumping) {
                 if (!isSliding) {
                     this.xVelocity *= 2f;
                 }
                 this.isSliding = true;
                 this.animation.setStateLocal("Slide", true);
-            }
-            else{
+            } else {
                 this.animation.setStateLocal("Run", true);
                 this.xVelocity = -speed;
             }
-        }
-        else if (Actions.get("Right")){
+        } else if (Actions.get("Right")) {
 
-            if (Actions.get("Down") && !isJumping){
+            if (Actions.get("Down") && !isJumping) {
                 if (!isSliding) {
                     this.xVelocity *= 2f;
                 }
                 this.isSliding = true;
                 this.animation.setStateLocal("Slide", false);
-            }
-            else{
+            } else {
                 this.animation.setStateLocal("Run", false);
                 this.xVelocity = speed;
             }
 
-        }
-
-        else {
+        } else {
             this.xVelocity = 0;
         }
 
-        if (!Actions.get("Down") && isSliding){
+        if (!Actions.get("Down") && isSliding) {
             this.isSliding = false;
         }
 
 
-        if (Actions.get("Up")){
-            if (!isJumping){
+        if (Actions.get("Up")) {
+            if (!isJumping) {
                 this.animation.setStateLocal("StartJump");
                 this.jump();
             }
         }
 
-        if (Actions.get("Down")){
+        if (Actions.get("Up") && !isJumping) {
+            jump();
+        }
+
+        if (Actions.get("Down")) {
             if (isJumping) {
                 this.yVelocity -= speed * Gdx.graphics.getDeltaTime() / 2;
                 this.animation.setStateLocal("AttackFromAir");
             }
         }
 
-        if (Actions.get("Space")){
+        if (Actions.get("Space")) {
             this.attack();
         }
 
@@ -245,7 +252,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             }
         }
 
-        if (this.y < 0){
+        if (this.y < 0) {
             this.y = 0;
             this.yVelocity = 0;
             this.isJumping = false;
@@ -283,10 +290,9 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     private void attackAnimation() {
-        if (this.isJumping){
+        if (this.isJumping) {
             this.animation.setStateLocal("AttackFromAir");
-        }
-        else {
+        } else {
             this.animation.setStateLocal("Attack");
         }
     }
@@ -331,6 +337,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     /**
      * Add a weapon to the personnage inventory, maximum 2 weapons
+     *
      * @param weapon
      */
     public void addWeaponInventory(Weapon weapon) {
@@ -363,6 +370,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     /**
      * Add a potion to the personnage inventory, maximum 2 potions
+     *
      * @param potion
      */
     public void addPotionInventory(Potion potion) {
@@ -395,6 +403,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     /**
      * Remove a weapon from the personnage inventory
+     *
      * @param weapon
      */
     public void removeWeaponInventory(Weapon weapon) {
@@ -409,6 +418,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     /**
      * Remove a potion from the personnage inventory
+     *
      * @param potion
      */
     public void removePotionInventory(Potion potion) {
@@ -423,6 +433,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     /**
      * Get a Cle
+     *
      * @return the Cle
      */
     public Cle getCleEquipped() {
@@ -431,6 +442,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     /**
      * Set a Cle
+     *
      * @param cle : the Cle
      */
     public void setCleEquipped(Cle cle) {
@@ -473,5 +485,17 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     public void setVelocityY(int i) {
         this.yVelocity = i;
+    }
+
+    public void setVelocityX(int i) {
+        this.xVelocity = i;
+    }
+
+    public boolean isMovingHorizontally() {
+        return xVelocity != 0;
+    }
+
+    public boolean isMovingVertically() {
+        return yVelocity != 0;
     }
 }
