@@ -230,6 +230,6 @@ public abstract class Entity extends Sprite {
     public abstract void collide(Entity entity);
 
     public void dispose() {
-        sprite.getTexture().dispose();
+        this.getSprite().getTexture().dispose();
     }
 }

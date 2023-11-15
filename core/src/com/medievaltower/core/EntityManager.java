@@ -14,6 +14,7 @@ public class EntityManager<T extends Entity> {
     private static EntityManager instance;
     private ArrayList<T> entities;
     private ArrayList<T> entitiesToAdd;
+    private ArrayList<T> entitiesToRemove;
 
     /**
      * Constructor
@@ -31,6 +32,7 @@ public class EntityManager<T extends Entity> {
     public EntityManager() {
         entities = new ArrayList<T>();
         entitiesToAdd = new ArrayList<T>();
+        entitiesToRemove = new ArrayList<T>();
         instance = this;
     }
 
@@ -58,7 +60,7 @@ public class EntityManager<T extends Entity> {
      * @param entity : the entity to remove
      */
     public void removeEntity(T entity) {
-        entities.remove(entity);
+        entitiesToRemove.add(entity);
     }
 
     /**
@@ -77,6 +79,9 @@ public class EntityManager<T extends Entity> {
             entities.add((T) entity);
         }
         entitiesToAdd.clear();
+        for (Entity entity : entitiesToRemove) {
+            entities.remove(entity);
+        }
         for (T entity : entities) {
             entity.move();
             collide(entity);

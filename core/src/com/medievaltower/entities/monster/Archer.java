@@ -101,7 +101,6 @@ public class Archer extends Monstre {
     @Override
     public void update() {
 
-        /*
         // Vérifie si la flèche actuelle est nulle
         if (currentArrow == null) {
             attack();
@@ -111,7 +110,6 @@ public class Archer extends Monstre {
             System.out.println("delete");
             attack();
         }
-        */
 
         // Tir la flèche si la condition est remplie
 
