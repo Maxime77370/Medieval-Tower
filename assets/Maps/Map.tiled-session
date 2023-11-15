@@ -54,24 +54,29 @@
         "map_2.tmx": {
             "expandedObjectLayers": [
                 3,
+                17,
+                16,
+                15,
+                14,
                 13
             ],
-            "scale": 0.75,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1253.3333333333335,
-                "y": 320
+                "x": 406.6666666666667,
+                "y": 470.66666666666663
             }
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
+                11,
                 10
             ],
-            "scale": 2,
-            "selectedLayer": 3,
+            "scale": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 3248.75,
-                "y": 469.5
+                "x": 184.66666666666663,
+                "y": 479.66666666666663
             }
         },
         "premiere_map.tmx": {

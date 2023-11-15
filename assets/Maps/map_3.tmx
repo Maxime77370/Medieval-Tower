@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="240" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="123">
+<map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="240" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="144">
  <tileset firstgid="1" source="tiled/Tiles.tsx"/>
  <tileset firstgid="626" source="tiled/Buildings.tsx"/>
  <tileset firstgid="1251" source="tiled/Rocks.tsx"/>
@@ -10,7 +10,7 @@
  </layer>
  <layer id="7" name="Arbres et décors secondaires" width="240" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt3FlKw1AYxfHbYrR91udODw4bEG0F0S3YgptQcBMOVRfhtAitwx60DouoA7gBjxCkphWTmvbei/8fHOxL6ldzT1IuEmMAAAAAAAAAAAAARC3bHgDAwNZtDwAnjWVtT+CmCSWn5G0PMmKXGWOuMranQFzXOlc3nK9vikopTMXqJKN3r7XwEFkPrBF3Peq8PHFuvnR39zNlM5wOv3v0N2eNwAf9utsd9Gqq1/t0Gw5YUBbN9/5WlVr40xW76sueI5050RynjsyC/y3QOhxXlvT6QmnZHugHR5rxuE9nfPpODqStoPVfVBp6vaFs2h4IwEC2lR1ly/YgABK7U9pK0/YgABLrKM+2hwAAJJIJjMkGtqcAMIhJdXcq7O8Oe/oAAAAAAAD4xQF7SIC3zugvAMBRr7pHvYX3qUPuV4BXcllj8jzLDAmtBMasevK/ZtOac0aZVeY8mTmusrpbSam/w37eVfT5AzXNvcS1x4o19aDuSRcWNOeiUlVqnsw8avPZ4T/vKvr8gbp+Z2PI/W1FPs9dgs8XcG0BUnE+4HWlHTmuk+B9CmF/n3XMS4zjuvci/iKt9wFccWtxPY+rxxMx7sVp7UWwpwGkp6gulWL0Ka29iDT3NAAAAAAAAAD0+gC6ZDeh
+   eJzt3FlOwlAYxfELSRme9RnQB4cdMCVGt6AkbkITNyGKuginRSgOexAcFgFq4gY8Jo2BgrHFwu2N/19yAi8lH/aeltyYGgMAAAAAAAAAAAAgaM32AAAmtm17AMAhWSWn5G0PMmM3KWNuU7anQFh3Olf3nK8hRaXkZ9HqJLP3qLXwFFgPrJHketZ5eeHcfBvs7lcWzHQ6/OHQ35w1AheM6+5gMKqlXh/RbSRAWamY4f5WlZr/mhQH6sthQjpzrjkuEjIL/jdP6zCj1PX+WmnbHugHp5rxbExnXPpNDsStoPVfVBp6v6Ps2h4IwET2laayZ3sQAJF1lK7Ssj0IgMh6St/2EACASFKeMWnP9hQAJjGn7s77/W2ypw8AAAAAAIBfHLOHBDjrkv4CABLqTfeod/8+dcL9CnBKLm1MPm17Crhm3TNmw5H/NVvSnMvKirLqyMxhLai7izH1d9rPuwo+f6Cmuetce6zYVA+2HOlCWXNWlKpSc2RmG6b9vKvg8we21N3GlPvbDnyfToTv53FtAWJxNeF1pRs4rhfhcwp+f/s65jXEcYN7EX8R1+cASfFgcT1n1ONsiHtxXHsR7GkA8SmqS6UQfYprLyLOPQ0AAAAAAAAAoz4B6xI3Yw==
   </data>
  </layer>
  <layer id="4" name="Background" width="240" height="40">
@@ -43,12 +43,6 @@
   <object id="26" x="704.667" y="368.667" width="62.6667" height="47.3333"/>
   <object id="27" x="960.182" y="224.545" width="64.5455" height="63.4545"/>
   <object id="28" x="661.455" y="304.909" width="26.7273" height="48"/>
-  <object id="32" x="104" y="439">
-   <polygon points="0,0 266,-185 283,-334 370,-389 423,-331 522,-327 575,-343 678,-340 733,-371 775,-373 774,-346 835,-341 840,-327 939,-324 937,-314 963,-294 962,-266 1029,-265 1138,-327 1187,-342 1252,-343 1271,-357 1360,-346 1388,-320 1368,-336 1366,-421 773,-371 2,-377"/>
-  </object>
-  <object id="33" x="685" y="352.5">
-   <polygon points="0,0 20.5,16 17.5,1.5"/>
-  </object>
   <object id="34" x="767.636" y="368.727" width="64.7273" height="15.8182"/>
   <object id="35" x="816.364" y="352.364" width="15.8182" height="32.1818"/>
   <object id="36" x="816.364" y="352.545" width="78.5455" height="15.8182"/>
@@ -103,9 +97,6 @@
   <object id="92" x="3519.67" y="255.333" width="48.6667" height="17"/>
   <object id="93" x="3379" y="256.667" width="43.6667" height="15.6667"/>
   <object id="94" x="3379" y="175.667" width="43.6667" height="17.3333"/>
-  <object id="98" x="1553.57" y="89.834">
-   <polygon points="0,0 90.3416,-24.8693 104.045,-41.1105 117.749,-13.7035 173.578,-9.13566 188.296,-21.8241 201.492,4.0603 267.472,9.6432 285.743,37.0502 335.482,38.0653 336.497,68.5175 350.2,80.6984 346.648,102.522 373.04,148.201 412.628,155.306 423.793,178.653 461.859,186.266 466.934,172.563 483.175,174.593 485.713,193.879 567.426,200.477 620.718,176.115 624.27,153.276 667.411,142.618 672.994,118.764 735.421,121.301 749.632,114.703 751.662,88.819 908.999,86.2813 940.466,72.5778 1013.04,69.5326 1041.97,49.2311 1038.93,39.0803 1131.3,38.0653 1151.09,31.4673 1164.8,16.2412 1167.33,-88.819 -1.52261,-89.834"/>
-  </object>
   <object id="99" x="2880.27" y="0.507537" width="95.4169" height="80.1908"/>
   <object id="100" x="3201.54" y="80.1908" width="110.136" height="15.7336"/>
   <object id="101" x="3312.19" y="80.1908" width="65.4723" height="47.7085"/>
@@ -117,15 +108,32 @@
   <object id="107" x="3712.33" y="385.333" width="17.6667" height="32.3333"/>
   <object id="108" x="3730" y="418.667" width="78.3333" height="13.6667"/>
   <object id="112" x="3793.09" y="418.727" width="16.1818" height="93.8182"/>
-  <object id="113" x="3377.67" y="112">
-   <polygon points="0,0 63,1 62,15.6667 126,17.3333 126.333,0.666667 142,1 142,15.6667 158.667,16.3333 158,48.3333 190.667,49 190.333,0"/>
-  </object>
   <object id="114" x="2977" y="64.5" width="177.5" height="33"/>
   <object id="115" x="32" y="433" width="17" height="80.5"/>
   <object id="116" x="33.5" y="417" width="71" height="21.5"/>
   <object id="117" x="351.5" y="466" width="17" height="47.5"/>
   <object id="118" x="2080.5" y="529" width="17" height="111"/>
   <object id="119" x="3151.67" y="528.333" width="17" height="111.667"/>
+  <object id="123" x="104.75" y="417.25" width="23" height="15.25"/>
+  <object id="124" x="128" y="400.25" width="32.25" height="16.75"/>
+  <object id="125" x="160.25" y="400.25" width="15.5" height="9"/>
+  <object id="126" x="175.75" y="384.75" width="16.25" height="15.5"/>
+  <object id="127" x="192" y="372.75" width="17.25" height="11"/>
+  <object id="128" x="210" y="348.5" width="13.75" height="24.75"/>
+  <object id="130" x="224" y="320.75" width="34.75" height="31"/>
+  <object id="131" x="260" y="303.75" width="28.25" height="16.75"/>
+  <object id="132" x="288.5" y="289.25" width="15.75" height="14.5"/>
+  <object id="133" x="303.5" y="274.5" width="35.75" height="14.75"/>
+  <object id="134" x="338.25" y="257.25" width="26.25" height="17"/>
+  <object id="135" x="338.5" y="185.5" width="26.75" height="70.5"/>
+  <object id="136" x="364.75" y="95.5" width="19.5" height="90.25"/>
+  <object id="137" x="384.5" y="80.75" width="16.5" height="14.25"/>
+  <object id="138" x="400.5" y="60.5" width="47" height="29.5"/>
+  <object id="139" x="519.75" y="64.75" width="521" height="45.5"/>
+  <object id="140" x="1040" y="110.25" width="32" height="18.25"/>
+  <object id="141" x="1072.5" y="128.75" width="16.25" height="47.75"/>
+  <object id="142" x="1072" y="160.75" width="78" height="15.75"/>
+  <object id="143" x="448.25" y="61" width="70.25" height="23.75"/>
  </objectgroup>
  <objectgroup id="11" name="Collisions_mort">
   <object id="120" x="560.333" y="482.667" width="126" height="30.6667"/>
