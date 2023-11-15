@@ -50,6 +50,8 @@ public class Archer extends Monstre {
         this.xLast = this.x;
         this.yLast = this.y;
 
+        this.yVelocity -= GRAVITY * Gdx.graphics.getDeltaTime();
+
         this.x += speed;
         if (speed > 0) {
             animation.setStateLocal("Run", false);
@@ -66,11 +68,6 @@ public class Archer extends Monstre {
         }
 
         super.move();
-    }
-
-    @Override
-    public void collide_floor() {
-
     }
 
     /**

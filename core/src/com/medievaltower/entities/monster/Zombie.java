@@ -1,5 +1,6 @@
 package com.medievaltower.entities.monster;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.medievaltower.core.Entity;
 import com.medievaltower.entities.animation.AnimationZombie;
@@ -37,8 +38,11 @@ public class Zombie extends Monstre {
      */
     @Override
     public void move() {
+
         this.xLast = this.x;
         this.yLast = this.y;
+
+        this.yVelocity -= GRAVITY * Gdx.graphics.getDeltaTime();
 
         animation.setStateLocal("Run");
         this.x += speed;
@@ -49,11 +53,6 @@ public class Zombie extends Monstre {
         }
 
         super.move();
-    }
-
-    @Override
-    public void collide_floor() {
-
     }
 
     /**

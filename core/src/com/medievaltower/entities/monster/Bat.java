@@ -40,6 +40,7 @@ public class Bat extends Monstre {
         this.xLast = this.x;
         this.yLast = this.y;
 
+
         this.sinusoidalMove();
         super.move();
     }

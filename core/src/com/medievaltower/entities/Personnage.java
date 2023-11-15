@@ -49,7 +49,6 @@ import java.util.WeakHashMap;
 public class Personnage extends Entity implements MovableEntity, AttackableEntity {
 
     private static final float JUMP_FORCE = 9;
-    private static final float GRAVITY = 20f;
     private static Personnage instance;
     private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
@@ -72,8 +71,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private final Tileset SlideTile = new Tileset("2D_SL_Knight_v1.0/Slide.png", 128, 64);
     private int speed = 4;
     private boolean isJumping = false;
-    private float xVelocity = 0;
-    private float yVelocity = 0;
     private int health = 3;
     private Weapon weaponEquipped = null;
     private Potion potionEquipped = null;
@@ -81,6 +78,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private boolean isSliding = false;
     private boolean isInvincible = false;
     private float invincibleTimer = 0;
+    private boolean isDead = false;
 
     /**
      * Personnage constructor
@@ -222,6 +220,10 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
                 this.jump();
             }
         }
+
+        if( isJumping){
+            this.animation.setStateLocal("InJump");
+        }
         
         if (Actions.get("Down")) {
             if (isJumping) {
@@ -235,7 +237,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         }
 
 
-        this.yVelocity -= GRAVITY * Gdx.graphics.getDeltaTime();
+        this.yVelocity -= this.GRAVITY * Gdx.graphics.getDeltaTime();
 
         if (isInvincible) {
             invincibleTimer -= Gdx.graphics.getDeltaTime();
@@ -248,10 +250,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.y = 0;
             this.yVelocity = 0;
             this.isJumping = false;
-        }
-
-        if( isJumping){
-            this.animation.setStateLocal("InJump");
         }
 
         //change position
@@ -312,6 +310,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.health -= damage;
             if (this.health < 0) {
                 this.health = 0;
+                this.isDead = true;
             }
             // Active l'invincibilité après avoir subi des dégâts
             activateInvincibility();

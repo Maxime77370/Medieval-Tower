@@ -1,5 +1,6 @@
 package com.medievaltower.core;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -44,9 +45,11 @@ public abstract class Entity extends Sprite {
     protected int yLast;
     protected int width;
     protected int height;
-
     protected Sprite sprite;
+    protected static final float GRAVITY = 20f;
     protected Rectangle boundingBox = new Rectangle();
+    protected float yVelocity;
+    protected float xVelocity;
 
     /**
      * Entity constructor
@@ -217,11 +220,11 @@ public abstract class Entity extends Sprite {
     }
 
     public void collide_floor(){
-
-    };
+        this.yVelocity = 0;
+    }
 
     public void collide_ceiling(){
-
+        this.yVelocity = 0;
     }
 
     public abstract void collide(Entity entity);
