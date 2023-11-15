@@ -149,6 +149,7 @@ public abstract class Entity extends Sprite {
         if (Personnage.getInstance().getyVelocity() > 0) { // Si l'entité se déplace vers le haut
             y = (int) (platform.y - this.boundingBox.height); // Positionnez l'entité juste en dessous de la plateforme
         } else { // Si l'entité se déplace vers le bas
+            Personnage.getInstance().setJumping(false);
             y = (int) (platform.y + platform.height); // Positionnez l'entité juste au-dessus de la plateforme
         }
 
