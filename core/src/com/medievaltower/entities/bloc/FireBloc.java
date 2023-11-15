@@ -1,5 +1,6 @@
 package com.medievaltower.entities.bloc;
 
+import com.medievaltower.core.Entity;
 import com.medievaltower.entities.Personnage;
 
 /**
@@ -26,5 +27,10 @@ public class FireBloc extends Bloc {
     public void effect() {
         // Add damage to the player
         Personnage.getInstance().receiveDamage(1);
+    }
+
+    @Override
+    public void collide(Entity entity) {
+
     }
 }

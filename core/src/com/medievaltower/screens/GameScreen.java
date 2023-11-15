@@ -30,9 +30,9 @@ public class GameScreen implements Screen {
     private final EntityManager entityManager;
     private final Map map;
     private final Personnage personnage;
-    //private final Zombie zombie;
-    //private final Bat bat;
-    //private final Archer archer;
+    private final Zombie zombie;
+    private final Bat bat;
+    private final Archer archer;
     private final Label fpsLabel; // Label for FPS
     private final Stage stage; // Stage for HUD
     private final Table table; // Table to organize HUD elements
@@ -50,16 +50,14 @@ public class GameScreen implements Screen {
         personnage = new Personnage(0, 200);
         entityManager.newEntity(personnage);
 
-        /*
         zombie = new Zombie(50, 50);
         entityManager.newEntity(zombie);
 
-        //bat = new Bat(200, 200);
+        bat = new Bat(200, 200);
         entityManager.newEntity(bat);
 
-        //archer = new Archer(500, 50);
+        archer = new Archer(500, 50);
         entityManager.newEntity(archer);
-        */
 
         camera = new Camera();
 

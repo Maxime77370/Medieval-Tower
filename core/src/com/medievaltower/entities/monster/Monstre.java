@@ -42,5 +42,7 @@ public abstract class Monstre extends Entity implements AttackableEntity, Movabl
      */
     public void move(){ }
 
+    public void collide(Entity entity){
 
+    }
 }

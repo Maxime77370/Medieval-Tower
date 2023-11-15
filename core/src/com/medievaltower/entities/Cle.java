@@ -41,4 +41,9 @@ public class Cle extends Entity implements CollectableEntity {
     public void update() {
     }
 
+    @Override
+    public void collide(Entity entity) {
+
+    }
+
 }

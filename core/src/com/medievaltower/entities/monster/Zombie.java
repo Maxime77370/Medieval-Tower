@@ -1,6 +1,7 @@
 package com.medievaltower.entities.monster;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.medievaltower.core.Entity;
 import com.medievaltower.entities.animation.AnimationZombie;
 
 /**
@@ -75,6 +76,12 @@ public class Zombie extends Monstre {
      */
     @Override
     public void update() {
+        this.xLast = this.x;
+        this.yLast = this.y;
         this.move();
+    }
+
+    public void collide(Entity entity){
+
     }
 }

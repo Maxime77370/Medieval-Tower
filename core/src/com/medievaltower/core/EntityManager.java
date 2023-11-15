@@ -81,6 +81,7 @@ public class EntityManager<T extends Entity> {
             entity.update();
             entity.checkCollidePlatform();
         }
+        collide();
     }
 
     public void draw(Batch batch) {
@@ -107,5 +108,15 @@ public class EntityManager<T extends Entity> {
             }
         }
         return count;
+    }
+
+    public void collide() {
+        for (T entity1 : entities) {
+            for (T entity2 : entities) {
+                if (entity2 != entity1 && entity2.getBoundingBox().overlaps(entity1.getBoundingBox())) {
+                    entity1.collide(entity2);
+                }
+            }
+        }
     }
 }

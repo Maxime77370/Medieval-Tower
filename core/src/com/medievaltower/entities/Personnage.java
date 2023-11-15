@@ -8,6 +8,8 @@ import com.medievaltower.core.Direction;
 import com.medievaltower.core.Entity;
 import com.medievaltower.core.MovableEntity;
 import com.medievaltower.entities.animation.AnimationPersonnage;
+import com.medievaltower.entities.monster.Arrow;
+import com.medievaltower.entities.monster.Monstre;
 import com.medievaltower.entities.potion.Potion;
 import com.medievaltower.entities.weapon.Weapon;
 import com.medievaltower.game.Tileset;
@@ -173,6 +175,9 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     @Override
     public void update() {
+
+        this.xLast = this.x;
+        this.yLast = this.y;
 
         move();
 
@@ -497,5 +502,26 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     public boolean isMovingVertically() {
         return yVelocity != 0;
+    }
+
+    public void collide(Entity entity) {
+        if (entity instanceof Monstre) {
+            this.receiveDamage(1);
+            this.animation.setStateLocal("Hurt");
+            System.out.println("Monster collision");
+        }
+        else if (entity instanceof Arrow){
+            this.receiveDamage(1);
+            System.out.println("Arrow collision");
+        }
+        else if (entity instanceof Potion){
+            this.addPotionInventory((Potion) entity);
+            System.out.println("Potion collision");
+        }
+        else if (entity instanceof Cle) {
+            this.setCleEquipped((Cle) entity);
+            System.out.println("Cle collision");
+        }
+
     }
 }

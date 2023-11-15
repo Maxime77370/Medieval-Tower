@@ -16,6 +16,7 @@ public class AnimationPersonnage extends Animation {
     private Tileset IdleTile = new Tileset("2D_SL_Knight_v1.0/Idle.png", 128, 64);
 
     private Tileset AttackFromAirTile = new Tileset("2D_SL_Knight_v1.0/attack_from_air.png", 128, 64);
+    private Tileset HurtTile = new Tileset("2D_SL_Knight_v1.0/Hurt.png", 128, 64);
     public AnimationPersonnage() {
         super();
         sprite = IdleTile.getTexture(0);
@@ -57,8 +58,14 @@ public class AnimationPersonnage extends Animation {
                 case "Attack":
                     sprite = new TextureRegion(animationAttack());
                     break;
-                    case "Slide":
+                case "Slide":
                     sprite = new TextureRegion(animationSlide());
+                    break;
+                case "Death":
+                    sprite = new TextureRegion(animationDeath());
+                    break;
+                case "Hurt":
+                    sprite = new TextureRegion(animationHurt());
                     break;
 
             }
@@ -159,5 +166,23 @@ public class AnimationPersonnage extends Animation {
         forceState = null;
         frame++;
         return SlideTile.getTexture(frame%6 + 2);
+    }
+
+    public TextureRegion animationDeath() {
+        if (frame >= DeathTile.getNbTexture()) {
+            frame = 0;
+        }
+        frame++;
+        return DeathTile.getTexture(frame - 1);
+    }
+
+    public TextureRegion animationHurt() {
+        forceState = "Hurt";
+        if (frame >= HurtTile.getNbTexture()) {
+            frame = 0;
+            forceState = null;
+        }
+        frame++;
+        return HurtTile.getTexture(frame - 1);
     }
 }

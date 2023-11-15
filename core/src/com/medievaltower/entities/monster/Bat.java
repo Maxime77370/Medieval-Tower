@@ -2,6 +2,7 @@ package com.medievaltower.entities.monster;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.medievaltower.core.Entity;
 import com.medievaltower.entities.animation.AnimationBat;
 
 /**
@@ -84,7 +85,13 @@ public class Bat extends Monstre {
 
     @Override
     public void update() {
+        this.xLast = this.x;
+        this.yLast = this.y;
         this.move();
+    }
+
+    public void collide(Entity entity){
+
     }
 }
 

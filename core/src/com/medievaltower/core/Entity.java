@@ -32,6 +32,8 @@ public abstract class Entity extends Sprite {
 
     protected int x;
     protected int y;
+    protected int xLast;
+    protected int yLast;
     protected int width;
     protected int height;
 
@@ -137,12 +139,14 @@ public abstract class Entity extends Sprite {
 }
 
     private boolean isVerticalCollision(Rectangle platform) {
-        float playerY = Personnage.getInstance().getY();
-        float playerHeight = Personnage.getInstance().getHeight();
-        float platformY = platform.y;
-        float platformHeight = platform.height;
+        if (xLast + (getBoundingBox().x - x) + getBoundingBox().width < platform.x) {
+            return false;
+        }
+        else if (xLast + (getBoundingBox().x - x) > platform.x + platform.width) {
+            return false;
+        }
+        return true;
 
-        return playerY + playerHeight > platformY && playerY < platformY + platformHeight;
     }
 
     private void handleVerticalCollision(Rectangle platform) {
@@ -159,9 +163,9 @@ public abstract class Entity extends Sprite {
 
     private void handleHorizontalCollision(Rectangle platform) {
         if (Personnage.getInstance().getxVelocity() > 0) { // Si l'entité se déplace vers la droite
-            x = (int) (platform.x - this.boundingBox.width); // Positionnez l'entité juste à gauche de la plateforme
+            x = (int) (platform.x - this.boundingBox.width + x - boundingBox.x -1 ) ; // Positionnez l'entité juste à gauche de la plateforme
         } else { // Si l'entité se déplace vers la gauche
-            x = (int) (platform.x + platform.width); // Positionnez l'entité juste à droite de la plateforme
+            x = (int) (platform.x + platform.width + x - boundingBox.x +1); // Positionnez l'entité juste à droite de la plateforme
         }
 
         Personnage.getInstance().setVelocityX(0); // Arrêtez le mouvement horizontal
@@ -206,4 +210,6 @@ public abstract class Entity extends Sprite {
         // Dispose of the pixmap to avoid memory leaks
         pixmap.dispose();
     }
+
+    public abstract void collide(Entity entity);
 }

@@ -31,6 +31,9 @@ public class Arrow extends Entity {
         // 1. Initialiser le lancement de la flèche avec l'angle.
         // 2. Donner une vitesse de départ à la flèche
         // 3
+        this.xLast = this.x;
+        this.yLast = this.y;
+
         speed_y -= gravity;
 
         this.x += speed_x;
@@ -50,5 +53,7 @@ public class Arrow extends Entity {
     // Lancer la méthode pour atteindre la target Personnage
     // DEtecter si la collision est faite avec le personnage
 
-    // couldo
+    public void collide(Entity entity){
+
+    }
 }

@@ -1,5 +1,6 @@
 package com.medievaltower.entities.bloc;
 
+import com.medievaltower.core.Entity;
 import com.medievaltower.entities.Personnage;
 
 /**
@@ -27,5 +28,10 @@ public class BlocNormal extends Bloc {
     public void effect() {
         Personnage.getInstance().setSliding();
         Personnage.getInstance().setSlow();
+    }
+
+    @Override
+    public void collide(Entity entity) {
+
     }
 }

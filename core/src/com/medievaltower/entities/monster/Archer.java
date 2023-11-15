@@ -47,6 +47,9 @@ public class Archer extends Monstre {
      */
     @Override
     public void move() {
+        this.xLast = this.x;
+        this.yLast = this.y;
+
         this.x += speed;
         if (speed > 0) {
             animation.setStateLocal("Run", false);
@@ -107,5 +110,9 @@ public class Archer extends Monstre {
             attack();
         }
         // Tir la flèche si la condition est remplie
+    }
+
+    public void collide(Entity entity){
+
     }
 }

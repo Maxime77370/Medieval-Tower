@@ -1,5 +1,6 @@
 package com.medievaltower.entities.bloc;
 
+import com.medievaltower.core.Entity;
 import com.medievaltower.entities.Personnage;
 
 /**
@@ -26,5 +27,10 @@ public class IceBloc extends Bloc {
     public void effect() {
         // Make the player slide
         Personnage.getInstance().setSliding();
+    }
+
+    @Override
+    public void collide(Entity entity) {
+
     }
 }
