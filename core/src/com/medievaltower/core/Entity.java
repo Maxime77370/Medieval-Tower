@@ -155,13 +155,12 @@ public abstract class Entity extends Sprite {
 
     private void handleVerticalCollision(Rectangle platform) {
         if (Personnage.getInstance().getyVelocity() > 0) { // Si l'entité se déplace vers le haut
+            collide_ceiling();
             y = (int) (platform.y - this.boundingBox.height); // Positionnez l'entité juste en dessous de la plateforme
         } else { // Si l'entité se déplace vers le bas
-            Personnage.getInstance().setJumping(false);
+            collide_floor();
             y = (int) (platform.y + platform.height); // Positionnez l'entité juste au-dessus de la plateforme
         }
-
-        Personnage.getInstance().setVelocityY(0);
         setBoundingBox(); // Mettez à jour la bounding box après avoir changé la position
     }
 
@@ -171,8 +170,6 @@ public abstract class Entity extends Sprite {
         } else { // Si l'entité se déplace vers la gauche
             x = (int) (platform.x + platform.width + x - boundingBox.x + 1); // Positionnez l'entité juste à droite de la plateforme
         }
-
-        Personnage.getInstance().setVelocityX(0); // Arrêtez le mouvement horizontal
         setBoundingBox(); // Mettez à jour la bounding box après avoir changé la position
     }
 
@@ -183,6 +180,10 @@ public abstract class Entity extends Sprite {
 
         // Update the sprite or animation
         // updateTexture(animation);
+    }
+
+    public void move(){
+        setBoundingBox();
     }
 
     /**
@@ -213,6 +214,14 @@ public abstract class Entity extends Sprite {
         batch.draw(new Texture(pixmap), boundingBox.x, boundingBox.y);
         // Dispose of the pixmap to avoid memory leaks
         pixmap.dispose();
+    }
+
+    public void collide_floor(){
+
+    };
+
+    public void collide_ceiling(){
+
     }
 
     public abstract void collide(Entity entity);

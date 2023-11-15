@@ -37,8 +37,21 @@ public class Bat extends Monstre {
      */
     @Override
     public void move() {
+        this.xLast = this.x;
+        this.yLast = this.y;
+
         this.sinusoidalMove();
-        updateTexture(animation);
+        super.move();
+    }
+
+    @Override
+    public void collide_floor() {
+
+    }
+
+    @Override
+    public void update() {
+        animation.update();
     }
 
     /**
@@ -81,13 +94,6 @@ public class Bat extends Monstre {
     @Override
     public void receiveDamage(int damage) {
 
-    }
-
-    @Override
-    public void update() {
-        this.xLast = this.x;
-        this.yLast = this.y;
-        this.move();
     }
 
     public void collide(Entity entity){

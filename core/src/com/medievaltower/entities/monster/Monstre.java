@@ -40,7 +40,9 @@ public abstract class Monstre extends Entity implements AttackableEntity, Movabl
      * Move the monster
      * defined in the subclass
      */
-    public void move(){ }
+    public void move(){
+        super.move();
+    }
 
     public void collide(Entity entity){
 

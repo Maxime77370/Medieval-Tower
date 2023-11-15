@@ -37,6 +37,11 @@ public class Potion extends Entity implements CollectableEntity {
     }
 
     @Override
+    public void collide_floor() {
+
+    }
+
+    @Override
     public void collect() {
 
     }

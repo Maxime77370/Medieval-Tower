@@ -64,7 +64,13 @@ public class Archer extends Monstre {
         } else if (this.x <= 0) {
             speed = Math.abs(speed);
         }
-        updateTexture(animation);
+
+        super.move();
+    }
+
+    @Override
+    public void collide_floor() {
+
     }
 
     /**
@@ -97,8 +103,6 @@ public class Archer extends Monstre {
 
     @Override
     public void update() {
-        super.update();
-        this.move();
 
         /*
         // Vérifie si la flèche actuelle est nulle
@@ -113,6 +117,8 @@ public class Archer extends Monstre {
         */
 
         // Tir la flèche si la condition est remplie
+
+        updateTexture(animation);
     }
 
     public void collide(Entity entity){

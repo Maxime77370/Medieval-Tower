@@ -167,19 +167,10 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             this.Actions.put("Space", true);
         }
-    }
 
-    /**
-     * Method update the personnage, jump and gravity
-     */
-
-    @Override
-    public void update() {
 
         this.xLast = this.x;
         this.yLast = this.y;
-
-        move();
 
         // run left : left
         // slide left : left + down
@@ -231,11 +222,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
                 this.jump();
             }
         }
-
-        if (Actions.get("Up") && !isJumping) {
-            jump();
-        }
-
+        
         if (Actions.get("Down")) {
             if (isJumping) {
                 this.yVelocity -= speed * Gdx.graphics.getDeltaTime() / 2;
@@ -263,6 +250,10 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.isJumping = false;
         }
 
+        if( isJumping){
+            this.animation.setStateLocal("InJump");
+        }
+
         //change position
         this.x += xVelocity;
         this.y += yVelocity;
@@ -270,9 +261,18 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
         //verify event
         setSliding();
+
+        super.move();
+    }
+
+    /**
+     * Method update the personnage, jump and gravity
+     */
+
+    @Override
+    public void update() {
         //change Texture
         updateTexture(animation);
-        setBoundingBox();
         super.update();
     }
 
@@ -484,6 +484,22 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         boundingBox.setPosition(x + 50, y);
     }
 
+
+    @Override
+    public void collide_floor(){
+        this.isJumping = false;
+        this.yVelocity = 0;
+    }
+
+    @Override
+    public void collide_ceiling(){
+        this.yVelocity = 0;
+    }
+
+    public void collide_wall(){
+        this.xVelocity = 0;
+    }
+
     public void setJumping(boolean b) {
         this.isJumping = b;
     }
@@ -507,7 +523,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     public void collide(Entity entity) {
         if (entity instanceof Monstre) {
             this.receiveDamage(1);
-            this.animation.setStateLocal("Hurt");
             System.out.println("Monster collision");
         }
         else if (entity instanceof Arrow){
@@ -522,6 +537,5 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.setCleEquipped((Cle) entity);
             System.out.println("Cle collision");
         }
-
     }
 }
