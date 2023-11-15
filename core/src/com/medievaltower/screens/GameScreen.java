@@ -1,22 +1,16 @@
 package com.medievaltower.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.medievaltower.core.EntityManager;
 import com.medievaltower.entities.Personnage;
-import com.medievaltower.entities.monster.Archer;
-import com.medievaltower.entities.monster.Bat;
-import com.medievaltower.entities.monster.Zombie;
 import com.medievaltower.game.Camera;
 import com.medievaltower.levels.Map;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -24,15 +18,10 @@ import com.badlogic.gdx.graphics.Pixmap;
 public class GameScreen implements Screen {
 
     private final SpriteBatch batch;
-    private final Texture img;
-
+    private final Personnage personnage;
     private final Camera camera;
     private final EntityManager entityManager;
     private final Map map;
-    private final Personnage personnage;
-    private final Zombie zombie;
-    private final Bat bat;
-    private final Archer archer;
     private final Label fpsLabel; // Label for FPS
     private final Stage stage; // Stage for HUD
     private final Table table; // Table to organize HUD elements
@@ -42,23 +31,17 @@ public class GameScreen implements Screen {
 
     public GameScreen() {
         batch = new SpriteBatch();
-        img = new Texture("badlogic.jpg");
 
         entityManager = EntityManager.getInstance();
         map = new Map(3);
 
-        personnage = new Personnage(0, 100);
-        entityManager.newEntity(personnage);
+        // create entities in the map
+        map.createEntities();
 
-        zombie = new Zombie(50, 50);
-        entityManager.newEntity(zombie);
+        // get the personnage
+        this.personnage = Personnage.getInstance();
 
-        bat = new Bat(200, 200);
-        entityManager.newEntity(bat);
-
-        archer = new Archer(500, 50);
-        entityManager.newEntity(archer);
-
+        // New camera
         camera = new Camera();
 
         // Initialize the HUD
@@ -250,13 +233,10 @@ public class GameScreen implements Screen {
         batch.dispose();
         map.dispose();
 
-        // Dispose of entity textures
-        personnage.getSprite().getTexture().dispose();
-        //zombie.getSprite().getTexture().dispose();
-        //bat.getSprite().getTexture().dispose();
-        //archer.getSprite().getTexture().dispose();
-        //archer.getCurrentArrow().getSprite().getTexture().dispose();
+        // Dispose of element of entities
+        entityManager.dispose();
 
+        // Dispose of the HUD
         stage.dispose();
 
         // Dispose of the font

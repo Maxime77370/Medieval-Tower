@@ -84,6 +84,7 @@ public class EntityManager<T extends Entity> {
         collide();
     }
 
+
     public void draw(Batch batch) {
         batch.begin();
         for (T entity : entities) {
@@ -117,6 +118,12 @@ public class EntityManager<T extends Entity> {
                     entity1.collide(entity2);
                 }
             }
+        }
+    }
+
+    public void dispose() {
+        for (T entity : entities) {
+            entity.dispose();
         }
     }
 }

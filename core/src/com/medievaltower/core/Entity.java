@@ -6,11 +6,19 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
+import com.medievaltower.entities.Cle;
 import com.medievaltower.entities.Personnage;
 import com.medievaltower.entities.animation.Animation;
+import com.medievaltower.entities.monster.Archer;
+import com.medievaltower.entities.monster.Bat;
+import com.medievaltower.entities.monster.Zombie;
 import com.medievaltower.levels.Map;
+
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -123,29 +131,25 @@ public abstract class Entity extends Sprite {
     }
 
     public void checkCollidePlatform() {
-    for (MapObject platformObject : Map.getInstance().getPlatforms()) {
-        if (platformObject instanceof RectangleMapObject) {
-            Rectangle platform = ((RectangleMapObject) platformObject).getRectangle();
-            if (boundingBox.overlaps(platform)) {
-                // Déterminer le type de collision
-                if (isVerticalCollision(platform)) {
-                    handleVerticalCollision(platform);
-                } else {
-                    handleHorizontalCollision(platform);
+        for (MapObject platformObject : Map.getInstance().getPlatforms()) {
+            if (platformObject instanceof RectangleMapObject) {
+                Rectangle platform = ((RectangleMapObject) platformObject).getRectangle();
+                if (boundingBox.overlaps(platform)) {
+                    // Déterminer le type de collision
+                    if (isVerticalCollision(platform)) {
+                        handleVerticalCollision(platform);
+                    } else {
+                        handleHorizontalCollision(platform);
+                    }
                 }
             }
         }
     }
-}
 
     private boolean isVerticalCollision(Rectangle platform) {
         if (xLast + (getBoundingBox().x - x) + getBoundingBox().width < platform.x) {
             return false;
-        }
-        else if (xLast + (getBoundingBox().x - x) > platform.x + platform.width) {
-            return false;
-        }
-        return true;
+        } else return !(xLast + (getBoundingBox().x - x) > platform.x + platform.width);
 
     }
 
@@ -163,9 +167,9 @@ public abstract class Entity extends Sprite {
 
     private void handleHorizontalCollision(Rectangle platform) {
         if (Personnage.getInstance().getxVelocity() > 0) { // Si l'entité se déplace vers la droite
-            x = (int) (platform.x - this.boundingBox.width + x - boundingBox.x -1 ) ; // Positionnez l'entité juste à gauche de la plateforme
+            x = (int) (platform.x - this.boundingBox.width + x - boundingBox.x - 1); // Positionnez l'entité juste à gauche de la plateforme
         } else { // Si l'entité se déplace vers la gauche
-            x = (int) (platform.x + platform.width + x - boundingBox.x +1); // Positionnez l'entité juste à droite de la plateforme
+            x = (int) (platform.x + platform.width + x - boundingBox.x + 1); // Positionnez l'entité juste à droite de la plateforme
         }
 
         Personnage.getInstance().setVelocityX(0); // Arrêtez le mouvement horizontal
@@ -212,4 +216,8 @@ public abstract class Entity extends Sprite {
     }
 
     public abstract void collide(Entity entity);
+
+    public void dispose() {
+        sprite.getTexture().dispose();
+    }
 }
