@@ -87,7 +87,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      * @param y : the y position of the personnage
      */
     public Personnage(int x, int y) {
-        super(x, y, 128 * 2, 64 * 2, new Texture("Texture/2D_SL_Knight_v1.0/Run.png"));
+        super(x, y, 128, 64, new Texture("Texture/2D_SL_Knight_v1.0/Run.png"));
         // Définissez l'instance du personnage
         instance = this;
 
@@ -475,8 +475,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     @Override
     public void setBoundingBox() {
         // Set the bounding box of the personnage character
-        boundingBox.setSize(width - 202, height - 34);
-        boundingBox.setPosition(x + 103, y);
+        boundingBox.setSize(width, height);
+        boundingBox.setPosition(x, y);
     }
 
     public void setJumping(boolean b) {

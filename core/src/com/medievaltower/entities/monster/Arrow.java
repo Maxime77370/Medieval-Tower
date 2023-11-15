@@ -18,7 +18,7 @@ public class Arrow extends Entity {
     private float rotation = 0; // Ajout de l'attribut rotation
 
     public Arrow(int x, int y) {
-        super(x, y, 100, 100, new Texture("arrow.png"));
+        super(x, y, 32, 32, new Texture("arrow.png"));
 
         speed_x = speed * (float) Math.cos(angle);
         speed_y = speed * (float) Math.sin(angle);

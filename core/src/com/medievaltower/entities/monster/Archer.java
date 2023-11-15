@@ -37,7 +37,7 @@ public class Archer extends Monstre {
     private AnimationArcher animation = new AnimationArcher();
 
     public Archer(int x, int y){
-        super(x, y, 64*2, 64*2, new Texture("paix.jpg"));
+        super(x, y, 64, 64, new Texture("paix.jpg"));
         this.entityManager = EntityManager.getInstance();
     }
 
