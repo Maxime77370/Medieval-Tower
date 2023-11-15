@@ -42,6 +42,11 @@ public class Cle extends Entity implements CollectableEntity {
     }
 
     @Override
+    public void collide_floor() {
+
+    }
+
+    @Override
     public void collide(Entity entity) {
 
     }

@@ -37,6 +37,9 @@ public class Zombie extends Monstre {
      */
     @Override
     public void move() {
+        this.xLast = this.x;
+        this.yLast = this.y;
+
         animation.setStateLocal("Run");
         this.x += speed;
         if (this.x >= 100) {
@@ -44,7 +47,13 @@ public class Zombie extends Monstre {
         } else if (this.x <= 0) {
             speed = Math.abs(speed);
         }
-        updateTexture(animation);
+
+        super.move();
+    }
+
+    @Override
+    public void collide_floor() {
+
     }
 
     /**
@@ -76,12 +85,7 @@ public class Zombie extends Monstre {
      */
     @Override
     public void update() {
-        this.xLast = this.x;
-        this.yLast = this.y;
-        this.move();
+        updateTexture(animation);
     }
 
-    public void collide(Entity entity){
-
-    }
 }

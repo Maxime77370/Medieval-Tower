@@ -30,6 +30,11 @@ public class SandBloc extends Bloc {
     }
 
     @Override
+    public void collide_floor() {
+
+    }
+
+    @Override
     public void collide(Entity entity) {
 
     }

@@ -7,15 +7,20 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.medievaltower.core.Entity;
 import com.medievaltower.core.EntityManager;
+import com.medievaltower.entities.Personnage;
+import com.medievaltower.entities.animation.AnimationArcher;
+import com.medievaltower.entities.animation.AnimationArrow;
+import com.sun.org.apache.xerces.internal.dom.RangeImpl;
 
 public class Arrow extends Entity {
     private float direction;
-    private float speed = 14;
+    private float speed = 10;
     private float speed_x;
     private float speed_y;
     private float gravity = 0.2f;
     private double angle = Math.PI/4;
     private float rotation = 0; // Ajout de l'attribut rotation
+    private AnimationArrow animation = new AnimationArrow();
 
     public Arrow(int x, int y) {
         super(x, y, 32, 32, new Texture("arrow.png"));
@@ -23,10 +28,11 @@ public class Arrow extends Entity {
         speed_x = speed * (float) Math.cos(angle);
         speed_y = speed * (float) Math.sin(angle);
         rotation = (float) Math.toDegrees(angle); // Initialisation de la rotation
+
     }
 
     @Override
-    public void update() {
+    public void move(){
         // TODO
         // 1. Initialiser le lancement de la flèche avec l'angle.
         // 2. Donner une vitesse de départ à la flèche
@@ -46,7 +52,18 @@ public class Arrow extends Entity {
         // Set the rotation of the arrow's sprite
         sprite.setRotation(rotation);
 
+        super.move();
     }
+
+    @Override
+    public void collide_floor() {
+
+    }
+
+    @Override
+    public void update() {
+    }
+
     // Creer fleche si null
     // Lancer la fleche avec formule (position de l'archer):
     // Recupérer l'instance singleton du Personnage.
@@ -54,6 +71,9 @@ public class Arrow extends Entity {
     // DEtecter si la collision est faite avec le personnage
 
     public void collide(Entity entity){
-
+        if (entity instanceof Personnage){
+            Personnage personnage = (Personnage) entity;
+            personnage.receiveDamage(1);
+        }
     }
 }

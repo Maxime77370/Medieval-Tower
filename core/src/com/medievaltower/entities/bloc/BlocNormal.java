@@ -31,6 +31,11 @@ public class BlocNormal extends Bloc {
     }
 
     @Override
+    public void collide_floor() {
+
+    }
+
+    @Override
     public void collide(Entity entity) {
 
     }
