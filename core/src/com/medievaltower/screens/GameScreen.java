@@ -45,9 +45,9 @@ public class GameScreen implements Screen {
         img = new Texture("badlogic.jpg");
 
         entityManager = EntityManager.getInstance();
-        map = new Map(2);
+        map = new Map(3);
 
-        personnage = new Personnage(0, 200);
+        personnage = new Personnage(0, 100);
         entityManager.newEntity(personnage);
 
         zombie = new Zombie(50, 50);
