@@ -5,8 +5,8 @@
     },
     "activeFile": "map_3.tmx",
     "expandedProjectPaths": [
-        "tiled",
-        "."
+        ".",
+        "tiled"
     ],
     "fileStates": {
         "/Users/maximecarpentier/Library/Mobile Documents/com~apple~CloudDocs/Epitech/T-JAV-501/T-JAV-501-LIL_10/assets/Texture/Legacy-Fantasy - High Forest 2.3/Tiles.tsx": {
@@ -53,34 +53,42 @@
         },
         "map_2.tmx": {
             "expandedObjectLayers": [
-                13,
-                15,
-                14,
                 17,
                 16,
+                15,
+                14,
+                13,
                 3
             ],
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 687.9999999999999,
-                "y": 356
+                "x": 1226.6666666666665,
+                "y": 319.3333333333333
             }
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
                 11,
                 10,
-                13,
-                12,
                 15,
-                14
+                14,
+                13,
+                12
             ],
             "scale": 1,
-            "selectedLayer": 7,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 3404,
-                "y": 279
+                "x": 288,
+                "y": 344
+            }
+        },
+        "map_4.tmx": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 633,
+                "y": 157
             }
         },
         "premiere_map.tmx": {
@@ -92,19 +100,19 @@
             }
         },
         "tiled/Background_1.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "tiled/Background_2.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "tiled/Buildings.tsx": {
-            "scaleInDock": 1.5,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "tiled/Rocks.tsx": {
-            "scaleInDock": 1.5,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "tiled/Tiles.tsx": {
@@ -117,11 +125,16 @@
             "scaleInEditor": 1
         },
         "tiled/Tree-Assets.tsx": {
-            "scaleInDock": 1.5,
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "tiled/castle_tileset_part1.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "tiled/toitRouge.tsx": {
-            "scaleInDock": 0.75,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "untitled.tmx": {
@@ -133,7 +146,7 @@
             }
         }
     },
-    "last.imagePath": "/home/olivierpakosz/Piscines/JAVA/T-JAV-501-LIL_10/assets/Texture/Legacy-Fantasy - High Forest 2.3/Assets",
+    "last.imagePath": "/home/olivierpakosz/Downloads",
     "map.height": 40,
     "map.lastUsedFormat": "tmx",
     "map.layerDataFormat": "3",
@@ -150,7 +163,9 @@
         "tiled/Background_2.tsx",
         "tiled/Tree-Assets.tsx",
         "map_2.tmx",
-        "map_3.tmx"
+        "map_3.tmx",
+        "map_4.tmx",
+        "tiled/castle_tileset_part1.tsx"
     ],
     "project": "Map.tiled-project",
     "recentFiles": [
@@ -163,9 +178,9 @@
         "tiled/Background_2.tsx",
         "tiled/Tree-Assets.tsx",
         "map_2.tmx",
-        "map_3.tmx",
-        "untitled.tmx",
-        "premiere_map.tmx"
+        "tiled/castle_tileset_part1.tsx",
+        "map_4.tmx",
+        "map_3.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

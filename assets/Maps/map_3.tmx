@@ -181,10 +181,10 @@
   <object id="215" x="3334.67" y="11" width="50.3333" height="68.6667"/>
  </objectgroup>
  <objectgroup id="17" name="Spawn_personnage">
-  <object id="214" x="150" y="486.833"/>
+  <object id="214" x="171" y="434.833"/>
  </objectgroup>
  <objectgroup id="12" name="Archer">
-  <object id="191" x="523" y="266"/>
+  <object id="191" x="526" y="294"/>
  </objectgroup>
  <objectgroup id="16" name="Collisions_monstres">
   <object id="192" x="410" y="144" width="9" height="155"/>
@@ -207,10 +207,10 @@
   <object id="209" x="3728" y="421" width="10" height="69"/>
  </objectgroup>
  <objectgroup id="13" name="Zombie">
-  <object id="190" x="492" y="266"/>
+  <object id="190" x="492" y="293"/>
  </objectgroup>
  <objectgroup id="14" name="Bat">
-  <object id="189" x="682" y="256"/>
+  <object id="189" x="713" y="293"/>
  </objectgroup>
  <objectgroup id="15" name="Key">
   <object id="188" x="3216.33" y="139.667"/>
