@@ -53,25 +53,30 @@
         },
         "map_2.tmx": {
             "expandedObjectLayers": [
-                13,
-                3
+                3,
+                17,
+                16,
+                15,
+                14,
+                13
             ],
-            "scale": 0.75,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1490.6666666666665,
-                "y": 208
+                "x": 406.6666666666667,
+                "y": 470.66666666666663
             }
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
+                11,
                 10
             ],
-            "scale": 2,
-            "selectedLayer": 3,
+            "scale": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 189.5,
-                "y": 471
+                "x": 184.66666666666663,
+                "y": 479.66666666666663
             }
         },
         "premiere_map.tmx": {
