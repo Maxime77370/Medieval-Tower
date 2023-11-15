@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map_3.tmx",
+    "activeFile": "map_2.tmx",
     "expandedProjectPaths": [
         ".",
         "tiled"
@@ -53,34 +53,34 @@
         },
         "map_2.tmx": {
             "expandedObjectLayers": [
+                16,
                 3,
                 17,
-                16,
-                15,
                 14,
+                15,
                 13
             ],
             "scale": 1.5,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 1226.6666666666665,
-                "y": 319.3333333333333
+                "x": 37,
+                "y": 418
             }
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
-                11,
-                10,
-                15,
                 14,
+                15,
+                12,
                 13,
-                12
+                10,
+                11
             ],
-            "scale": 1.5,
+            "scale": 4,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1489.6666666666665,
-                "y": 266.66666666666663
+                "x": 3240.625,
+                "y": 83.75
             }
         },
         "premiere_map.tmx": {
@@ -162,8 +162,8 @@
         "tiled/Background_1.tsx",
         "tiled/Background_2.tsx",
         "tiled/Tree-Assets.tsx",
-        "map_2.tmx",
         "map_3.tmx",
+        "map_2.tmx",
         "untitled.tmx",
         "premiere_map.tmx"
     ],

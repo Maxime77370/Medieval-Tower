@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="240" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="214">
+<map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="240" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="215">
  <tileset firstgid="1" source="tiled/Tiles.tsx"/>
  <tileset firstgid="626" source="tiled/Buildings.tsx"/>
  <tileset firstgid="1251" source="tiled/Rocks.tsx"/>
@@ -32,7 +32,7 @@
   <object id="15" x="399.875" y="304.375" width="15.75" height="80.375"/>
   <object id="16" x="400.25" y="304.25" width="191.25" height="17"/>
   <object id="17" x="574.727" y="305.818" width="15.2727" height="80.1818"/>
-  <object id="18" x="448.727" y="368.182" width="142.727" height="16.7273"/>
+  <object id="18" x="446.727" y="368.849" width="142.727" height="16.7273"/>
   <object id="19" x="448.364" y="367.818" width="16" height="96.9091"/>
   <object id="20" x="304.5" y="448.75" width="160" height="16"/>
   <object id="21" x="723" y="240.333" width="77.6667" height="16.6667"/>
@@ -47,7 +47,7 @@
   <object id="35" x="816.364" y="352.364" width="15.8182" height="32.1818"/>
   <object id="36" x="816.364" y="352.545" width="78.5455" height="15.8182"/>
   <object id="37" x="895" y="368.667" width="64.3333" height="93.6667"/>
-  <object id="38" x="912.75" y="253.75" width="15.5" height="115.5"/>
+  <object id="38" x="911.25" y="254" width="15.5" height="115.5"/>
   <object id="39" x="959.667" y="385.333" width="32.3333" height="64"/>
   <object id="40" x="976" y="433" width="79.6667" height="15.6667"/>
   <object id="41" x="1040" y="447.667" width="127" height="16"/>
@@ -72,8 +72,8 @@
   <object id="62" x="1744" y="289" width="64" height="14.6667"/>
   <object id="63" x="1856.33" y="353" width="63.6667" height="15.3333"/>
   <object id="65" x="1966.67" y="430.667" width="128.333" height="98.3333"/>
-  <object id="66" x="928.5" y="463.5" width="239" height="34.5"/>
-  <object id="67" x="944" y="497.5" width="224.5" height="16"/>
+  <object id="66" x="927.5" y="464.25" width="239" height="34.5"/>
+  <object id="67" x="942" y="499" width="224.5" height="16"/>
   <object id="68" x="1264.83" y="464.167" width="17.5" height="64"/>
   <object id="69" x="1075.67" y="240.333" width="172.667" height="63"/>
   <object id="70" x="1120.25" y="303.5" width="128.25" height="65.5"/>
@@ -109,7 +109,7 @@
   <object id="115" x="32" y="433" width="17" height="80.5"/>
   <object id="116" x="33.5" y="417" width="71" height="21.5"/>
   <object id="117" x="351.5" y="466" width="17" height="47.5"/>
-  <object id="118" x="2080.5" y="529" width="17" height="111"/>
+  <object id="118" x="2078.25" y="529.75" width="17" height="111"/>
   <object id="119" x="3151.67" y="528.333" width="17" height="111.667"/>
   <object id="123" x="104.75" y="417.25" width="23" height="15.25"/>
   <object id="124" x="128" y="400.25" width="32.25" height="16.75"/>
@@ -179,6 +179,9 @@
   <object id="212" x="2944.25" y="352.5" width="176.25" height="48"/>
   <object id="213" x="689" y="352.667" width="17.6667" height="18.3333"/>
  </objectgroup>
+ <objectgroup id="17" name="Spawn_personnage">
+  <object id="214" x="70" y="469.333"/>
+ </objectgroup>
  <objectgroup id="12" name="Archer">
   <object id="191" x="523" y="266"/>
  </objectgroup>
@@ -213,7 +216,7 @@
  </objectgroup>
  <objectgroup id="11" name="Collisions_mort">
   <object id="120" x="560.333" y="482.667" width="126" height="30.6667"/>
-  <object id="121" x="1168.33" y="497" width="95.6667" height="16.6667"/>
+  <object id="121" x="1167.58" y="497" width="96.4167" height="16.6667"/>
   <object id="122" x="2097.45" y="624.182" width="1054.55" height="16.1818"/>
  </objectgroup>
  <layer id="1" name="Tile Layer 1" width="240" height="40">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="150" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="68">
+<map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="150" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="69">
  <tileset firstgid="1" source="tiled/Tiles.tsx"/>
  <tileset firstgid="626" source="tiled/Buildings.tsx"/>
  <tileset firstgid="1251" source="tiled/toitRouge.tsx"/>
@@ -10,6 +10,9 @@
  <objectgroup id="6" name="Monstres" visible="0"/>
  <objectgroup id="17" name="Key">
   <object id="67" x="2248" y="504"/>
+ </objectgroup>
+ <objectgroup id="18" name="Spawn_personnage">
+  <object id="68" x="38.6667" y="487.333"/>
  </objectgroup>
  <objectgroup id="4" name="Collisions_monstres">
   <object id="25" x="129.333" y="478.667" width="17.3333" height="49.3333"/>
