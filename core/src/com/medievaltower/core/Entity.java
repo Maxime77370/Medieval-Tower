@@ -39,17 +39,17 @@ import java.util.List;
 public abstract class Entity extends Sprite {
 
 
-    protected int x;
-    protected int y;
-    protected int xLast;
-    protected int yLast;
+    protected float x;
+    protected float y;
+    protected float xLast;
+    protected float yLast;
     protected int width;
     protected int height;
     protected Sprite sprite;
-    protected static final float GRAVITY = 20f;
+    protected static final float GRAVITY = 2000f;
     protected Rectangle boundingBox = new Rectangle();
-    protected float yVelocity;
-    protected float xVelocity;
+    protected float yVelocity = 0;
+    protected float xVelocity = 0;
 
     /**
      * Entity constructor
@@ -157,7 +157,7 @@ public abstract class Entity extends Sprite {
     }
 
     private void handleVerticalCollision(Rectangle platform) {
-        if (Personnage.getInstance().getyVelocity() > 0) { // Si l'entité se déplace vers le haut
+        if (this.yVelocity > 0) { // Si l'entité se déplace vers le haut
             collide_ceiling();
             y = (int) (platform.y - this.boundingBox.height); // Positionnez l'entité juste en dessous de la plateforme
         } else { // Si l'entité se déplace vers le bas
@@ -169,8 +169,10 @@ public abstract class Entity extends Sprite {
 
     private void handleHorizontalCollision(Rectangle platform) {
         if (Personnage.getInstance().getxVelocity() > 0) { // Si l'entité se déplace vers la droite
+            collide_right();
             x = (int) (platform.x - this.boundingBox.width + x - boundingBox.x - 1); // Positionnez l'entité juste à gauche de la plateforme
         } else { // Si l'entité se déplace vers la gauche
+            collide_left();
             x = (int) (platform.x + platform.width + x - boundingBox.x + 1); // Positionnez l'entité juste à droite de la plateforme
         }
         setBoundingBox(); // Mettez à jour la bounding box après avoir changé la position
@@ -186,6 +188,9 @@ public abstract class Entity extends Sprite {
     }
 
     public void move(){
+        this.yVelocity -= GRAVITY * Gdx.graphics.getDeltaTime();
+        x += this.xVelocity * Gdx.graphics.getDeltaTime();
+        y += this.yVelocity * Gdx.graphics.getDeltaTime();
         setBoundingBox();
     }
 
@@ -225,6 +230,16 @@ public abstract class Entity extends Sprite {
 
     public void collide_ceiling(){
         this.yVelocity = 0;
+    }
+
+    public void collide_left(){
+        this.xVelocity = 0;
+        this.yVelocity *= 0.5f;
+    }
+
+    public void collide_right(){
+        this.xVelocity = 0;
+        this.yVelocity *= 0.5f;
     }
 
     public abstract void collide(Entity entity);
