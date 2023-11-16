@@ -234,12 +234,16 @@ public abstract class Entity extends Sprite {
 
     public void collide_left(){
         this.xVelocity = 0;
-        this.yVelocity *= 0.5f;
+        if (this.yVelocity < 0) {
+            this.yVelocity *= 0.5f;
+        }
     }
 
     public void collide_right(){
         this.xVelocity = 0;
-        this.yVelocity *= 0.5f;
+        if (this.yVelocity < 0) {
+            this.yVelocity *= 0.5f;
+        }
     }
 
     public abstract void collide(Entity entity);

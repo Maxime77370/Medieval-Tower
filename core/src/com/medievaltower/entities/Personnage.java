@@ -484,13 +484,11 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     @Override
     public void collide_left(){
-        this.isJumping = false;
         super.collide_left();
     }
 
     @Override
     public void collide_right(){
-        this.isJumping = false;
         super.collide_right();
     }
 
