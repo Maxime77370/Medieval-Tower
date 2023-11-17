@@ -11,7 +11,6 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.medievaltower.entities.Cle;
-import com.medievaltower.entities.Personnage;
 import com.medievaltower.entities.animation.Animation;
 import com.medievaltower.entities.monster.Archer;
 import com.medievaltower.entities.monster.Bat;
@@ -168,7 +167,7 @@ public abstract class Entity extends Sprite {
     }
 
     private void handleHorizontalCollision(Rectangle platform) {
-        if (Personnage.getInstance().getxVelocity() > 0) { // Si l'entité se déplace vers la droite
+        if (this.xVelocity > 0) { // Si l'entité se déplace vers la droite
             collide_right();
             x = (int) (platform.x - this.boundingBox.width + x - boundingBox.x - 1); // Positionnez l'entité juste à gauche de la plateforme
         } else { // Si l'entité se déplace vers la gauche
