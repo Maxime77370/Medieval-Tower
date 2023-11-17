@@ -182,12 +182,16 @@ public abstract class Entity extends Sprite {
         // Check for collisions
         checkCollidePlatform();
 
+
+
         // Update the sprite or animation
         // updateTexture(animation);
     }
 
     public void move(){
-        this.yVelocity -= GRAVITY * Gdx.graphics.getDeltaTime();
+        if (yVelocity > -700) {
+            this.yVelocity -= GRAVITY * Gdx.graphics.getDeltaTime();
+        }
         x += this.xVelocity * Gdx.graphics.getDeltaTime();
         y += this.yVelocity * Gdx.graphics.getDeltaTime();
         setBoundingBox();

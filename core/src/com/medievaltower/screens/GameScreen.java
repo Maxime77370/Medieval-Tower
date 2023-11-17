@@ -159,6 +159,11 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
+        // if delta time to long don't run the script to fix bug collide
+        if (Gdx.graphics.getDeltaTime() > 0.5f){
+            return;
+        }
         // Update entities
         entityManager.update();
 

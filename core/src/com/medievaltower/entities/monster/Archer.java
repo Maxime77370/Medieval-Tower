@@ -50,7 +50,7 @@ public class Archer extends Monstre {
         this.xLast = this.x;
         this.yLast = this.y;
 
-        this.x += speed;
+        this.x += speed * Gdx.graphics.getDeltaTime();
         if (speed > 0) {
             animation.setStateLocal("Run", false);
         } else if (speed < 0){
@@ -58,11 +58,6 @@ public class Archer extends Monstre {
         }
         else{
             animation.setStateLocal("Breath");
-        }
-        if (this.x >= 800) {
-            speed = -speed;
-        } else if (this.x <= 0) {
-            speed = Math.abs(speed);
         }
 
         super.move();
@@ -114,8 +109,14 @@ public class Archer extends Monstre {
         updateTexture(animation);
     }
 
-    public void collide(Entity entity){
+    @Override
+    public void collide_left(){
+        super.collide_left();
+    }
 
+    @Override
+    public void collide_right(){
+        super.collide_right();
     }
 
     @Override
