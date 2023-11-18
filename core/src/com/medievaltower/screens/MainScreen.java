@@ -107,6 +107,21 @@ public class MainScreen implements Screen {
             }
         });
 
+        optionButton.addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
+            @Override
+            public void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
+                if (!isLaunched) {
+                    isLaunched = true;
+                    game.setScreen(new OptionScreen());
+                }
+            }
+
+            @Override
+            public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
+
         exitButton.addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
             @Override
             public void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
