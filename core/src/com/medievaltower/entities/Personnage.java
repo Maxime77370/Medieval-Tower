@@ -534,4 +534,12 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             System.out.println("Cle collision");
         }
     }
+
+    public void die() {
+        this.isDead = true;
+    }
+
+    public boolean isDead() {
+        return this.isDead;
+    }
 }

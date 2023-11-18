@@ -1,8 +1,10 @@
 package com.medievaltower.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,7 +15,6 @@ import com.medievaltower.core.EntityManager;
 import com.medievaltower.entities.Personnage;
 import com.medievaltower.game.Camera;
 import com.medievaltower.levels.Map;
-import com.badlogic.gdx.graphics.Pixmap;
 
 public class GameScreen implements Screen {
 
@@ -28,6 +29,7 @@ public class GameScreen implements Screen {
     private final BitmapFont font; // BitmapFont for Label
     private final Label monsterCountLabel; // Label for monster count
     private final ProgressBar expBar; // Progress bar for experience points
+    private Game game;
 
     public GameScreen() {
         batch = new SpriteBatch();
@@ -167,9 +169,9 @@ public class GameScreen implements Screen {
         // Update entities
         entityManager.update();
 
-        float red = 31f/255f;
-        float green = 28f/255f;
-        float blue = 18f/255f;
+        float red = 31f / 255f;
+        float green = 28f / 255f;
+        float blue = 18f / 255f;
 
         // Clear the screen
         ScreenUtils.clear(red, green, blue, 1);
@@ -202,6 +204,11 @@ public class GameScreen implements Screen {
         // stop the game
         if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.ESCAPE)) {
             Gdx.app.exit();
+        }
+
+        // if player is dead
+        if (personnage.isDead()) {
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new DeathScreen());
         }
 
 
