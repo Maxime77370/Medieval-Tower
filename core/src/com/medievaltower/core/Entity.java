@@ -149,6 +149,24 @@ public abstract class Entity extends Sprite {
         }
     }
 
+    public void checkDeathCollision() {
+        for (MapObject platformObject : Map.getInstance().getDeathCollision()) {
+            if (platformObject instanceof RectangleMapObject) {
+                Rectangle platform = ((RectangleMapObject) platformObject).getRectangle();
+                if (boundingBox.overlaps(platform)) {
+                    // Déterminer le type de collision
+                    if (isVerticalCollision(platform)) {
+                        // make the personnage die
+                        Personnage.getInstance().die();
+                        handleVerticalCollision(platform);
+                    } else {
+                        handleHorizontalCollision(platform);
+                    }
+                }
+            }
+        }
+    }
+
     private boolean isVerticalCollision(Rectangle platform) {
         if (xLast + (getBoundingBox().x - x) + getBoundingBox().width < platform.x) {
             return false;
@@ -182,6 +200,9 @@ public abstract class Entity extends Sprite {
     public void update() {
         // Check for collisions
         checkCollidePlatform();
+
+        // Check for death collisions
+        checkDeathCollision();
 
         // Update the sprite or animation
         // updateTexture(animation);

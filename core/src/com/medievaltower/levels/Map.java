@@ -88,6 +88,10 @@ public class Map {
         return elementsToCreate;
     }
 
+    public MapObjects getDeathCollision() {
+        return this.collisionMort;
+    }
+
     public void createEntities() {
         HashMap<MapObjects, String> elementsToCreate = this.getAllElementsToCreate();
 
@@ -127,6 +131,8 @@ public class Map {
             }
         }
     }
+
+
 
     public static Map getInstance(int... mapId) {
         if (instance == null && mapId.length == 1) {
