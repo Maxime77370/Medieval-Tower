@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
 
         entityManager = EntityManager.getInstance();
-        map = new Map(3);
+        map = new Map(2);
 
         // create entities in the map
         map.createEntities();

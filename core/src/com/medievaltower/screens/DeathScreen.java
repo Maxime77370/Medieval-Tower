@@ -89,8 +89,8 @@ public class DeathScreen implements Screen {
 
         batch.begin();
         batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.draw(deathImage, Gdx.graphics.getWidth() / 2 - deathImage.getWidth() / 2 - 160, Gdx.graphics.getHeight() / 2f + 40);
-        font.draw(batch, "You died !", Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() / 2f + 150);
+        batch.draw(deathImage, Gdx.graphics.getWidth() / 2 - deathImage.getWidth() / 2 - 120, Gdx.graphics.getHeight() / 2f + 40);
+        font.draw(batch, "You died !", Gdx.graphics.getWidth() / 2f - 70 , Gdx.graphics.getHeight() / 2f + 150);
         batch.end();
 
         if (this.btnRestart.isOver()) {

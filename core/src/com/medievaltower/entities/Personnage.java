@@ -314,6 +314,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      * Method to activate invincibility
      */
     private void activateInvincibility() {
+        // Create animation to show that the character is invincible
         this.isInvincible = true;
         this.invincibleTimer = invincibleDuration; // Réinitialise le timer pour la durée spécifiée
     }
