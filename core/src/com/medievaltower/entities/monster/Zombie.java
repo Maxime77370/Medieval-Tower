@@ -78,8 +78,6 @@ public class Zombie extends Monstre {
      */
     @Override
     public void update() {
-        System.out.println(yVelocity);
-        System.out.println(y);
         updateTexture(animation);
     }
 

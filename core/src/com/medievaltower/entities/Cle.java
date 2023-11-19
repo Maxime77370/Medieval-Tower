@@ -22,7 +22,7 @@ public class Cle extends Entity implements CollectableEntity {
      * @param y : the y position of the cle
      */
     public Cle(int x, int y) {
-        super(x, y, 20, 20, new Texture("heart.png"));
+        super(x, y, 20, 20, new Texture("key.png"));
     }
 
     /**
