@@ -282,6 +282,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         // Depends on the weapon equipped by the character
         this.attackAnimation();
 
+
     }
 
     private void attackAnimation() {
@@ -300,7 +301,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     public void receiveDamage(int damage) {
         if (!this.isInvincible) {
             this.health -= damage;
-            if (this.health < 0) {
+            if (this.health <= 0) {
                 this.health = 0;
                 this.isDead = true;
             }
@@ -519,6 +520,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     public void collide(Entity entity) {
         if (entity instanceof Monstre) {
             this.receiveDamage(1);
+            System.out.println(this.health);
             System.out.println("Monster collision");
         }
         else if (entity instanceof Arrow){
@@ -542,4 +544,9 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     public boolean isDead() {
         return this.isDead;
     }
+
+    public boolean isKeyEquipped() {
+        return this.cleEquipped != null;
+    }
+
 }
