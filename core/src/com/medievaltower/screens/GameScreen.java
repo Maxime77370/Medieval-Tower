@@ -127,7 +127,7 @@ public class GameScreen implements Screen {
         Texture inventoryTexture = new Texture("inventory.png"); // Replace with your inventory icon
         Texture potionTexture = new Texture("potion.png"); // Replace with your potion icon
         Texture monsterTexture = new Texture("monster.png"); // Replace with your monster icon
-        Texture keyTexture = new Texture("key.png"); // Replace with your key icon
+        Texture keyTexture = new Texture("Texture/Key/key.png"); // Replace with your key icon
 
 
         // Add a separator
