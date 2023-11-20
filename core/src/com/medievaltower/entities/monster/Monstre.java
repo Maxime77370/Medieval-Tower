@@ -33,7 +33,9 @@ public abstract class Monstre extends Entity implements AttackableEntity, Movabl
      * Update the monster
      * called in the subclass
      */
+    @Override
     public void update() {
+        super.update();
     }
 
     /**

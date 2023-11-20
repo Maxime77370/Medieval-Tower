@@ -7,19 +7,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
-import com.medievaltower.entities.Cle;
 import com.medievaltower.entities.Personnage;
 import com.medievaltower.entities.animation.Animation;
 import com.medievaltower.entities.monster.Archer;
-import com.medievaltower.entities.monster.Bat;
 import com.medievaltower.entities.monster.Zombie;
 import com.medievaltower.levels.Map;
-
-import java.util.HashMap;
-import java.util.List;
 
 
 /**
@@ -39,6 +33,7 @@ import java.util.List;
 public abstract class Entity extends Sprite {
 
 
+    protected static final float GRAVITY = 2000f;
     public float x;
     public float y;
     protected float xLast;
@@ -46,7 +41,6 @@ public abstract class Entity extends Sprite {
     protected int width;
     protected int height;
     protected Sprite sprite;
-    protected static final float GRAVITY = 2000f;
     protected Rectangle boundingBox = new Rectangle();
     protected float yVelocity = 0;
     protected float xVelocity = 0;
@@ -153,7 +147,7 @@ public abstract class Entity extends Sprite {
         for (MapObject platformObject : Map.getInstance().getDeathCollision()) {
             if (platformObject instanceof RectangleMapObject) {
                 Rectangle platform = ((RectangleMapObject) platformObject).getRectangle();
-                if (boundingBox.overlaps(platform)) {
+                if (boundingBox.overlaps(platform) && this instanceof Personnage) {
                     // Déterminer le type de collision
                     if (isVerticalCollision(platform)) {
                         // make the personnage die
@@ -167,6 +161,21 @@ public abstract class Entity extends Sprite {
         }
     }
 
+    public void checkBlockCollision() {
+        for (MapObject blockObject : Map.getInstance().getMonstersCollision()) {
+            if (blockObject instanceof RectangleMapObject) {
+                Rectangle block = ((RectangleMapObject) blockObject).getRectangle();
+                if (this.getBoundingBox().overlaps(block) && (this instanceof Zombie || this instanceof Archer)) {
+                    // Ajouter les collisions horizontales pour inverser la direction
+                    if (this instanceof Zombie) {
+                        ((Zombie) this).invertDirection();
+                    } else {
+                        ((Archer) this).invertDirection();
+                    }
+                }
+            }
+        }
+    }
     private boolean isVerticalCollision(Rectangle platform) {
         if (xLast + (getBoundingBox().x - x) + getBoundingBox().width < platform.x) {
             return false;
@@ -204,11 +213,14 @@ public abstract class Entity extends Sprite {
         // Check for death collisions
         checkDeathCollision();
 
+        // Check for monsters collisions
+        checkBlockCollision();
+
         // Update the sprite or animation
         // updateTexture(animation);
     }
 
-    public void move(){
+    public void move() {
         if (yVelocity > -700) {
             this.yVelocity -= GRAVITY * Gdx.graphics.getDeltaTime();
         }
@@ -247,22 +259,22 @@ public abstract class Entity extends Sprite {
         pixmap.dispose();
     }
 
-    public void collide_floor(){
+    public void collide_floor() {
         this.yVelocity = 0;
     }
 
-    public void collide_ceiling(){
+    public void collide_ceiling() {
         this.yVelocity = 0;
     }
 
-    public void collide_left(){
+    public void collide_left() {
         this.xVelocity = 0;
         if (this.yVelocity < 0) {
             this.yVelocity *= 0.5f;
         }
     }
 
-    public void collide_right(){
+    public void collide_right() {
         this.xVelocity = 0;
         if (this.yVelocity < 0) {
             this.yVelocity *= 0.5f;

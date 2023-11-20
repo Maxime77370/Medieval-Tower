@@ -2,32 +2,34 @@ package com.medievaltower.entities.monster;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.medievaltower.core.Entity;
 import com.medievaltower.entities.animation.AnimationZombie;
 
 /**
  * Class Zombie
  * <p>
- *     This class is a subclass class of monster in the game.
- *     It contains the position, the size and the texture of the monster.
- *     It also contains the update method.
- *     This entity move horizontally.
- *     It extends the Monstre class.
- *     It contains the AI of the zombie.
- *     It contains the attack method of the zombie.
- *     It contains the receiveDamage method of the zombie.
- *     It contains the update method of the zombie.
+ * This class is a subclass class of monster in the game.
+ * It contains the position, the size and the texture of the monster.
+ * It also contains the update method.
+ * This entity move horizontally.
+ * It extends the Monstre class.
+ * It contains the AI of the zombie.
+ * It contains the attack method of the zombie.
+ * It contains the receiveDamage method of the zombie.
+ * It contains the update method of the zombie.
  * </p>
+ *
  * @see Monstre
  */
 public class Zombie extends Monstre {
 
     /**
      * Zombie constructor
+     *
      * @param x : the x position of the monster
      * @param y : the y position of the monster
      */
-    private AnimationZombie animation = new AnimationZombie();
+    private final AnimationZombie animation = new AnimationZombie();
+
     public Zombie(int x, int y) {
         super(x, y, 32, 32, new Texture("paix.jpg"));
     }
@@ -56,6 +58,13 @@ public class Zombie extends Monstre {
         // TODO: Implémentez l'IA du zombie
     }
 
+    public void invertDirection() {
+        speed = -speed;
+        // inverse if speed is negative
+        boolean inverse = speed < 0;
+        this.animation.setStateLocal("Run", inverse);
+    }
+
     /**
      * Attack the player
      */
@@ -66,6 +75,7 @@ public class Zombie extends Monstre {
 
     /**
      * Receive damage
+     *
      * @param damage : the damage received
      */
     @Override
@@ -79,12 +89,13 @@ public class Zombie extends Monstre {
     @Override
     public void update() {
         updateTexture(animation);
+        super.update();
     }
 
     @Override
     public void setBoundingBox() {
         // Set the bounding box of the personnage character
-        boundingBox.setSize(width - 9, height - 5 );
+        boundingBox.setSize(width - 9, height - 5);
         boundingBox.setPosition(x + 5, y);
     }
 }

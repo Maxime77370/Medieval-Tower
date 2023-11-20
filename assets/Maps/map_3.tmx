@@ -184,7 +184,7 @@
   <object id="214" x="171" y="434.833"/>
  </objectgroup>
  <objectgroup id="12" name="Archer">
-  <object id="191" x="526" y="294"/>
+  <object id="191" x="520" y="294"/>
  </objectgroup>
  <objectgroup id="16" name="Collisions_monstres">
   <object id="192" x="410" y="144" width="9" height="155"/>

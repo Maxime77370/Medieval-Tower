@@ -92,6 +92,10 @@ public class Map {
         return this.collisionMort;
     }
 
+    public MapObjects getMonstersCollision() {
+        return collisionMonstre;
+    }
+
     public void createEntities() {
         HashMap<MapObjects, String> elementsToCreate = this.getAllElementsToCreate();
 
@@ -131,8 +135,6 @@ public class Map {
             }
         }
     }
-
-
 
     public static Map getInstance(int... mapId) {
         if (instance == null && mapId.length == 1) {

@@ -55,6 +55,7 @@ public class Bat extends Monstre {
     @Override
     public void update() {
         updateTexture(animation);
+        super.update();
     }
 
     /**

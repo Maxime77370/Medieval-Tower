@@ -94,6 +94,8 @@ public class Archer extends Monstre {
     @Override
     public void update() {
 
+        super.update();
+
         // Vérifie si la flèche actuelle est nulle
         if (currentArrow == null) {
             attack();
@@ -124,5 +126,12 @@ public class Archer extends Monstre {
         // Set the bounding box of the personnage character
         boundingBox.setSize(width - 32, height - 32 );
         boundingBox.setPosition(x + 16, y + 16);
+    }
+
+    public void invertDirection() {
+        speed = -speed;
+        // inverse if speed is negative
+        boolean inverse = speed < 0;
+        this.animation.setStateLocal("Run", inverse);
     }
 }
