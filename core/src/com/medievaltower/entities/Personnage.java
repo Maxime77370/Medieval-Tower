@@ -77,6 +77,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private boolean isInvincible = false;
     private float invincibleTimer = 0;
     private boolean isDead = false;
+    private boolean isAttacked;
 
     /**
      * Personnage constructor
@@ -238,7 +239,10 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         }
 
         if (Actions.get("Space")) {
+            this.isAttacked = true;
             this.attack();
+        } else {
+            this.isAttacked = false;
         }
 
         if (isInvincible) {
@@ -288,8 +292,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     public void attack() {
         // Depends on the weapon equipped by the character
         this.attackAnimation();
-
-
     }
 
     private void attackAnimation() {
@@ -298,6 +300,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         } else {
             this.animation.setStateLocal("Attack");
         }
+
     }
 
     /**
@@ -529,13 +532,17 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     public void collide(Entity entity) {
         if (entity instanceof Monstre) {
-            this.receiveDamage(1);
-            System.out.println(this.health);
-            System.out.println("Monster collision");
+            // si le personnage est en train d'attaquer alors le monstre est tué sinon prend des degats
+            if (this.isAttacked) {
+                ((Monstre) entity).receiveDamage(1);
+                EntityManager.getInstance().removeEntity(entity);
+                this.setExp(50);
+            } else {
+                this.receiveDamage(1);
+            }
         }
         else if (entity instanceof Arrow){
             this.receiveDamage(1);
-            System.out.println("Arrow collision");
         }
         else if (entity instanceof Potion){
             this.addPotionInventory((Potion) entity);
@@ -561,7 +568,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     public void setExp(float exp) {
-        this.exp = exp;
+        this.exp += exp;
     }
 
 }
