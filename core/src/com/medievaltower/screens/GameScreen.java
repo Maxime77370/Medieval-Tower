@@ -247,24 +247,34 @@ public class GameScreen implements Screen {
         // Update the progress bar
         expBar.setValue(personnage.getExp());
 
+        // Update the exp restant
+        expLabel.setText("Exp restante  : " + (325 - personnage.getExp()));
+
+        // Update the level
+        levelLabel.setText("Niv. " + personnage.getLevel());
+
+        System.out.println("Cle : " + Personnage.getInstance().isKeyEquipped());
+
         // Update the key
         if (Personnage.getInstance().isKeyEquipped()) {
-            keyLabel = new Label("FOUND", new Label.LabelStyle(font, Color.GREEN));
+            keyLabel.setText("FOUND");
+            keyLabel.setStyle(new Label.LabelStyle(font, Color.GREEN));
         } else {
-            keyLabel = new Label("NOT FOUND", new Label.LabelStyle(font, Color.RED));
+            keyLabel.setText("NOT FOUND");
+            keyLabel.setStyle(new Label.LabelStyle(font, Color.RED));
         }
 
         // Update the heart
         updateHearts();
 
         // Display inventory count (replace with the actual count)
-        inventoryCountLabel = new Label("x" + personnage.getWeaponInventory().size(), new Label.LabelStyle(font, Color.WHITE));
+        inventoryCountLabel.setText("x" + personnage.getWeaponInventory().size());
 
         // Display potion count (replace with the actual count)
-        potionCountLabel = new Label("x" + personnage.getPotionInventory().size(), new Label.LabelStyle(font, Color.WHITE));
+        potionCountLabel.setText("x" + personnage.getPotionInventory().size());
 
         // Update the monster
-        monsterCountLabel = new Label("x" + entityManager.getNumberOfMonsters(), new Label.LabelStyle(font, Color.WHITE));
+        monsterCountLabel.setText("x" + entityManager.getNumberOfMonsters());
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
     }

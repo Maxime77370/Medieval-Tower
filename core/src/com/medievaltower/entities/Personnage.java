@@ -3,10 +3,7 @@ package com.medievaltower.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.medievaltower.core.AttackableEntity;
-import com.medievaltower.core.Direction;
-import com.medievaltower.core.Entity;
-import com.medievaltower.core.MovableEntity;
+import com.medievaltower.core.*;
 import com.medievaltower.entities.animation.AnimationPersonnage;
 import com.medievaltower.entities.monster.Arrow;
 import com.medievaltower.entities.monster.Monstre;
@@ -54,7 +51,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
     private final float invincibleDuration = 3;
     private final AnimationPersonnage animation = new AnimationPersonnage();
-    private final float exp = 120f;
+    private float exp = 0f;
     private final int level = 1;
     private final Direction currentDirection = Direction.NONE;
     private final boolean isSlow = false;
@@ -546,7 +543,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         }
         else if (entity instanceof Cle) {
             this.setCleEquipped((Cle) entity);
-            System.out.println("Cle collision");
+            EntityManager.getInstance().removeEntity(entity);
+            this.setExp(100);
         }
     }
 
@@ -560,6 +558,10 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     public boolean isKeyEquipped() {
         return this.cleEquipped != null;
+    }
+
+    public void setExp(float exp) {
+        this.exp = exp;
     }
 
 }
