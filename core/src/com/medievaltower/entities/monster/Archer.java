@@ -75,7 +75,7 @@ public class Archer extends Monstre {
      */
     @Override
     public void attack() {
-        currentArrow = new Arrow((int) getX(), (int) getY());
+        currentArrow = new Arrow((int) getX(), (int) getY() + 32);
         entityManager.newEntity(currentArrow);
         timer = new Date();
     }

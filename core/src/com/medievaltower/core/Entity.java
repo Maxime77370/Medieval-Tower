@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.medievaltower.entities.Personnage;
 import com.medievaltower.entities.animation.Animation;
 import com.medievaltower.entities.monster.Archer;
+import com.medievaltower.entities.monster.Arrow;
 import com.medievaltower.entities.monster.Zombie;
 import com.medievaltower.levels.Map;
 
@@ -132,6 +133,10 @@ public abstract class Entity extends Sprite {
             if (platformObject instanceof RectangleMapObject) {
                 Rectangle platform = ((RectangleMapObject) platformObject).getRectangle();
                 if (boundingBox.overlaps(platform)) {
+                    if (this instanceof Arrow) {
+                        // delete the arrow  if it collides with a platform
+                        EntityManager.getInstance().removeEntity(this);
+                    }
                     // Déterminer le type de collision
                     if (isVerticalCollision(platform)) {
                         handleVerticalCollision(platform);

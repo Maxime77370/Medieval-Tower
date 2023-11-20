@@ -17,7 +17,7 @@ public class Arrow extends Entity {
     private float speed = 10;
     private float speed_x;
     private float speed_y;
-    private float gravity = 0.2f;
+    private float gravity = 0.1f;
     private double angle = Math.PI/4;
     private float rotation = 0; // Ajout de l'attribut rotation
     private AnimationArrow animation = new AnimationArrow();
@@ -57,6 +57,7 @@ public class Arrow extends Entity {
 
     @Override
     public void update() {
+        super.update();
     }
 
     // Creer fleche si null
