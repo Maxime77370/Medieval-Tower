@@ -3,6 +3,7 @@ package com.medievaltower.entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.medievaltower.core.CollectableEntity;
 import com.medievaltower.core.Entity;
+import com.medievaltower.entities.animation.AnimationCle;
 
 /**
  * Cle class
@@ -15,6 +16,8 @@ import com.medievaltower.core.Entity;
  * @see Texture
  */
 public class Cle extends Entity implements CollectableEntity {
+
+    private AnimationCle animation = new AnimationCle();
 
     /**
      * Cle constructor
@@ -39,6 +42,7 @@ public class Cle extends Entity implements CollectableEntity {
      * Update the cle
      */
     public void update() {
+        updateTexture(animation);
     }
 
     @Override
