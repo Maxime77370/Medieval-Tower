@@ -1,5 +1,6 @@
 package com.medievaltower.entities.animation;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.medievaltower.game.Tileset;
 
@@ -17,7 +18,7 @@ public class AnimationBat extends Animation {
      */
     @Override
     public TextureRegion update() {
-        float delta = com.badlogic.gdx.Gdx.graphics.getDeltaTime();
+        float delta = Gdx.graphics.getDeltaTime();
         this.frameTimer += delta;
 
         setStateGlobal();

@@ -129,4 +129,10 @@ public class EntityManager<T extends Entity> {
             entity.dispose();
         }
     }
+
+    public void reset(){
+        entities.clear();
+        entitiesToAdd.clear();
+        entitiesToRemove.clear();
+    }
 }

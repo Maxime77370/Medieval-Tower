@@ -38,11 +38,18 @@ public class Cle extends Entity implements CollectableEntity {
         }
     }
 
+    @Override
+    public void move() {
+
+    }
+
     /**
      * Update the cle
      */
+    @Override
     public void update() {
         updateTexture(animation);
+        setBoundingBox();
     }
 
     @Override

@@ -48,10 +48,8 @@ public class DeathScreen implements Screen {
         btnRestart = new TextButton("Restart", style);
         btnRestart.addListener(event -> {
             if (event.isHandled()) {
-
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen());
-
-                dispose();
+                GameScreen.getInstance().restartGame();
+                dispose(); // Libérez les ressources associées à DeathScreen
             }
             return true;
         });

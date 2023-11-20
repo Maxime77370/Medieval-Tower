@@ -37,9 +37,12 @@ public class GameScreen implements Screen {
     private Label keyLabel; // Label for key
     private Label potionCountLabel; // Label for potion
     private Label inventoryCountLabel; // Label for inventory
-    private Game game;
+    private static GameScreen Instance;
 
     public GameScreen() {
+
+        Instance = this;
+
         batch = new SpriteBatch();
 
         entityManager = EntityManager.getInstance();
@@ -225,6 +228,7 @@ public class GameScreen implements Screen {
 
         // if player is dead
         if (personnage.isDead()) {
+            dispose();
             ((Game) Gdx.app.getApplicationListener()).setScreen(new DeathScreen());
         }
 
@@ -325,5 +329,18 @@ public class GameScreen implements Screen {
 
         // Dispose of the font
         font.dispose();
+    }
+
+    public void restartGame() {
+        // Réinitialiser toutes les entités, états et variables nécessaires
+        entityManager.reset();
+        map.createEntities();
+    }
+
+    public static GameScreen getInstance() {
+        if (Instance == null) {
+            Instance = new GameScreen();
+        }
+        return Instance;
     }
 }

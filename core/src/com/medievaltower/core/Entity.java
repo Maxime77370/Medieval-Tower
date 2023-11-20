@@ -284,6 +284,8 @@ public abstract class Entity extends Sprite {
     public abstract void collide(Entity entity);
 
     public void dispose() {
-        this.getSprite().getTexture().dispose();
+        if (this.sprite.getTexture() != null) {
+            this.sprite.getTexture().dispose();
+        }
     }
 }

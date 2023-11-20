@@ -1,15 +1,16 @@
 package com.medievaltower.entities.animation;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.medievaltower.game.Tileset;
 
 public class AnimationCle extends Animation {
 
-    private Tileset BatTile = new Tileset("Key/key.png", 32, 32);
+    private Tileset KeyTile = new Tileset("Key/key.png", 320, 320);
 
     public AnimationCle() {
         super();
-        sprite = BatTile.getTexture(0);
+        sprite = KeyTile.getTexture(0);
     }
 
     /**
@@ -17,7 +18,7 @@ public class AnimationCle extends Animation {
      */
     @Override
     public TextureRegion update() {
-        float delta = com.badlogic.gdx.Gdx.graphics.getDeltaTime();
+        float delta = Gdx.graphics.getDeltaTime();
         this.frameTimer += delta;
 
         setStateGlobal();
@@ -32,10 +33,10 @@ public class AnimationCle extends Animation {
     }
 
     private TextureRegion animateFly() {
-        if (frame >= 2) {
+        if (frame >= KeyTile.getNbTexture()) {
             frame = 0;
         }
         frame++;
-        return BatTile.getTexture(frame - 1);
+        return KeyTile.getTexture(frame - 1);
     }
 }
