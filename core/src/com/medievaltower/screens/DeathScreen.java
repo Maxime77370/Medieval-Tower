@@ -14,9 +14,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.medievaltower.game.MedievalTower;
+import com.medievaltower.levels.Map;
 
 public class DeathScreen implements Screen {
 
+    private MedievalTower game;
     private final SpriteBatch batch;
     private final BitmapFont font;
     private final Texture backgroundTexture;
@@ -25,7 +28,10 @@ public class DeathScreen implements Screen {
     private TextButton btnRestart;
     private TextButton btnQuit;
 
-    public DeathScreen() {
+    public DeathScreen(MedievalTower game) {
+
+        this.game = game;
+
         batch = new SpriteBatch();
         backgroundTexture = new Texture(Gdx.files.internal("medievaltower.jpg"));
         deathImage = new Texture(Gdx.files.internal("death.png"));
@@ -48,8 +54,10 @@ public class DeathScreen implements Screen {
         btnRestart = new TextButton("Restart", style);
         btnRestart.addListener(event -> {
             if (event.isHandled()) {
-                GameScreen.getInstance().restartGame();
-                dispose(); // Libérez les ressources associées à DeathScreen
+                GameScreen gameScreen = GameScreen.getInstance();
+                Map.getInstance().loadMap(3);
+                gameScreen.restartGame();
+                game.setScreen(gameScreen);
             }
             return true;
         });

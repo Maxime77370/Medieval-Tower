@@ -15,15 +15,17 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.medievaltower.core.EntityManager;
 import com.medievaltower.entities.Personnage;
 import com.medievaltower.game.Camera;
+import com.medievaltower.game.MedievalTower;
 import com.medievaltower.levels.Map;
 
 public class GameScreen implements Screen {
 
+    private MedievalTower game;
     private final SpriteBatch batch;
     private final Personnage personnage;
     private final Camera camera;
     private final EntityManager entityManager;
-    private final Map map;
+    private Map map;
     private final Label fpsLabel; // Label for FPS
     private final Stage stage; // Stage for HUD
     private final Table table; // Table to organize HUD elements
@@ -39,8 +41,9 @@ public class GameScreen implements Screen {
     private Label inventoryCountLabel; // Label for inventory
     private static GameScreen Instance;
 
-    public GameScreen() {
+    public GameScreen(MedievalTower game) {
 
+        this.game = game;
         Instance = this;
 
         batch = new SpriteBatch();
@@ -229,7 +232,7 @@ public class GameScreen implements Screen {
         // if player is dead
         if (personnage.isDead()) {
             dispose();
-            ((Game) Gdx.app.getApplicationListener()).setScreen(new DeathScreen());
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new DeathScreen(game));
         }
 
 
@@ -348,9 +351,6 @@ public class GameScreen implements Screen {
     }
 
     public static GameScreen getInstance() {
-        if (Instance == null) {
-            Instance = new GameScreen();
-        }
         return Instance;
     }
 }

@@ -55,10 +55,9 @@ public class Map {
         // Dispose of the map when it is no longer needed
         tiledMap.dispose();
         tiledMapRenderer.dispose();
-        instance = null;
     }
 
-    private void loadMap(int mapId) {
+    public void loadMap(int mapId) {
         // Your existing code to load the map
         TmxMapLoader mapLoader = new TmxMapLoader();
         FileHandle mapFileHandle = Gdx.files.internal("Maps/map_" + mapId + ".tmx");
@@ -137,9 +136,6 @@ public class Map {
     }
 
     public static Map getInstance(int... mapId) {
-        if (instance == null && mapId.length == 1) {
-            instance = new Map(mapId[0]);
-        }
         return instance;
     }
 }

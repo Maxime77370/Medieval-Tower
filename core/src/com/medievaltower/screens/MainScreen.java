@@ -97,7 +97,7 @@ public class MainScreen implements Screen {
             public void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
                 if (!isLaunched) {
                     isLaunched = true;
-                    game.setScreen(new GameScreen());
+                    game.setScreen(new GameScreen(game));
                 }
             }
 
@@ -112,7 +112,7 @@ public class MainScreen implements Screen {
             public void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
                 if (!isLaunched) {
                     isLaunched = true;
-                    game.setScreen(new OptionScreen());
+                    game.setScreen(new OptionScreen(game));
                 }
             }
 

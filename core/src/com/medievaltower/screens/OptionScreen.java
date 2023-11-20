@@ -16,9 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.medievaltower.game.GameSettings;
+import com.medievaltower.game.MedievalTower;
 
 public class OptionScreen implements Screen {
 
+    private MedievalTower game;
     private final Stage stage;
     private final BitmapFont font;
     private final Texture backgroundTexture;
@@ -28,7 +30,9 @@ public class OptionScreen implements Screen {
     private Label speedLabel;
     private Label gravityLabel;
 
-    public OptionScreen() {
+    public OptionScreen(MedievalTower game) {
+
+        this.game = game;
         batch = new SpriteBatch();
         backgroundTexture = new Texture(Gdx.files.internal("medievaltower.jpg"));
         stage = new Stage(new ScreenViewport(), batch);
@@ -70,7 +74,7 @@ public class OptionScreen implements Screen {
 
         saveButton.addListener(event -> {
             if (event.isHandled()) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen());
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new MainScreen(game));
             }
             return true;
         });
@@ -80,7 +84,7 @@ public class OptionScreen implements Screen {
 
         cancelButton.addListener(event -> {
             if (event.isHandled()) {
-                Gdx.app.exit();
+                game.setScreen(new MainScreen(game));
             }
             return true;
         });
