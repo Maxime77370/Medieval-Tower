@@ -17,9 +17,11 @@ import com.medievaltower.entities.animation.AnimationBat;
  * @see Monstre
  */
 public class Bat extends Monstre {
-    protected float amplitude = 10f;
+    protected float amplitude = 100f;
     protected float frequency = 1f;
     private float timeElapsed = 0;
+    private int xOrigin;
+    private int yOrigin;
     private AnimationBat animation = new AnimationBat();
 
     /**
@@ -29,6 +31,8 @@ public class Bat extends Monstre {
      */
     public Bat(int x, int y) {
         super(x, y, 30, 30, new Texture("paix.jpg"));
+        this.xOrigin = x;
+        this.yOrigin = y;
     }
 
     /**
@@ -40,37 +44,37 @@ public class Bat extends Monstre {
         this.xLast = this.x;
         this.yLast = this.y;
 
-
         this.sinusoidalMove();
+
+        xVelocity = 0;
+
+        x += this.xVelocity * Gdx.graphics.getDeltaTime();
         setBoundingBox();
     }
 
     @Override
     public void update() {
-        animation.update();
+        updateTexture(animation);
     }
 
     /**
      * Sinusoidal move of the monster
      */
     private void sinusoidalMove() {
-        // Utilisez la fonction sinus pour moduler la position y en fonction du temps
+        // Utilize the sine function to modulate the y position over time
         float deltaTime = Gdx.graphics.getDeltaTime();
 
-        float newY = (float) ((getY()) + amplitude * Math.sin(2 * Math.PI * frequency * timeElapsed));
+        // Calculate the new y position using a sinusoidal function with the original y position as the reference
+        float newY = (float) (yOrigin + amplitude * Math.sin(2 * Math.PI * frequency * timeElapsed));
 
-        // Définissez la nouvelle position y
+        // Update the y position
         this.y = (int) newY;
 
-        this.x += speed;
-        if (this.x >= 400) {
-            speed = -speed;
-        } else if (this.x <= 0) {
-            speed = Math.abs(speed);
-        }
-        // Mettez à jour le temps écoulé
+        // Update the elapsed time
         timeElapsed += deltaTime;
     }
+
+
 
     /**
      * Move the bat with the AI

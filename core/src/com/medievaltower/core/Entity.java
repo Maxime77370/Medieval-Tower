@@ -39,8 +39,8 @@ import java.util.List;
 public abstract class Entity extends Sprite {
 
 
-    protected float x;
-    protected float y;
+    public float x;
+    public float y;
     protected float xLast;
     protected float yLast;
     protected int width;

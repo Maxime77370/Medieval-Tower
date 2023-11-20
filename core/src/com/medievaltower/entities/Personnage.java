@@ -76,6 +76,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private Potion potionEquipped = null;
     private Cle cleEquipped = null;
     private boolean isSliding = false;
+    private boolean isHanging = false;
     private boolean isInvincible = false;
     private float invincibleTimer = 0;
     private boolean isDead = false;
@@ -166,7 +167,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.Actions.put("Space", true);
         }
 
-
         this.xLast = this.x;
         this.yLast = this.y;
 
@@ -182,7 +182,11 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
         if (Actions.get("Left")) {
 
-            if (Actions.get("Down") && !isJumping) {
+            if (isHanging){
+                this.animation.setStateLocal("Hanging", true);
+            }
+
+            else if (Actions.get("Down") && !isJumping) {
                 if (!isSliding) {
                     this.xVelocity *= 2f;
                 }
@@ -194,7 +198,11 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             }
         } else if (Actions.get("Right")) {
 
-            if (Actions.get("Down") && !isJumping) {
+            if (isHanging){
+                this.animation.setStateLocal("Hanging", false);
+            }
+
+            else if (Actions.get("Down") && !isJumping) {
                 if (!isSliding) {
                     this.xVelocity *= 2f;
                 }
@@ -253,6 +261,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         setSliding();
 
         super.move();
+
+        this.isHanging = false;
     }
 
     /**
@@ -486,11 +496,13 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     @Override
     public void collide_left(){
+        this.isHanging = true;
         super.collide_left();
     }
 
     @Override
     public void collide_right(){
+        this.isHanging = true;
         super.collide_right();
     }
 

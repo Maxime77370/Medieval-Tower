@@ -6,17 +6,18 @@ import com.medievaltower.game.Tileset;
 
 public class AnimationPersonnage extends Animation {
 
-    private Tileset RunTile = new Tileset("2D_SL_Knight_v1.0/Run.png", 128, 64);
-    private Tileset AttackTile = new Tileset("2D_SL_Knight_v1.0/Attacks.png", 128, 64);
-    private Tileset JumpTile = new Tileset("2D_SL_Knight_v1.0/Jump.png", 128, 64);
-    private Tileset SlideTile = new Tileset("2D_SL_Knight_v1.0/Slide.png", 128, 64);
-    private Tileset DeathTile = new Tileset("2D_SL_Knight_v1.0/Death.png", 128, 64);
-    private Tileset HealthTile = new Tileset("2D_SL_Knight_v1.0/Health.png", 128, 64);
+    private final Tileset RunTile = new Tileset("2D_SL_Knight_v1.0/Run.png", 128, 64);
+    private final Tileset AttackTile = new Tileset("2D_SL_Knight_v1.0/Attacks.png", 128, 64);
+    private final Tileset JumpTile = new Tileset("2D_SL_Knight_v1.0/Jump.png", 128, 64);
+    private final Tileset SlideTile = new Tileset("2D_SL_Knight_v1.0/Slide.png", 128, 64);
+    private final Tileset DeathTile = new Tileset("2D_SL_Knight_v1.0/Death.png", 128, 64);
+    private final Tileset HealthTile = new Tileset("2D_SL_Knight_v1.0/Health.png", 128, 64);
 
-    private Tileset IdleTile = new Tileset("2D_SL_Knight_v1.0/Idle.png", 128, 64);
+    private final Tileset IdleTile = new Tileset("2D_SL_Knight_v1.0/Idle.png", 128, 64);
 
-    private Tileset AttackFromAirTile = new Tileset("2D_SL_Knight_v1.0/attack_from_air.png", 128, 64);
-    private Tileset HurtTile = new Tileset("2D_SL_Knight_v1.0/Hurt.png", 128, 64);
+    private final Tileset AttackFromAirTile = new Tileset("2D_SL_Knight_v1.0/attack_from_air.png", 128, 64);
+    private final Tileset HurtTile = new Tileset("2D_SL_Knight_v1.0/Hurt.png", 128, 64);
+    private final Tileset Hanging = new Tileset("2D_SL_Knight_v1.0/Hanging.png", 128, 64);
     public AnimationPersonnage() {
         super();
         sprite = IdleTile.getTexture(0);
@@ -66,6 +67,9 @@ public class AnimationPersonnage extends Animation {
                     break;
                 case "Hurt":
                     sprite = new TextureRegion(animationHurt());
+                    break;
+                case "Hanging":
+                    sprite = new TextureRegion(animationHanging());
                     break;
 
             }
@@ -184,5 +188,13 @@ public class AnimationPersonnage extends Animation {
         }
         frame++;
         return HurtTile.getTexture(frame - 1);
+    }
+
+    public TextureRegion animationHanging() {
+        if (frame >= Hanging.getNbTexture()) {
+            frame = 0;
+        }
+        frame++;
+        return Hanging.getTexture(frame - 1);
     }
 }

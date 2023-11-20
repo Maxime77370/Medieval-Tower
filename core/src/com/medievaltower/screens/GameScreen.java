@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
 
         entityManager = EntityManager.getInstance();
-        map = new Map(2);
+        map = new Map(3);
 
         // create entities in the map
         map.createEntities();
@@ -187,7 +187,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
 
         // if delta time to long don't run the script to fix bug collide
-        if (Gdx.graphics.getDeltaTime() > 0.5f){
+        if (Gdx.graphics.getDeltaTime() > 0.2f){
             return;
         }
         // Update entities
