@@ -12,9 +12,7 @@ public class AnimationPersonnage extends Animation {
     private final Tileset SlideTile = new Tileset("2D_SL_Knight_v1.0/Slide.png", 128, 64);
     private final Tileset DeathTile = new Tileset("2D_SL_Knight_v1.0/Death.png", 128, 64);
     private final Tileset HealthTile = new Tileset("2D_SL_Knight_v1.0/Health.png", 128, 64);
-
     private final Tileset IdleTile = new Tileset("2D_SL_Knight_v1.0/Idle.png", 128, 64);
-
     private final Tileset AttackFromAirTile = new Tileset("2D_SL_Knight_v1.0/attack_from_air.png", 128, 64);
     private final Tileset HurtTile = new Tileset("2D_SL_Knight_v1.0/Hurt.png", 128, 64);
     private final Tileset Hanging = new Tileset("2D_SL_Knight_v1.0/Hanging.png", 128, 64);

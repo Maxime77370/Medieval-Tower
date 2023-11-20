@@ -1,22 +1,10 @@
 package com.medievaltower.entities.potion;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.medievaltower.core.CollectableEntity;
-import com.medievaltower.core.Entity;
 
-/**
- * Potion class
- * <p>
- *     This class is the parent class of all potions in the game.
- *     It is abstract because it is not supposed to be instantiated.
- *     It extends the CollectableEntity class.
- * </p>
- * @see CollectableEntity
- */
-public abstract class Potion extends Entity implements CollectableEntity {
-
+public class SpeedPotion extends Potion {
     /**
-     * Entity constructor
+     * SpeedPotion constructor
      * <p>
      * This constructor is used to create an entity.
      * It takes the position, the size and the texture of the entity as parameters.
@@ -32,27 +20,17 @@ public abstract class Potion extends Entity implements CollectableEntity {
      * @param height  : the height of the entity
      * @param texture : the texture of the entity
      */
-    protected Potion(int x, int y, int width, int height, Texture texture) {
-        super(x, y, width, height, texture);
+    protected SpeedPotion(int x, int y, int width, int height, Texture texture) {
+        super(x, y, 20, 20, new Texture("Texture/Potion/speed_potion.png"));
     }
 
     @Override
-    public void collide_floor() {
-
+    public void collect() {
+        super.collect();
     }
 
     @Override
     public void update() {
         super.update();
-    }
-
-    @Override
-    public void collect() {
-
-    }
-
-    @Override
-    public void collide(Entity entity) {
-
     }
 }

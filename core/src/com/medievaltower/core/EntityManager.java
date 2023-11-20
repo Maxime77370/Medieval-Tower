@@ -90,7 +90,14 @@ public class EntityManager<T extends Entity> {
         }
     }
 
-
+    /**
+     * Draw all the entities
+     * @param batch
+     * @see Batch
+     * @see Entity#draw(Batch)
+     * @see Entity#drawDebug(Batch)
+     * @see Entity
+     */
     public void draw(Batch batch) {
         batch.begin();
         for (T entity : entities) {
@@ -98,6 +105,7 @@ public class EntityManager<T extends Entity> {
         }
         batch.end();
     }
+
 
     public void drawDebug(Batch batch) {
         batch.begin();

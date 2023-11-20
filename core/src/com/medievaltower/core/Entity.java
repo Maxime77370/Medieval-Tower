@@ -181,6 +181,7 @@ public abstract class Entity extends Sprite {
             }
         }
     }
+
     private boolean isVerticalCollision(Rectangle platform) {
         if (xLast + (getBoundingBox().x - x) + getBoundingBox().width < platform.x) {
             return false;
