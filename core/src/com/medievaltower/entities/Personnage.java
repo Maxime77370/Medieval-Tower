@@ -642,4 +642,24 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     public void setSlow() {
         this.isSlow = true;
     }
+
+    public void reset(){
+        this.health = 3;
+        this.isDead = false;
+        this.isInvincible = false;
+        this.isJumping = false;
+        this.isSliding = false;
+        this.isSlow = false;
+        this.isHanging = false;
+        this.isAttacked = false;
+        this.weaponEquipped = null;
+        this.potionEquipped = null;
+        this.cleEquipped = null;
+        this.weaponInventory.clear();
+        this.potionInventory.clear();
+        this.xVelocity = 0;
+        this.yVelocity = 0;
+        this.invincibleTimer = 0;
+        this.speedEffectDuration = 0;
+    }
 }

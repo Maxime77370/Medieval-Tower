@@ -195,7 +195,9 @@ public class Map {
                         entityManager.newEntity(new Bat(x, y));
                         break;
                     case "Personnage":
-                        entityManager.newEntity(new Personnage(x, y));
+                        entityManager.newEntity(Personnage.getInstance());
+                        Personnage.getInstance().x = x;
+                        Personnage.getInstance().y = y;
                         break;
                     case "Key":
                         entityManager.newEntity(new Cle(x, y));

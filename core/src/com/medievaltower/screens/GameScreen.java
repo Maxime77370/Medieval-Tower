@@ -256,7 +256,6 @@ public class GameScreen implements Screen {
 
         // if player is dead
         if (personnage.isDead()) {
-            dispose();
             ((Game) Gdx.app.getApplicationListener()).setScreen(new DeathScreen(game));
         }
 
@@ -376,6 +375,7 @@ public class GameScreen implements Screen {
     public void restartGame() {
         // Réinitialiser toutes les entités, états et variables nécessaires
         entityManager.reset();
+        personnage.reset();
         map.createEntities();
     }
 
