@@ -33,6 +33,7 @@ public class Map {
     private OrthogonalTiledMapRenderer tiledMapRenderer;
     private MapObjects collisionPlateforme;
     private MapObjects collisionMonstre;
+    private MapObjects collisionLevel;
     private MapObjects spawnZombie;
     private MapObjects spawnArcher;
     private MapObjects spawnBat;
@@ -112,6 +113,7 @@ public class Map {
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.collisionPlateforme = tiledMap.getLayers().get("Collisions_plateforme").getObjects();
         this.collisionMonstre = tiledMap.getLayers().get("Collisions_monstres").getObjects();
+        this.collisionLevel = tiledMap.getLayers().get("end_game").getObjects();
         this.spawnZombie = tiledMap.getLayers().get("Zombie").getObjects();
         this.spawnArcher = tiledMap.getLayers().get("Archer").getObjects();
         this.spawnBat = tiledMap.getLayers().get("Bat").getObjects();
@@ -163,6 +165,8 @@ public class Map {
     public MapObjects getMonstersCollision() {
         return collisionMonstre;
     }
+
+    public MapObjects getEndCollision(){return collisionLevel;}
 
     /**
      * Create all instances of the elements with their position

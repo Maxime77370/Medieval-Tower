@@ -67,7 +67,7 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
 
         entityManager = EntityManager.getInstance();
-        map = new Map(4);
+        map = new Map(3);
 
         // create entities in the map
         map.createEntities();
@@ -394,6 +394,7 @@ public class GameScreen implements Screen {
         // Réinitialiser toutes les entités, états et variables nécessaires
         entityManager.reset();
         personnage.reset();
+        map.loadMap(personnage.map);
         map.createEntities();
     }
 }

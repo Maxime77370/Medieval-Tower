@@ -3,6 +3,9 @@ package com.medievaltower.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.medievaltower.core.*;
 import com.medievaltower.entities.animation.AnimationPersonnage;
 import com.medievaltower.entities.monster.Arrow;
@@ -12,7 +15,11 @@ import com.medievaltower.entities.potion.Potion;
 import com.medievaltower.entities.potion.SpeedPotion;
 import com.medievaltower.entities.weapon.Weapon;
 import com.medievaltower.game.Tileset;
+
 import com.medievaltower.levels.NiveauPersonnage;
+
+import com.medievaltower.screens.GameScreen;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,6 +63,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private final float invincibleDuration = 3;
     private final AnimationPersonnage animation = new AnimationPersonnage();
     private final int level = 1;
+
+    public int map = 3;
     private final Direction currentDirection = Direction.NONE;
     private boolean isSlow = false;
     private final Map<String, Boolean> Actions = new HashMap<String, Boolean>() {{
@@ -317,6 +326,19 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         //change Texture
         updateTexture(animation);
         super.update();
+
+        for (MapObject platformObject : com.medievaltower.levels.Map.getInstance().getEndCollision()) {
+            if (platformObject instanceof RectangleMapObject) {
+                Rectangle platform = ((RectangleMapObject) platformObject).getRectangle();
+                if (boundingBox.overlaps(platform)) {
+                    // Déterminer le type de collision
+                    if (isKeyEquipped()){
+                        map += 1;
+                        GameScreen.getInstance().restartGame();
+                    }
+                }
+            }
+        }
     }
 
     /**
