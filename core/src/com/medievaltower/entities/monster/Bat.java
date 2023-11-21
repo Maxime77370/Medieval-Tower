@@ -68,6 +68,7 @@ public class Bat extends Monstre {
         super.update();
     }
 
+
     /**
      * Sinusoidal move of the monster
      */

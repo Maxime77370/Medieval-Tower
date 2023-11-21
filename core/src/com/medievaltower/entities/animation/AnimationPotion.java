@@ -6,9 +6,9 @@ import com.medievaltower.game.Tileset;
 
 public class AnimationPotion extends Animation {
 
-    private final Tileset potionSpeed = new Tileset("Potion/speed_potion.png", 320, 320);
-    private final Tileset potionHealing = new Tileset("Potion/healing_potion.png", 320, 320);
-    private final Tileset potionExp = new Tileset("Potion/exp_potion.png", 320, 320);
+    private final Tileset potionSpeed = new Tileset("Potion/speed_potion.png", 2058, 2400);
+    private final Tileset potionHealing = new Tileset("Potion/healing_potion.png", 384, 384);
+    private final Tileset potionExp = new Tileset("Potion/exp_potion.png", 400, 400);
     private Tileset potionTile;
 
     public AnimationPotion(int type) {

@@ -284,8 +284,6 @@ public class GameScreen implements Screen {
         // Update the level
         levelLabel.setText("Niv. " + personnage.getLevel());
 
-        System.out.println("Cle : " + Personnage.getInstance().isKeyEquipped());
-
         // Update the key
         if (Personnage.getInstance().isKeyEquipped()) {
             keyLabel.setText("FOUND");

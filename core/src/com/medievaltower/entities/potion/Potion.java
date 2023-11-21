@@ -3,6 +3,7 @@ package com.medievaltower.entities.potion;
 import com.badlogic.gdx.graphics.Texture;
 import com.medievaltower.core.CollectableEntity;
 import com.medievaltower.core.Entity;
+import com.medievaltower.entities.animation.Animation;
 
 /**
  * Potion class
@@ -54,7 +55,7 @@ public abstract class Potion extends Entity implements CollectableEntity {
      */
     @Override
     public void update() {
-        super.update();
+
     }
 
     /**
@@ -71,6 +72,10 @@ public abstract class Potion extends Entity implements CollectableEntity {
      */
     @Override
     public void collide(Entity entity) {
+    }
+
+    @Override
+    public void move(){
 
     }
 }
