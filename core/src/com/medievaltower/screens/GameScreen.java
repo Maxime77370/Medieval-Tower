@@ -28,12 +28,11 @@ import com.medievaltower.levels.Map;
  */
 public class GameScreen implements Screen {
 
-    private MedievalTower game;
+    private static GameScreen Instance;
     private final SpriteBatch batch;
     private final Personnage personnage;
     private final Camera camera;
     private final EntityManager entityManager;
-    private Map map;
     private final Label fpsLabel; // Label for FPS
     private final Stage stage; // Stage for HUD
     private final Table table; // Table to organize HUD elements
@@ -43,11 +42,12 @@ public class GameScreen implements Screen {
     private final Label expLabel; // Label for experience points
     private final Array<Image> heartImages = new Array<>(); // Liste pour gérer les images de cœur
     private final Table heartTable; // Table pour organiser les images de cœur
-    private Label monsterCountLabel; // Label for monster count
-    private Label keyLabel; // Label for key
-    private Label potionCountLabel; // Label for potion
-    private Label inventoryCountLabel; // Label for inventory
-    private static GameScreen Instance;
+    private final MedievalTower game;
+    private final Map map;
+    private final Label monsterCountLabel; // Label for monster count
+    private final Label keyLabel; // Label for key
+    private final Label potionCountLabel; // Label for potion
+    private final Label inventoryCountLabel; // Label for inventory
 
     /**
      * GameScreen constructor
@@ -125,16 +125,19 @@ public class GameScreen implements Screen {
         // Set the background style to the progress bar
         progressBarStyle.background = skin.getDrawable("white");
 
-        expBar = new ProgressBar(0, 325, 1, false, progressBarStyle);
+        expBar = new ProgressBar(0, personnage.getExpRequiredForNextLevel(), 1, false, progressBarStyle);
         expBar.setPosition(10, 10);
-        expBar.setSize(290, expBar.getPrefHeight());
-        expBar.setValue(personnage.getExp());
+        expBar.setSize(150, expBar.getPrefHeight()); // Set a constant width for the progress bar
 
         // Label to show the player's level
         levelLabel = new Label("Niv. " + personnage.getLevel(), new Label.LabelStyle(font, Color.WHITE));
 
         // Label to show the experience points progress
-        expLabel = new Label("Exp restante  : " + (325 - personnage.getExp()), new Label.LabelStyle(font, Color.WHITE));
+        expLabel = new Label("Exp restante  : " + (personnage.getExpRequiredForNextLevel() - personnage.getExp()), new Label.LabelStyle(font, Color.WHITE));
+
+        // Update the progress bar
+        expBar.setValue(personnage.getExp());
+        expBar.setSize(290, expBar.getPrefHeight());
 
         // Arrange the widgets in a table
         Table expTable = new Table();
@@ -175,7 +178,7 @@ public class GameScreen implements Screen {
         table.add(potionImage).pad(5).width(50).height(50);
 
         // Display potion count (replace with the actual count)
-        potionCountLabel = new Label("x" + map.countPotions(), new Label.LabelStyle(font, Color.WHITE));
+        potionCountLabel = new Label("x" + EntityManager.getInstance().getNumberOfPotions(), new Label.LabelStyle(font, Color.WHITE));
         table.add(potionCountLabel).pad(5);
 
         // Add information about monsters (replace with the actual count)
@@ -204,6 +207,9 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
+    public static GameScreen getInstance() {
+        return Instance;
+    }
 
     @Override
     public void show() {
@@ -212,13 +218,14 @@ public class GameScreen implements Screen {
 
     /**
      * Render the game screen
+     *
      * @param delta
      */
     @Override
     public void render(float delta) {
 
         // if delta time to long don't run the script to fix bug collide
-        if (Gdx.graphics.getDeltaTime() > 0.2f){
+        if (Gdx.graphics.getDeltaTime() > 0.2f) {
             return;
         }
         // Update entities
@@ -274,14 +281,25 @@ public class GameScreen implements Screen {
         fpsLabel.setText("FPS: " + Gdx.graphics.getFramesPerSecond());
         monsterCountLabel.setText("x" + entityManager.getNumberOfMonsters());
 
-        // Update the progress bar
-        expBar.setValue(personnage.getExp());
+        // Check if the player leveled up
+        if (personnage.levelUp()) {
+            // If the player leveled up, update the progress bar for the new level
+            expBar.setRange(0, personnage.getExpRequiredForNextLevel());
+            expBar.setValue(0);
+            expBar.setSize(150, expBar.getPrefHeight());
+        } else {
+            expBar.setRange(0, personnage.getExpRequiredForNextLevel());
+            expBar.setValue(personnage.getExp());
+            // Maintenez la taille constante de la barre de progression
+            expBar.setSize(150, expBar.getPrefHeight());
+        }
 
-        // Update the exp restant
-        expLabel.setText("Exp restante  : " + (325 - personnage.getExp()));
-
-        // Update the level
+        // Update other HUD elements
+        expLabel.setText("Exp restante  : " + (personnage.getExpRequiredForNextLevel() - personnage.getExp()));
         levelLabel.setText("Niv. " + personnage.getLevel());
+
+        // Update the personnage level
+        personnage.levelUp();
 
         // Update the key
         if (Personnage.getInstance().isKeyEquipped()) {
@@ -299,7 +317,7 @@ public class GameScreen implements Screen {
         inventoryCountLabel.setText("x" + personnage.getWeaponInventory().size());
 
         // Display potion count (replace with the actual count)
-        potionCountLabel.setText("x" + map.countPotions());
+        potionCountLabel.setText("x" + EntityManager.getInstance().getNumberOfPotions());
 
         // Update the monster
         monsterCountLabel.setText("x" + entityManager.getNumberOfMonsters());
@@ -377,9 +395,5 @@ public class GameScreen implements Screen {
         entityManager.reset();
         personnage.reset();
         map.createEntities();
-    }
-
-    public static GameScreen getInstance() {
-        return Instance;
     }
 }

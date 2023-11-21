@@ -224,17 +224,4 @@ public class Map {
             }
         }
     }
-
-    /**
-     * Get the number of potions in the map
-     *
-     * @return the number of potions
-     */
-    public int countPotions() {
-        int count = 0;
-        for (MapObject mapObject : spawnPotions) {
-            count++;
-        }
-        return count;
-    }
 }

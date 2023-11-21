@@ -12,6 +12,7 @@ import com.medievaltower.entities.potion.Potion;
 import com.medievaltower.entities.potion.SpeedPotion;
 import com.medievaltower.entities.weapon.Weapon;
 import com.medievaltower.game.Tileset;
+import com.medievaltower.levels.NiveauPersonnage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +49,7 @@ import java.util.WeakHashMap;
 public class Personnage extends Entity implements MovableEntity, AttackableEntity {
 
     private static final float JUMP_FORCE = 600;
+    private final NiveauPersonnage niveauPersonnage = new NiveauPersonnage();
     private static Personnage instance;
     private final WeakHashMap<Weapon, Integer> weaponInventory = new WeakHashMap<>();
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
@@ -70,7 +72,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private float exp = 0f;
     private int speed = 256;
     private boolean isJumping = false;
-    private int health = 3;
     private Weapon weaponEquipped = null;
     private Potion potionEquipped = null;
     private Cle cleEquipped = null;
@@ -133,7 +134,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      * @return the health of the personnage
      */
     public int getHealth() {
-        return health;
+        return niveauPersonnage.getHearts();
     }
 
     /**
@@ -142,11 +143,11 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      * @return the experience of the personnage
      */
     public float getExp() {
-        return exp;
+        return niveauPersonnage.getExp();
     }
 
-    public void setExp(float exp) {
-        this.exp += exp;
+    public void setExp(int exp) {
+        this.niveauPersonnage.gainExp(exp);
     }
 
     /**
@@ -155,7 +156,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      * @return the level of the personnage
      */
     public int getLevel() {
-        return level;
+        return niveauPersonnage.getCurrentLevel();
     }
 
     /**
@@ -354,9 +355,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      */
     public void receiveDamage(int damage) {
         if (!this.isInvincible) {
-            this.health -= damage;
-            if (this.health <= 0) {
-                this.health = 0;
+            this.niveauPersonnage.loseHeart(damage);
+            if (this.getHealth() <= 0) {
                 this.isDead = true;
             }
             // Active l'invincibilité après avoir subi des dégâts
@@ -600,8 +600,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     private void setHealthEffect() {
-        if (this.health < 3) {
-            this.health += 1;
+        if (this.niveauPersonnage.getHearts() < 3) {
+            this.niveauPersonnage.gainHeart(1);
         }
     }
 
@@ -643,8 +643,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         this.isSlow = true;
     }
 
-    public void reset(){
-        this.health = 3;
+    public void reset() {
+        this.niveauPersonnage.setHearts(3);
         this.isDead = false;
         this.isInvincible = false;
         this.isJumping = false;
@@ -661,5 +661,18 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         this.yVelocity = 0;
         this.invincibleTimer = 0;
         this.speedEffectDuration = 0;
+    }
+
+    public int getExpRequiredForNextLevel() {
+        return niveauPersonnage.getExpRequiredForNextLevel();
+    }
+
+    public boolean levelUp() {
+        return niveauPersonnage.levelUp();
+
+    }
+
+    public int getExpByCurrentLevel(int level) {
+        return niveauPersonnage.getExpByCurrentLevel(level);
     }
 }
