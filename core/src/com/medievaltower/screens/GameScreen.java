@@ -72,7 +72,7 @@ public class GameScreen implements Screen {
         // create entities in the map
         map.createEntities();
 
-        System.out.println();
+        System.out.println(EntityManager.getInstance().getEntities());
 
         // get the personnage
         this.personnage = Personnage.getInstance();

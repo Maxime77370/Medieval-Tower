@@ -1,6 +1,7 @@
 package com.medievaltower.entities.potion;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.medievaltower.entities.animation.AnimationPotion;
 
 /**
  * HealthPotion class
@@ -18,6 +19,7 @@ import com.badlogic.gdx.graphics.Texture;
  *
  */
 public class HealthPotion extends Potion {
+    private AnimationPotion animation = new AnimationPotion(1);
     /**
      * Entity constructor
      * <p>
@@ -43,7 +45,8 @@ public class HealthPotion extends Potion {
 
     @Override
     public void update() {
-        super.update();
+        updateTexture(animation);
+        setBoundingBox();
     }
 
 }

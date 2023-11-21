@@ -1,6 +1,7 @@
 package com.medievaltower.entities.potion;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.medievaltower.entities.animation.AnimationPotion;
 
 /**
  * SpeedPotion class
@@ -18,6 +19,7 @@ import com.badlogic.gdx.graphics.Texture;
  * @see Texture
  */
 public class SpeedPotion extends Potion {
+    private AnimationPotion animation = new AnimationPotion(3);
     /**
      * SpeedPotion constructor
      * <p>
@@ -49,7 +51,7 @@ public class SpeedPotion extends Potion {
      */
     @Override
     public void update() {
-
-        super.update();
+        updateTexture(animation);
+        setBoundingBox();
     }
 }

@@ -68,7 +68,7 @@ public class EntityManager<T extends Entity> {
      * @return the list of entities
      */
     public ArrayList<T> getEntities() {
-        return entities;
+            return entitiesToAdd;
     }
 
     /**

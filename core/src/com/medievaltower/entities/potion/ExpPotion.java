@@ -1,6 +1,7 @@
 package com.medievaltower.entities.potion;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.medievaltower.entities.animation.AnimationPotion;
 
 /**
  * ExpPotion class
@@ -9,6 +10,9 @@ import com.badlogic.gdx.graphics.Texture;
  *     It contains the position, the size and the texture of the potion.
  */
 public class ExpPotion extends Potion {
+
+    private AnimationPotion animation = new AnimationPotion(2);
+
     /**
      * ExpPotion constructor
      * <p>
@@ -50,6 +54,7 @@ public class ExpPotion extends Potion {
      */
     @Override
     public void update() {
-        super.update();
+        updateTexture(animation);
+        setBoundingBox();
     }
 }
