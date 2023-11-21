@@ -4,7 +4,7 @@ public class NiveauPersonnage {
     private int currentLevel;
     private int hearts;
     private int exp;
-    private final int[] expRequired = {0, 100, 200, 300, 400, 500}; // Adjust as needed
+    private final int[] expRequired = {0, 175, 400, 850, 1300, 2050};
 
     public NiveauPersonnage() {
         this.currentLevel = 1;

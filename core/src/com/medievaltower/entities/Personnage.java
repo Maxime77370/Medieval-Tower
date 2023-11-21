@@ -573,7 +573,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             if (this.isAttacked) {
                 ((Monstre) entity).receiveDamage(1);
                 EntityManager.getInstance().removeEntity(entity);
-                this.setExp(50);
+                this.setExp(25);
             } else {
                 this.receiveDamage(1);
             }
