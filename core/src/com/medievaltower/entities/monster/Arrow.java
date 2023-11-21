@@ -6,7 +6,7 @@ import com.medievaltower.entities.Personnage;
 import com.medievaltower.entities.animation.AnimationArrow;
 
 public class Arrow extends Entity {
-    private float speed = 15;
+    private float speed = 12;
     private float speed_x;
     private float speed_y;
     private float gravity = 0.1f;
