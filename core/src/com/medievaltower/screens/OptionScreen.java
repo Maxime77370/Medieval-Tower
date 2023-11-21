@@ -18,6 +18,14 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.medievaltower.game.GameSettings;
 import com.medievaltower.game.MedievalTower;
 
+/**
+ * OptionScreen class
+ * <p>
+ * This class is used to create the option screen.
+ * It contains the render method.
+ * It is used to render the option screen.
+ * </p>
+ */
 public class OptionScreen implements Screen {
 
     private MedievalTower game;
@@ -30,6 +38,16 @@ public class OptionScreen implements Screen {
     private Label speedLabel;
     private Label gravityLabel;
 
+    /**
+     * OptionScreen constructor
+     * <p>
+     * This constructor is used to create the option screen.
+     * It takes the game as parameter.
+     * It is used to create the option screen.
+     * </p>
+     *
+     * @param game : the game
+     */
     public OptionScreen(MedievalTower game) {
 
         this.game = game;
@@ -47,6 +65,13 @@ public class OptionScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * Initialize the sliders
+     * <p>
+     * This method is used to initialize the sliders.
+     * It is used to initialize the sliders and change the value of the params.
+     * </p>
+     */
     private void initializeSliders() {
         Label.LabelStyle labelStyle = new Label.LabelStyle(font, null);
         Slider.SliderStyle sliderStyle = new Slider.SliderStyle();

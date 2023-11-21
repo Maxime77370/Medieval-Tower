@@ -52,6 +52,9 @@ public class Bat extends Monstre {
         setBoundingBox();
     }
 
+    /**
+     * Override the update method
+     */
     @Override
     public void update() {
         updateTexture(animation);
@@ -92,11 +95,19 @@ public class Bat extends Monstre {
 
     }
 
+    /**
+     * Override the receiveDamage method
+     * @param damage
+     */
     @Override
     public void receiveDamage(int damage) {
 
     }
 
+    /**
+     * Override the collide method
+     * @param entity
+     */
     public void collide(Entity entity){
 
     }

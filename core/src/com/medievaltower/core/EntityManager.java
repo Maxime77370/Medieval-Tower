@@ -106,7 +106,15 @@ public class EntityManager<T extends Entity> {
         batch.end();
     }
 
-
+    /**
+     * Draw the debug of all the entities
+     * @see Entity#drawDebug(Batch)
+     * @see Entity
+     * @see Batch
+     * @see Entity#draw(Batch)
+     * @see Entity
+     * @param batch
+     */
     public void drawDebug(Batch batch) {
         batch.begin();
         for (T entity : entities) {
@@ -115,6 +123,10 @@ public class EntityManager<T extends Entity> {
         batch.end();
     }
 
+    /**
+     * Get the number of monsters in the list of entities
+     * @return the number of monsters in the list of entities
+     */
     public int getNumberOfMonsters() {
         int count = 0;
         for (T entity : entities) {
@@ -125,6 +137,10 @@ public class EntityManager<T extends Entity> {
         return count;
     }
 
+    /**
+     * Check if an entity collides with another entity
+     * @param entity1
+     */
     public void collide(Entity entity1) {
         for (T entity2 : entities) {
             if (entity2 != entity1 && entity2.getBoundingBox().overlaps(entity1.getBoundingBox())) {
@@ -132,12 +148,20 @@ public class EntityManager<T extends Entity> {
         }
     }
 
+    /**
+     * Dispose all the entities
+     * @see Entity#dispose()
+     * @see Entity
+     */
     public void dispose() {
         for (T entity : entities) {
             entity.dispose();
         }
     }
 
+    /**
+     * Reset the list of entities
+     */
     public void reset(){
         entities.clear();
         entitiesToAdd.clear();

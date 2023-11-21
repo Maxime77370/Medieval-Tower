@@ -17,8 +17,13 @@ import com.medievaltower.entities.monster.Bat;
 import com.medievaltower.entities.monster.Zombie;
 
 import java.util.HashMap;
-import java.util.List;
 
+/**
+ * Map class
+ * <p>
+ * This class is a singleton that contains the map.
+ * </p>
+ */
 public class Map {
     private static Map instance;
     private TiledMap tiledMap;
@@ -32,12 +37,25 @@ public class Map {
     private MapObjects spawnKey;
     private MapObjects collisionMort;
 
-
+    /**
+     * Map constructor
+     * Load the map
+     *
+     * @param mapId : the id of the map to load
+     */
     public Map(int mapId) {
         instance = this;
         loadMap(mapId);
     }
 
+    /**
+     * Get the instance of map
+     *
+     * @return the map
+     */
+    public static Map getInstance() {
+        return instance;
+    }
     public void render(OrthographicCamera camera) {
         // Set the renderer's view to the camera's combined matrix
         tiledMapRenderer.setView(camera);
@@ -46,17 +64,29 @@ public class Map {
         tiledMapRenderer.render();
     }
 
+    /**
+     * Resize the map
+     * @param width
+     * @param height
+     */
     public void resize(int width, int height) {
         // Update the viewport when the screen is resized
         tiledMapRenderer.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     }
 
+    /**
+     * Dispose of the map when it is no longer needed
+     */
     public void dispose() {
         // Dispose of the map when it is no longer needed
         tiledMap.dispose();
         tiledMapRenderer.dispose();
     }
 
+    /**
+     * Load the map with all the elements that been created in Tiled
+     * @param mapId : the id of the map to load
+     */
     public void loadMap(int mapId) {
         // Your existing code to load the map
         TmxMapLoader mapLoader = new TmxMapLoader();
@@ -73,10 +103,18 @@ public class Map {
         this.collisionMort = tiledMap.getLayers().get("Collisions_mort").getObjects();
     }
 
+    /**
+     * Get the collision blocks of the map
+     * @return the map
+     */
     public MapObjects getPlatforms() {
         return collisionPlateforme;
     }
 
+    /**
+     * Get all the elements that been created in Tiled and need to be created in the game
+     * @return the elements that been created in Tiled
+     */
     public HashMap<MapObjects, String> getAllElementsToCreate() {
         HashMap<MapObjects, String> elementsToCreate = new HashMap<>();
         elementsToCreate.put(spawnZombie, "Zombie");
@@ -87,14 +125,25 @@ public class Map {
         return elementsToCreate;
     }
 
+    /**
+     * Get the collision death of the map
+     * @return the map
+     */
     public MapObjects getDeathCollision() {
         return this.collisionMort;
     }
 
+    /**
+     * Get the collision monsters of the map to make them move between the platforms
+     * @return the map
+     */
     public MapObjects getMonstersCollision() {
         return collisionMonstre;
     }
 
+    /**
+     * Create all instances of the elements with their position
+     */
     public void createEntities() {
         HashMap<MapObjects, String> elementsToCreate = this.getAllElementsToCreate();
 
@@ -135,6 +184,11 @@ public class Map {
         }
     }
 
+    /**
+     * Get the instance of the map
+     * @param mapId : the id of the map to load
+     * @return the map
+     */
     public static Map getInstance(int... mapId) {
         return instance;
     }

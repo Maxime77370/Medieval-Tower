@@ -18,6 +18,14 @@ import com.medievaltower.game.Camera;
 import com.medievaltower.game.MedievalTower;
 import com.medievaltower.levels.Map;
 
+/**
+ * GameScreen class
+ * <p>
+ * This class is used to create the game screen.
+ * It contains the render method.
+ * It is used to render the game screen.
+ * </p>
+ */
 public class GameScreen implements Screen {
 
     private MedievalTower game;
@@ -41,6 +49,16 @@ public class GameScreen implements Screen {
     private Label inventoryCountLabel; // Label for inventory
     private static GameScreen Instance;
 
+    /**
+     * GameScreen constructor
+     * <p>
+     * This constructor is used to create the game screen.
+     * It takes the game as parameter.
+     * It is used to create the game screen.
+     * </p>
+     *
+     * @param game : the game
+     */
     public GameScreen(MedievalTower game) {
 
         this.game = game;
@@ -184,11 +202,16 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
+
     @Override
     public void show() {
         // Initialization code (if any) when the screen is shown
     }
 
+    /**
+     * Render the game screen
+     * @param delta
+     */
     @Override
     public void render(float delta) {
 
@@ -242,6 +265,9 @@ public class GameScreen implements Screen {
         stage.draw();
     }
 
+    /**
+     * Update the HUD
+     */
     private void updateHUD() {
         // Update the HUD
         fpsLabel.setText("FPS: " + Gdx.graphics.getFramesPerSecond());
@@ -282,6 +308,9 @@ public class GameScreen implements Screen {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
     }
 
+    /**
+     * Update the hearts in the screen
+     */
     private void updateHearts() {
         int currentHealth = personnage.getHealth();
 

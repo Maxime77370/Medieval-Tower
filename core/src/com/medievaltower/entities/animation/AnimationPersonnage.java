@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.medievaltower.game.Tileset;
 
+/**
+ * Class that manages the animations of the character
+ */
 public class AnimationPersonnage extends Animation {
 
     private final Tileset RunTile = new Tileset("2D_SL_Knight_v1.0/Run.png", 128, 64);
@@ -16,12 +19,25 @@ public class AnimationPersonnage extends Animation {
     private final Tileset AttackFromAirTile = new Tileset("2D_SL_Knight_v1.0/attack_from_air.png", 128, 64);
     private final Tileset HurtTile = new Tileset("2D_SL_Knight_v1.0/Hurt.png", 128, 64);
     private final Tileset Hanging = new Tileset("2D_SL_Knight_v1.0/Hanging.png", 128, 64);
+
+    /**
+     * AnimationPersonnage constructor
+     * <p>
+     * This constructor is used to create an animation.
+     * Create the sprite of the animation.
+     * It extends the Animation class.
+     * </p>
+     */
     public AnimationPersonnage() {
         super();
         sprite = IdleTile.getTexture(0);
     }
 
-
+    /**
+     * Override the update method
+     * Affect the sprite of the animation
+     * @return the sprite of the animation
+     */
     public TextureRegion update() {
         float delta = Gdx.graphics.getDeltaTime();
         this.frameTimer += delta;
@@ -76,6 +92,10 @@ public class AnimationPersonnage extends Animation {
         return sprite;
     }
 
+    /**
+     * Take the animation of the character when run
+     * @return the texture of the animation
+     */
     public TextureRegion animationRun() {
         if (frame >= RunTile.getNbTexture()) {
             frame = 0;
@@ -84,6 +104,10 @@ public class AnimationPersonnage extends Animation {
         return RunTile.getTexture(frame - 1);
     }
 
+    /**
+     * Take the animation of the character when breath
+     * @return the texture of the animation
+     */
     public TextureRegion animationBreath() {
         if (frame >= IdleTile.getNbTexture()) {
             frame = 0;
@@ -92,6 +116,10 @@ public class AnimationPersonnage extends Animation {
         return IdleTile.getTexture(frame - 1);
     }
 
+    /**
+     * Take the animation of the character when attack
+     * @return the texture of the animation
+     */
     public TextureRegion animationAttack() {
         forceState = "Attack";
         if (frame >= AttackTile.getNbTexture() / 2) {
@@ -102,6 +130,10 @@ public class AnimationPersonnage extends Animation {
         return AttackTile.getTexture(frame - 1);
     }
 
+    /**
+     * Take the animation of the character when jump
+     * @return the texture of the animation
+     */
     public TextureRegion animationStartJump() {
         forceState = "Jump";
         if (frame >= 3) {
@@ -112,14 +144,22 @@ public class AnimationPersonnage extends Animation {
         return JumpTile.getTexture(frame - 1);
     }
 
-    public TextureRegion animationInJump(){
-        if (frame >= 2){
+    /**
+     * Take the animation of the character when jump
+     * @return the texture of the animation
+     */
+    public TextureRegion animationInJump() {
+        if (frame >= 2) {
             frame = 0;
         }
         frame++;
         return JumpTile.getTexture(frame + 2);
     }
 
+    /**
+     * Take the animation of the character when jump
+     * @return the texture of the animation
+     */
     public TextureRegion animationEndJump() {
         if (frame >= 3) {
             frame = 0;
@@ -128,21 +168,33 @@ public class AnimationPersonnage extends Animation {
         return JumpTile.getTexture(frame + 3);
     }
 
+    /**
+     * Take the animation of the character when attack from air
+     * @return the texture of the animation
+     */
     public TextureRegion animationStartAttackFromAir() {
         forceState = "AttackFromAir";
         frame++;
         return AttackFromAirTile.getTexture(frame - 1);
     }
 
-    public TextureRegion animationAttackFromAir(){
-        if (frame <= 2){
+    /**
+     * Take the animation of the character when attack from air
+     * @return the texture of the animation
+     */
+    public TextureRegion animationAttackFromAir() {
+        if (frame <= 2) {
             return animationStartAttackFromAir();
         }
         forceState = null;
         frame++;
-        return AttackFromAirTile.getTexture(frame%2);
+        return AttackFromAirTile.getTexture(frame % 2);
     }
 
+    /**
+     * Take the animation of the character when attack from air
+     * @return the texture of the animation
+     */
     public TextureRegion animationEndAttackFromAir() {
         if (frame >= 4) {
             frame = 0;
@@ -151,6 +203,10 @@ public class AnimationPersonnage extends Animation {
         return AttackFromAirTile.getTexture(frame + 2);
     }
 
+    /**
+     * Take the animation of the character when slide
+     * @return the texture of the animation
+     */
     public TextureRegion animationStartSlide() {
         forceState = "Slide";
         if (frame >= 3) {
@@ -161,15 +217,23 @@ public class AnimationPersonnage extends Animation {
         return SlideTile.getTexture(frame - 1);
     }
 
+    /**
+     * Take the animation of the character when slide
+     * @return the texture of the animation
+     */
     public TextureRegion animationSlide() {
         if (frame <= 2) {
             return animationStartSlide();
         }
         forceState = null;
         frame++;
-        return SlideTile.getTexture(frame%6 + 2);
+        return SlideTile.getTexture(frame % 6 + 2);
     }
 
+    /**
+     * Take the animation of the character when death
+     * @return the texture of the animation
+     */
     public TextureRegion animationDeath() {
         if (frame >= DeathTile.getNbTexture()) {
             frame = 0;
@@ -178,6 +242,10 @@ public class AnimationPersonnage extends Animation {
         return DeathTile.getTexture(frame - 1);
     }
 
+    /**
+     * Take the animation of the character when hurt
+     * @return the texture of the animation
+     */
     public TextureRegion animationHurt() {
         forceState = "Hurt";
         if (frame >= HurtTile.getNbTexture()) {
@@ -188,6 +256,10 @@ public class AnimationPersonnage extends Animation {
         return HurtTile.getTexture(frame - 1);
     }
 
+    /**
+     * Take the animation of the character when hanging
+     * @return the texture of the animation
+     */
     public TextureRegion animationHanging() {
         if (frame >= Hanging.getNbTexture()) {
             frame = 0;
@@ -196,6 +268,10 @@ public class AnimationPersonnage extends Animation {
         return Hanging.getTexture(frame - 1);
     }
 
+    /**
+     * Take the current state
+     * @return the current state
+     */
     public Object getState() {
         return state;
     }

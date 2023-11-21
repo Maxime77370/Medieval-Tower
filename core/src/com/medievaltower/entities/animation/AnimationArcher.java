@@ -3,6 +3,10 @@ package com.medievaltower.entities.animation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.medievaltower.game.Tileset;
+
+/**
+ * Class that manages the animations of Archer
+ */
 public class AnimationArcher extends Animation{
 
     private Tileset RunAndIdleTile = new Tileset("Archery/Idle and running.png", 64, 64);
@@ -13,13 +17,23 @@ public class AnimationArcher extends Animation{
     private Tileset DeathTile = new Tileset("Archery/death.png", 128, 64);
     private Tileset DashTile = new Tileset("Archery/Dash.png", 128, 64);
 
-
+    /**
+     * AnimationArcher constructor
+     * <p>
+     *     This constructor is used to create an animation.
+     *     Create the sprite of the animation.
+     * </p>
+     */
     public AnimationArcher() {
         super();
         sprite = RunAndIdleTile.getTexture(0);
     }
 
-
+    /**
+     * Override the update method
+     * Affect the sprite of the animation
+     * @return
+     */
     public TextureRegion update() {
         float delta = Gdx.graphics.getDeltaTime();
         this.frameTimer += delta;
@@ -44,6 +58,10 @@ public class AnimationArcher extends Animation{
         return sprite;
     }
 
+    /**
+     * Take the animation of the archer when breath
+     * @return
+     */
     private TextureRegion animationBreath() {
         if (frame >= 2) {
             frame = 0;
@@ -52,6 +70,10 @@ public class AnimationArcher extends Animation{
         return RunAndIdleTile.getTexture(frame - 1);
     }
 
+    /**
+     * Take the animation of the archer when run
+     * @return the texture of the animation
+     */
     private TextureRegion animationRun() {
         if (frame >= 8) {
             frame = 0;

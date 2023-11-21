@@ -49,12 +49,20 @@ public class Camera {
         update();
     }
 
+    /**
+     * Get the instance of camera
+     * @return the camera
+     */
     public static Camera getInstance() {
         if (instance == null) {
             instance = new Camera();
         }
         return instance;
     }
+
+    /**
+     * Update the camera with the animation zoom
+     */
     public void update() {
         float range = 0.8f; // 80% of the screen width
         float cameraSpeed = 2.0f;
@@ -96,7 +104,9 @@ public class Camera {
         camera.update();
     }
 
-    // Zoom in
+    /**
+     * Zoom in the camera with the animation zoom
+     */
     public void zoomIn() {
         camera.zoom += zoomSpeed;
         if (camera.zoom > maxZoom) {
@@ -104,7 +114,9 @@ public class Camera {
         }
     }
 
-    // Zoom out
+    /**
+     * Zoom out the camera with the animation zoom
+     */
     public void zoomOut() {
         camera.zoom -= zoomSpeed;
         if (camera.zoom < minZoom) {
@@ -112,6 +124,10 @@ public class Camera {
         }
     }
 
+    /**
+     * Get the camera
+     * @return the camera
+     */
     public OrthographicCamera getCamera() {
         return camera;
     }
