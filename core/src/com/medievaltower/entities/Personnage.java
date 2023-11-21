@@ -697,4 +697,12 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     public int getExpByCurrentLevel(int level) {
         return niveauPersonnage.getExpByCurrentLevel(level);
     }
+
+    public int getCurrentLevel() {
+        return niveauPersonnage.getCurrentLevel();
+    }
+
+    public int getMaxLevel() {
+        return niveauPersonnage.getMaxLevel();
+    }
 }

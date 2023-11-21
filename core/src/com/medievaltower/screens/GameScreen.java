@@ -16,6 +16,7 @@ import com.medievaltower.core.EntityManager;
 import com.medievaltower.entities.Personnage;
 import com.medievaltower.game.Camera;
 import com.medievaltower.game.MedievalTower;
+import com.medievaltower.levels.Chronometre;
 import com.medievaltower.levels.Map;
 
 /**
@@ -48,6 +49,7 @@ public class GameScreen implements Screen {
     private final Label keyLabel; // Label for key
     private final Label potionCountLabel; // Label for potion
     private final Label inventoryCountLabel; // Label for inventory
+    private final Chronometre chronometre = new Chronometre();
 
     /**
      * GameScreen constructor
@@ -133,7 +135,7 @@ public class GameScreen implements Screen {
         levelLabel = new Label("Niv. " + personnage.getLevel(), new Label.LabelStyle(font, Color.WHITE));
 
         // Label to show the experience points progress
-        expLabel = new Label("Exp restante  : " + (personnage.getExpRequiredForNextLevel() - personnage.getExp()), new Label.LabelStyle(font, Color.WHITE));
+        expLabel = new Label("Exp restante  : " + personnage.getExpRequiredForNextLevel(), new Label.LabelStyle(font, Color.WHITE));
 
         // Update the progress bar
         expBar.setValue(personnage.getExp());
@@ -214,6 +216,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         // Initialization code (if any) when the screen is shown
+        chronometre.start();
     }
 
     /**
@@ -263,6 +266,7 @@ public class GameScreen implements Screen {
 
         // if player is dead
         if (personnage.isDead()) {
+            chronometre.stop();
             ((Game) Gdx.app.getApplicationListener()).setScreen(new DeathScreen(game));
         }
 
@@ -278,7 +282,6 @@ public class GameScreen implements Screen {
      */
     private void updateHUD() {
         // Update the HUD
-        fpsLabel.setText("FPS: " + Gdx.graphics.getFramesPerSecond());
         monsterCountLabel.setText("x" + entityManager.getNumberOfMonsters());
 
         // Check if the player leveled up
@@ -295,11 +298,26 @@ public class GameScreen implements Screen {
         }
 
         // Update other HUD elements
-        expLabel.setText("Exp restante  : " + (personnage.getExpRequiredForNextLevel() - personnage.getExp()));
-        levelLabel.setText("Niv. " + personnage.getLevel());
+        expLabel.setText("Exp restante  : " + (personnage.getExpRequiredForNextLevel()));
+        if (personnage.getCurrentLevel() >= personnage.getMaxLevel()) {
+            levelLabel.setText("Niveau Max");
+        } else {
+            levelLabel.setText("Niv. " + personnage.getCurrentLevel());
+        }
 
         // Update the personnage level
         personnage.levelUp();
+
+        // Mettre à jour le chronomètre
+        long elapsedTimeInSeconds = chronometre.getElapsedTime() / 1000; // Convertir en secondes
+        int hours = (int) (elapsedTimeInSeconds / 3600);
+        int minutes = (int) (elapsedTimeInSeconds % 3600) / 60;
+        int seconds = (int) elapsedTimeInSeconds % 60;
+
+        // Formatter et afficher le temps écoulé
+        String time = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        fpsLabel.setText("FPS: " + Gdx.graphics.getFramesPerSecond() + " | " + time);
+
 
         // Update the key
         if (Personnage.getInstance().isKeyEquipped()) {

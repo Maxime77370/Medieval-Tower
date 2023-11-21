@@ -1,10 +1,12 @@
 package com.medievaltower.levels;
 
 public class NiveauPersonnage {
+    private final int[] expRequired = {0, 175, 400, 850, 1300, 2050};
+    private final int MAX_LEVEL = expRequired.length - 1;
     private int currentLevel;
     private int hearts;
     private int exp;
-    private final int[] expRequired = {0, 175, 400, 850, 1300, 2050};
+
 
     public NiveauPersonnage() {
         this.currentLevel = 1;
@@ -20,6 +22,10 @@ public class NiveauPersonnage {
         return hearts;
     }
 
+    public void setHearts(int i) {
+        this.hearts = i;
+    }
+
     public void loseHeart(int damage) {
         this.hearts -= damage;
     }
@@ -29,22 +35,30 @@ public class NiveauPersonnage {
     }
 
     public int getExpRequiredForNextLevel() {
-        return expRequired[currentLevel] - exp;
-    }
+    return expRequired[currentLevel] - exp;
+}
 
     public boolean levelUp() {
-        if (exp >= getExpRequiredForNextLevel() && currentLevel < expRequired.length - 1) {
+        if (exp >= expRequired[currentLevel] && currentLevel < MAX_LEVEL) {
             currentLevel++;
-            hearts += 1; // Adjust as needed
+            exp = 0; // Réinitialiser l'expérience pour le nouveau niveau
+            hearts += 1; // Augmenter les cœurs si nécessaire
+            return true; // Retourner true pour indiquer qu'un niveau a été franchi
         }
-        return false;
+        return false; // Retourner false si aucun niveau n'a été franchi
     }
 
     public void gainExp(int amount) {
-        if (this.exp + amount >= expRequired[currentLevel]) {
-            this.exp = expRequired[currentLevel];
-        } else {
-            this.exp += amount;
+
+        if (currentLevel >= MAX_LEVEL) {
+            return;
+        }
+
+        // Ajout de l'expérience et vérification d'un éventuel niveau supérieur
+        this.exp += amount;
+        if (this.exp >= expRequired[currentLevel]) {
+            // Monter de niveau si possible
+            levelUp();
         }
     }
 
@@ -56,7 +70,7 @@ public class NiveauPersonnage {
         return expRequired[level];
     }
 
-    public void setHearts(int i) {
-        this.hearts = i;
+    public int getMaxLevel() {
+        return MAX_LEVEL;
     }
 }
