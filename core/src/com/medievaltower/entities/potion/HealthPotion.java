@@ -32,7 +32,7 @@ public class HealthPotion extends Potion {
      * @param x       : the x position of the entity
      * @param y       : the y position of the entity
      */
-    protected HealthPotion(int x, int y) {
+    public HealthPotion(int x, int y) {
         super(x, y, 20, 20, new Texture("Texture/Potion/healing_potion.png"));
     }
 

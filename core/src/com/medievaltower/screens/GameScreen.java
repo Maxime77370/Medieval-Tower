@@ -72,6 +72,8 @@ public class GameScreen implements Screen {
         // create entities in the map
         map.createEntities();
 
+        System.out.println();
+
         // get the personnage
         this.personnage = Personnage.getInstance();
 
@@ -173,7 +175,7 @@ public class GameScreen implements Screen {
         table.add(potionImage).pad(5).width(50).height(50);
 
         // Display potion count (replace with the actual count)
-        potionCountLabel = new Label("x" + personnage.getPotionInventory().size(), new Label.LabelStyle(font, Color.WHITE));
+        potionCountLabel = new Label("x" + map.countPotions(), new Label.LabelStyle(font, Color.WHITE));
         table.add(potionCountLabel).pad(5);
 
         // Add information about monsters (replace with the actual count)
@@ -300,7 +302,7 @@ public class GameScreen implements Screen {
         inventoryCountLabel.setText("x" + personnage.getWeaponInventory().size());
 
         // Display potion count (replace with the actual count)
-        potionCountLabel.setText("x" + personnage.getPotionInventory().size());
+        potionCountLabel.setText("x" + map.countPotions());
 
         // Update the monster
         monsterCountLabel.setText("x" + entityManager.getNumberOfMonsters());

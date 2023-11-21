@@ -13,6 +13,7 @@ import com.medievaltower.entities.Personnage;
 import com.medievaltower.entities.animation.Animation;
 import com.medievaltower.entities.monster.Archer;
 import com.medievaltower.entities.monster.Arrow;
+import com.medievaltower.entities.monster.Bat;
 import com.medievaltower.entities.monster.Zombie;
 import com.medievaltower.levels.Map;
 
@@ -138,10 +139,13 @@ public abstract class Entity extends Sprite {
                         EntityManager.getInstance().removeEntity(this);
                     }
                     // Déterminer le type de collision
-                    if (isVerticalCollision(platform)) {
+                    if (isVerticalCollision(platform) && !(this instanceof Bat)) {
                         handleVerticalCollision(platform);
                     } else {
-                        handleHorizontalCollision(platform);
+                        if (!(this instanceof Bat)) {
+                           handleHorizontalCollision(platform);
+                        }
+
                     }
                 }
             }

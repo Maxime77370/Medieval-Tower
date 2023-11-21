@@ -22,11 +22,8 @@ public class ExpPotion extends Potion {
      *
      * @param x       : the x position of the entity
      * @param y       : the y position of the entity
-     * @param width   : the width of the entity
-     * @param height  : the height of the entity
-     * @param texture : the texture of the entity
      */
-    protected ExpPotion(int x, int y, int width, int height, Texture texture) {
+    public ExpPotion(int x, int y) {
         super(x, y, 20, 20, new Texture("Texture/Potion/exp_potion.png"));
     }
 

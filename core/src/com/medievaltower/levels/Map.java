@@ -15,6 +15,9 @@ import com.medievaltower.entities.Personnage;
 import com.medievaltower.entities.monster.Archer;
 import com.medievaltower.entities.monster.Bat;
 import com.medievaltower.entities.monster.Zombie;
+import com.medievaltower.entities.potion.ExpPotion;
+import com.medievaltower.entities.potion.HealthPotion;
+import com.medievaltower.entities.potion.SpeedPotion;
 
 import java.util.HashMap;
 
@@ -36,6 +39,7 @@ public class Map {
     private MapObjects spawnPlayer;
     private MapObjects spawnKey;
     private MapObjects collisionMort;
+    private MapObjects spawnPotions;
 
     /**
      * Map constructor
@@ -56,6 +60,17 @@ public class Map {
     public static Map getInstance() {
         return instance;
     }
+
+    /**
+     * Get the instance of the map
+     *
+     * @param mapId : the id of the map to load
+     * @return the map
+     */
+    public static Map getInstance(int... mapId) {
+        return instance;
+    }
+
     public void render(OrthographicCamera camera) {
         // Set the renderer's view to the camera's combined matrix
         tiledMapRenderer.setView(camera);
@@ -66,6 +81,7 @@ public class Map {
 
     /**
      * Resize the map
+     *
      * @param width
      * @param height
      */
@@ -85,6 +101,7 @@ public class Map {
 
     /**
      * Load the map with all the elements that been created in Tiled
+     *
      * @param mapId : the id of the map to load
      */
     public void loadMap(int mapId) {
@@ -101,10 +118,12 @@ public class Map {
         this.spawnPlayer = tiledMap.getLayers().get("Spawn_personnage").getObjects();
         this.spawnKey = tiledMap.getLayers().get("Key").getObjects();
         this.collisionMort = tiledMap.getLayers().get("Collisions_mort").getObjects();
+        this.spawnPotions = tiledMap.getLayers().get("Spawn_potion").getObjects();
     }
 
     /**
      * Get the collision blocks of the map
+     *
      * @return the map
      */
     public MapObjects getPlatforms() {
@@ -113,6 +132,7 @@ public class Map {
 
     /**
      * Get all the elements that been created in Tiled and need to be created in the game
+     *
      * @return the elements that been created in Tiled
      */
     public HashMap<MapObjects, String> getAllElementsToCreate() {
@@ -122,11 +142,13 @@ public class Map {
         elementsToCreate.put(spawnBat, "Bat");
         elementsToCreate.put(spawnPlayer, "Personnage");
         elementsToCreate.put(spawnKey, "Key");
+        elementsToCreate.put(spawnPotions, "Potion");
         return elementsToCreate;
     }
 
     /**
      * Get the collision death of the map
+     *
      * @return the map
      */
     public MapObjects getDeathCollision() {
@@ -135,6 +157,7 @@ public class Map {
 
     /**
      * Get the collision monsters of the map to make them move between the platforms
+     *
      * @return the map
      */
     public MapObjects getMonstersCollision() {
@@ -163,20 +186,36 @@ public class Map {
                 // Create the element
                 switch (type) {
                     case "Zombie":
-                        entityManager.newEntity(new Zombie((int) x, (int) y));
+                        entityManager.newEntity(new Zombie(x, y));
                         break;
                     case "Archer":
-                        entityManager.newEntity(new Archer((int) x, (int) y));
+                        entityManager.newEntity(new Archer(x, y));
                         break;
                     case "Bat":
-                        entityManager.newEntity(new Bat((int) x, (int) y));
+                        entityManager.newEntity(new Bat(x, y));
                         break;
                     case "Personnage":
-                        entityManager.newEntity(new Personnage((int) x, (int) y));
+                        entityManager.newEntity(new Personnage(x, y));
                         break;
                     case "Key":
-                        entityManager.newEntity(new Cle((int) x, (int) y));
+                        entityManager.newEntity(new Cle(x, y));
                         break;
+                    case "Potion":
+                        // For every potion make random to choice between healt potion, speed Potion, expPotion
+                        int random = (int) (Math.random() * 3);
+                        switch (random) {
+                            case 0:
+                                entityManager.newEntity(new SpeedPotion(x, y));
+                                break;
+                            case 1:
+                                entityManager.newEntity(new HealthPotion(x, y));
+                                break;
+                            case 2:
+                                entityManager.newEntity(new ExpPotion(x, y));
+                                break;
+                            default:
+                                break;
+                        }
                     default:
                         break;
                 }
@@ -185,11 +224,15 @@ public class Map {
     }
 
     /**
-     * Get the instance of the map
-     * @param mapId : the id of the map to load
-     * @return the map
+     * Get the number of potions in the map
+     *
+     * @return the number of potions
      */
-    public static Map getInstance(int... mapId) {
-        return instance;
+    public int countPotions() {
+        int count = 0;
+        for (MapObject mapObject : spawnPotions) {
+            count++;
+        }
+        return count;
     }
 }
