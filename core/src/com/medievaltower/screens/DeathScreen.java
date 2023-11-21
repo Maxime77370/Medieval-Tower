@@ -17,6 +17,14 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.medievaltower.game.MedievalTower;
 import com.medievaltower.levels.Map;
 
+/**
+ * DeathScreen class
+ * <p>
+ * This class is used to create the death screen.
+ * It contains the render method.
+ * It is used to render the death screen.
+ * </p>
+ */
 public class DeathScreen implements Screen {
 
     private MedievalTower game;
@@ -28,6 +36,16 @@ public class DeathScreen implements Screen {
     private TextButton btnRestart;
     private TextButton btnQuit;
 
+    /**
+     * DeathScreen constructor
+     * <p>
+     * This constructor is used to create the death screen.
+     * It takes the game as parameter.
+     * It is used to create the death screen.
+     * </p>
+     *
+     * @param game : the game
+     */
     public DeathScreen(MedievalTower game) {
 
         this.game = game;
@@ -47,6 +65,9 @@ public class DeathScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * Initialize the buttons with the style and the position
+     */
     private void initializeButtons() {
         TextButtonStyle style = new TextButtonStyle();
         style.font = font;
@@ -88,6 +109,10 @@ public class DeathScreen implements Screen {
 
     }
 
+    /**
+     * Render the death screen
+     * @param delta
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -155,8 +180,9 @@ public class DeathScreen implements Screen {
 
     }
 
-    // Implémentez les autres méthodes nécessaires de l'interface Screen
-
+    /**
+     * Called when this screen should release all resources.
+     */
     @Override
     public void dispose() {
         batch.dispose();

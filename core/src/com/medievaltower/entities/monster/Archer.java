@@ -3,9 +3,7 @@ package com.medievaltower.entities.monster;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.medievaltower.entities.animation.AnimationArcher;
-import com.medievaltower.core.Entity;
 import com.medievaltower.core.EntityManager;
-import com.medievaltower.entities.Personnage;
 
 import java.util.Date;
 
@@ -111,16 +109,25 @@ public class Archer extends Monstre {
         updateTexture(animation);
     }
 
+    /**
+     * Collide with the left side of the screen
+     */
     @Override
     public void collide_left(){
         super.collide_left();
     }
 
+    /**
+     * Collide with the right side of the screen
+     */
     @Override
     public void collide_right(){
         super.collide_right();
     }
 
+    /**
+     * Set the size and the position of the bounding box
+     */
     @Override
     public void setBoundingBox() {
         // Set the bounding box of the personnage character
@@ -128,6 +135,9 @@ public class Archer extends Monstre {
         boundingBox.setPosition(x + 16, y + 16);
     }
 
+    /**
+     * Invert the direction of the monster
+     */
     public void invertDirection() {
         speed = -speed;
         // inverse if speed is negative

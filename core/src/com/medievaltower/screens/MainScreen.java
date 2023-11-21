@@ -20,6 +20,14 @@ import com.medievaltower.game.MedievalTower;
 
 import java.util.Locale;
 
+/**
+ * MainScreen class
+ * <p>
+ *     This class is used to create the main screen.
+ *     It contains the render method.
+ *     It is used to render the main screen.
+ * </p>
+ */
 public class MainScreen implements Screen {
 
     private final MedievalTower game;
@@ -34,11 +42,28 @@ public class MainScreen implements Screen {
     private TextButton optionButton;
     private TextButton exitButton;
 
+    /**
+     * MainScreen constructor
+     * <p>
+     *     This constructor is used to create the main screen.
+     *     It takes the game as parameter.
+     *     It is used to create the main screen.
+     * </p>
+     *
+     * @param game : the game
+     */
     public MainScreen(MedievalTower game) {
         this.game = game;
         initialize();
     }
 
+    /**
+     * Initialize the main screen
+     * <p>
+     *     This method is used to initialize the main screen.
+     *     It is used to initialize the main screen.
+     * </p>
+     */
     private void initialize() {
         camera = new OrthographicCamera();
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
@@ -64,6 +89,13 @@ public class MainScreen implements Screen {
         generator.dispose();
     }
 
+    /**
+     * Create the UI
+     * <p>
+     *     This method is used to create the UI.
+     *     It is used to create the button play, option and exit with their interactions.
+     * </p>
+     */
     private void createUI() {
         Skin skin = new Skin();
         TextButtonStyle style = new TextButtonStyle();

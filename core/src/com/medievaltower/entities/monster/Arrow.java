@@ -1,19 +1,11 @@
 package com.medievaltower.entities.monster;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.medievaltower.core.Entity;
-import com.medievaltower.core.EntityManager;
 import com.medievaltower.entities.Personnage;
-import com.medievaltower.entities.animation.AnimationArcher;
 import com.medievaltower.entities.animation.AnimationArrow;
-import com.sun.org.apache.xerces.internal.dom.RangeImpl;
 
 public class Arrow extends Entity {
-    private float direction;
     private float speed = 10;
     private float speed_x;
     private float speed_y;
@@ -22,6 +14,11 @@ public class Arrow extends Entity {
     private float rotation = 0; // Ajout de l'attribut rotation
     private AnimationArrow animation = new AnimationArrow();
 
+    /**
+     * Arrow constructor
+     * @param x
+     * @param y
+     */
     public Arrow(int x, int y) {
         super(x, y, 32, 32, new Texture("arrow.png"));
 
@@ -31,12 +28,11 @@ public class Arrow extends Entity {
 
     }
 
+    /**
+     * Move the arrow with a formula
+     */
     @Override
     public void move(){
-        // TODO
-        // 1. Initialiser le lancement de la flèche avec l'angle.
-        // 2. Donner une vitesse de départ à la flèche
-        // 3
         this.xLast = this.x;
         this.yLast = this.y;
 
@@ -55,17 +51,18 @@ public class Arrow extends Entity {
         super.move();
     }
 
+    /**
+     * Override the update method
+     */
     @Override
     public void update() {
         super.update();
     }
 
-    // Creer fleche si null
-    // Lancer la fleche avec formule (position de l'archer):
-    // Recupérer l'instance singleton du Personnage.
-    // Lancer la méthode pour atteindre la target Personnage
-    // DEtecter si la collision est faite avec le personnage
-
+    /**
+     * Override the collide method
+     * @param entity
+     */
     public void collide(Entity entity){
         if (entity instanceof Personnage){
             Personnage personnage = (Personnage) entity;

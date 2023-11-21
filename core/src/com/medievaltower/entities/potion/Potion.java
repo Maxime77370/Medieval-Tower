@@ -7,16 +7,17 @@ import com.medievaltower.core.Entity;
 /**
  * Potion class
  * <p>
- *     This class is the parent class of all potions in the game.
- *     It is abstract because it is not supposed to be instantiated.
- *     It extends the CollectableEntity class.
+ * This class is the parent class of all potions in the game.
+ * It is abstract because it is not supposed to be instantiated.
+ * It extends the CollectableEntity class.
  * </p>
+ *
  * @see CollectableEntity
  */
 public abstract class Potion extends Entity implements CollectableEntity {
 
     /**
-     * Entity constructor
+     * Potion constructor
      * <p>
      * This constructor is used to create an entity.
      * It takes the position, the size and the texture of the entity as parameters.
@@ -36,21 +37,38 @@ public abstract class Potion extends Entity implements CollectableEntity {
         super(x, y, width, height, texture);
     }
 
+    /**
+     * Collide with the floor
+     * <p>
+     * This method is used to collide with the floor.
+     * It is called when the entity collide with the floor.
+     * </p>
+     */
     @Override
     public void collide_floor() {
 
     }
 
+    /**
+     * Update the potion
+     */
     @Override
     public void update() {
         super.update();
     }
 
+    /**
+     * Collect the potion
+     */
     @Override
     public void collect() {
 
     }
 
+    /**
+     * Collide with an entity
+     * @param entity : the entity that collide with the potion
+     */
     @Override
     public void collide(Entity entity) {
 

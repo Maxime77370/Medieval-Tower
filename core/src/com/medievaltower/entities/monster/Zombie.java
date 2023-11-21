@@ -92,6 +92,9 @@ public class Zombie extends Monstre {
         super.update();
     }
 
+    /**
+     * Set the size and position of the bounding box
+     */
     @Override
     public void setBoundingBox() {
         // Set the bounding box of the personnage character

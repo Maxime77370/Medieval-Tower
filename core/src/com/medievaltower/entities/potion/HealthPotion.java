@@ -2,6 +2,21 @@ package com.medievaltower.entities.potion;
 
 import com.badlogic.gdx.graphics.Texture;
 
+/**
+ * HealthPotion class
+ * <p>
+ *     This class is a subclass class of potion in the game.
+ *     It contains the position, the size and the texture of the potion.
+ *     It also contains the update method.
+ *     It extends the Potion class.
+ *     It contains the collect method of the potion.
+ *     It contains the update method of the potion.
+ *     It is used to create a health potion.
+ * </p>
+ *      @see Potion
+ *      @see Texture
+ *
+ */
 public class HealthPotion extends Potion {
     /**
      * Entity constructor

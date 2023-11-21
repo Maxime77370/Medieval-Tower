@@ -46,6 +46,10 @@ public abstract class Monstre extends Entity implements AttackableEntity, Movabl
         super.move();
     }
 
+    /**
+     * Collide with an entity
+     * @param entity : the entity that collide with the monster
+     */
     public void collide(Entity entity){
 
     }

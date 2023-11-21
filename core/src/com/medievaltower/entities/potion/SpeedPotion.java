@@ -2,6 +2,21 @@ package com.medievaltower.entities.potion;
 
 import com.badlogic.gdx.graphics.Texture;
 
+/**
+ * SpeedPotion class
+ * <p>
+ * This class is a subclass class of potion in the game.
+ * It contains the position, the size and the texture of the potion.
+ * It also contains the update method.
+ * It extends the Potion class.
+ * It contains the collect method of the potion.
+ * It contains the update method of the potion.
+ * It is used to create a speed potion.
+ * </p>
+ *
+ * @see Potion
+ * @see Texture
+ */
 public class SpeedPotion extends Potion {
     /**
      * SpeedPotion constructor
@@ -24,11 +39,17 @@ public class SpeedPotion extends Potion {
         super(x, y, 20, 20, new Texture("Texture/Potion/speed_potion.png"));
     }
 
+    /**
+     * Collect the potion
+     */
     @Override
     public void collect() {
         super.collect();
     }
 
+    /**
+     * Update the potion
+     */
     @Override
     public void update() {
         super.update();

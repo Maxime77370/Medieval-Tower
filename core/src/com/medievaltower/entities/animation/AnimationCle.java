@@ -4,17 +4,41 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.medievaltower.game.Tileset;
 
+/**
+ * Class that manages the animations of Key
+ * <p>
+ * This class is used to create an animation.
+ * Create the sprite of the animation.
+ * It extends the Animation class.
+ * It contains the update method.
+ * </p>
+ *
+ * @see Animation
+ * @see TextureRegion
+ * @see Tileset
+ * @see Gdx
+ * @see TextureRegion
+ */
 public class AnimationCle extends Animation {
 
-    private Tileset KeyTile = new Tileset("Key/key.png", 320, 320);
+    private final Tileset KeyTile = new Tileset("Key/key.png", 320, 320);
 
+    /**
+     * AnimationCle constructor
+     * <p>
+     *     This constructor is used to create an animation.
+     *     Create the sprite of the animation.
+     *     It extends the Animation class.
+     * </p>
+     */
     public AnimationCle() {
         super();
         sprite = KeyTile.getTexture(0);
     }
 
     /**
-     * @return
+     * Override the update method
+     * @return the sprite of the animation
      */
     @Override
     public TextureRegion update() {
@@ -32,6 +56,10 @@ public class AnimationCle extends Animation {
         return sprite;
     }
 
+    /**
+     * Animate the fly of the key
+     * @return the sprite of the animation
+     */
     private TextureRegion animateFly() {
         if (frame >= KeyTile.getNbTexture()) {
             frame = 0;

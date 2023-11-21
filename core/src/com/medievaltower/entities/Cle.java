@@ -38,6 +38,9 @@ public class Cle extends Entity implements CollectableEntity {
         }
     }
 
+    /**
+     * Move the cle but here it is not used
+     */
     @Override
     public void move() {
 
@@ -52,11 +55,18 @@ public class Cle extends Entity implements CollectableEntity {
         setBoundingBox();
     }
 
+    /**
+     * Collide with an entity
+     */
     @Override
     public void collide_floor() {
 
     }
 
+    /**
+     * Collide with an entity
+     * @param entity : the entity that collide with the cle
+     */
     @Override
     public void collide(Entity entity) {
 

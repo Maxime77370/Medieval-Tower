@@ -51,7 +51,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private final WeakHashMap<Potion, Integer> potionInventory = new WeakHashMap<>();
     private final float invincibleDuration = 3;
     private final AnimationPersonnage animation = new AnimationPersonnage();
-    private float exp = 0f;
     private final int level = 1;
     private final Direction currentDirection = Direction.NONE;
     private final boolean isSlow = false;
@@ -66,6 +65,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private final Tileset AttackTile = new Tileset("2D_SL_Knight_v1.0/Attacks.png", 128, 64);
     private final Tileset JumpTile = new Tileset("2D_SL_Knight_v1.0/Jump.png", 128, 64);
     private final Tileset SlideTile = new Tileset("2D_SL_Knight_v1.0/Slide.png", 128, 64);
+    private float exp = 0f;
     private int speed = 256;
     private boolean isJumping = false;
     private int health = 3;
@@ -105,44 +105,80 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         return instance;
     }
 
+    /**
+     * Get the weapon inventory of the personnage
+     *
+     * @return the weapon inventory of the personnage
+     */
     public WeakHashMap<Weapon, Integer> getWeaponInventory() {
         return weaponInventory;
     }
 
+    /**
+     * Get the potion inventory of the personnage
+     *
+     * @return the potion inventory of the personnage
+     */
     public WeakHashMap<Potion, Integer> getPotionInventory() {
         return potionInventory;
     }
 
+    /**
+     * Get the health of the personnage
+     *
+     * @return the health of the personnage
+     */
     public int getHealth() {
         return health;
     }
 
+    /**
+     * Get the experience of the personnage
+     *
+     * @return the experience of the personnage
+     */
     public float getExp() {
         return exp;
     }
 
+    public void setExp(float exp) {
+        this.exp += exp;
+    }
+
+    /**
+     * Get the level of the personnage
+     *
+     * @return the level of the personnage
+     */
     public int getLevel() {
         return level;
     }
 
-    public Weapon getWeaponEquipped() {
-        return weaponEquipped;
-    }
-
-    public Potion getPotionEquipped() {
-        return potionEquipped;
-    }
-
+    /**
+     * Get the x Velocity of the personnage
+     *
+     * @return the x Velocity of the personnage
+     */
     public float getxVelocity() {
         return xVelocity;
     }
 
+    /**
+     * Get the y Velocity of the personnage
+     *
+     * @return the y Velocity of the personnage
+     */
     public float getyVelocity() {
         return yVelocity;
     }
 
     /**
-     * Method to move the personnage with the keyboard
+     * Method to move the personnage with the keyboard and add animation
+     * <p>
+     * This method is used to move the personnage with the keyboard.
+     * It is called in the update method of the entity manager.
+     * It is defined in the MovableEntity interface.
+     * </p>
      */
     public void move() {
         for (Map.Entry<String, Boolean> entry : Actions.entrySet()) {
@@ -168,23 +204,13 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         this.xLast = this.x;
         this.yLast = this.y;
 
-        // run left : left
-        // slide left : left + down
-        // run right : right
-        // slide right : right + down
-        // jump : up
-        // jump attack : down + isJumping
-        // attack : space
-
         this.animation.setStateLocal("Breath");
 
         if (Actions.get("Left")) {
 
-            if (isHanging){
+            if (isHanging) {
                 this.animation.setStateLocal("Hanging", true);
-            }
-
-            else if (Actions.get("Down") && !isJumping) {
+            } else if (Actions.get("Down") && !isJumping) {
                 if (!isSliding) {
                     this.xVelocity *= 2f;
                 }
@@ -196,11 +222,9 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             }
         } else if (Actions.get("Right")) {
 
-            if (isHanging){
+            if (isHanging) {
                 this.animation.setStateLocal("Hanging", false);
-            }
-
-            else if (Actions.get("Down") && !isJumping) {
+            } else if (Actions.get("Down") && !isJumping) {
                 if (!isSliding) {
                     this.xVelocity *= 2f;
                 }
@@ -227,10 +251,10 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             }
         }
 
-        if( isJumping){
+        if (isJumping) {
             this.animation.setStateLocal("InJump");
         }
-        
+
         if (Actions.get("Down")) {
             if (isJumping) {
                 this.yVelocity -= speed * Gdx.graphics.getDeltaTime() / 2;
@@ -267,9 +291,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     /**
-     * Method update the personnage, jump and gravity
+     * Method update the personnage, jump and gravity and animation
      */
-
     @Override
     public void update() {
         //change Texture
@@ -294,6 +317,9 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         this.attackAnimation();
     }
 
+    /**
+     * Method to add animation when the personnage attack
+     */
     private void attackAnimation() {
         if (this.isJumping) {
             this.animation.setStateLocal("AttackFromAir");
@@ -467,7 +493,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         }
     }
 
-
     /**
      * Make the personnage character slow
      */
@@ -480,6 +505,9 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         }
     }
 
+    /**
+     * Set the size and position of the bounding box
+     */
     @Override
     public void setBoundingBox() {
         // Set the bounding box of the personnage character
@@ -487,49 +515,39 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         boundingBox.setPosition(x + 50, y);
     }
 
-
+    /**
+     * Collide with the floor
+     * call the super method
+     */
     @Override
-    public void collide_floor(){
+    public void collide_floor() {
         this.isJumping = false;
         super.collide_floor();
     }
 
+    /**
+     * Collide with left wall
+     * call the super method
+     */
     @Override
-    public void collide_left(){
+    public void collide_left() {
         this.isHanging = true;
         super.collide_left();
     }
 
+    /**
+     * Collide with the right wall
+     * call the super method
+     */
     @Override
-    public void collide_right(){
+    public void collide_right() {
         this.isHanging = true;
         super.collide_right();
     }
 
-    public void collide_wall(){
-        this.xVelocity = 0;
-    }
-
-    public void setJumping(boolean b) {
-        this.isJumping = b;
-    }
-
-    public void setVelocityY(int i) {
-        this.yVelocity = i;
-    }
-
-    public void setVelocityX(int i) {
-        this.xVelocity = i;
-    }
-
-    public boolean isMovingHorizontally() {
-        return xVelocity != 0;
-    }
-
-    public boolean isMovingVertically() {
-        return yVelocity != 0;
-    }
-
+    /**
+     * Check all the collisions with entities
+     */
     public void collide(Entity entity) {
         if (entity instanceof Monstre) {
             // si le personnage est en train d'attaquer alors le monstre est tué sinon prend des degats
@@ -540,35 +558,41 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             } else {
                 this.receiveDamage(1);
             }
-        }
-        else if (entity instanceof Arrow){
+        } else if (entity instanceof Arrow) {
             this.receiveDamage(1);
-        }
-        else if (entity instanceof Potion){
+        } else if (entity instanceof Potion) {
             this.addPotionInventory((Potion) entity);
             System.out.println("Potion collision");
-        }
-        else if (entity instanceof Cle) {
+        } else if (entity instanceof Cle) {
             this.setCleEquipped((Cle) entity);
             EntityManager.getInstance().removeEntity(entity);
             this.setExp(100);
         }
     }
 
+    /**
+     * Set the personnage dead
+     */
     public void die() {
         this.isDead = true;
     }
 
+    /**
+     * Check if the personnage is dead
+     *
+     * @return true if the personnage is dead
+     */
     public boolean isDead() {
         return this.isDead;
     }
 
+    /**
+     * Check if the personnage has found the key
+     *
+     * @return true if the personnage is invincible
+     */
     public boolean isKeyEquipped() {
         return this.cleEquipped != null;
-    }
-
-    public void setExp(float exp) {
-        this.exp += exp;
     }
 
 }
