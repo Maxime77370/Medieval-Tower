@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="240" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="218">
+<map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="240" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="241">
  <tileset firstgid="1" source="tiled/Tiles.tsx"/>
  <tileset firstgid="626" source="tiled/Buildings.tsx"/>
  <tileset firstgid="1251" source="tiled/Rocks.tsx"/>
@@ -179,12 +179,28 @@
   <object id="212" x="2944.25" y="352.5" width="176.25" height="48"/>
   <object id="213" x="689" y="352.667" width="17.6667" height="18.3333"/>
   <object id="215" x="3334.67" y="11" width="50.3333" height="68.6667"/>
+  <object id="234" x="2935" y="224" width="408" height="20.25"/>
  </objectgroup>
  <objectgroup id="17" name="Spawn_personnage">
   <object id="214" x="171" y="434.833"/>
  </objectgroup>
  <objectgroup id="12" name="Archer">
-  <object id="191" x="520" y="294"/>
+  <object id="191" x="526" y="294"/>
+  <object id="220" x="1095" y="422"/>
+  <object id="225" x="1713" y="471"/>
+  <object id="229" x="2813" y="291"/>
+  <object id="230" x="3039" y="137"/>
+  <object id="233" x="3554" y="455"/>
+ </objectgroup>
+ <objectgroup id="18" name="Spawn_potion">
+  <object id="235" x="1504" y="474.667"/>
+  <object id="236" x="879.333" y="267.333"/>
+  <object id="237" x="1208.67" y="227.333"/>
+  <object id="238" x="1488" y="158"/>
+  <object id="239" x="3138" y="148.667"/>
+ </objectgroup>
+ <objectgroup id="19" name="end_game">
+  <object id="240" x="3781.33" y="472"/>
  </objectgroup>
  <objectgroup id="16" name="Collisions_monstres">
   <object id="192" x="410" y="144" width="9" height="155"/>
@@ -205,12 +221,22 @@
   <object id="207" x="3118" y="240" width="5" height="93"/>
   <object id="208" x="3221" y="245" width="2" height="250"/>
   <object id="209" x="3728" y="421" width="10" height="69"/>
+  <object id="222" x="1164" y="372" width="13" height="75"/>
+  <object id="223" x="1263" y="260" width="12" height="187"/>
+  <object id="231" x="2921" y="76" width="22" height="88"/>
  </objectgroup>
  <objectgroup id="13" name="Zombie">
   <object id="190" x="492" y="293"/>
+  <object id="218" x="1154" y="216"/>
+  <object id="226" x="1545" y="467"/>
+  <object id="227" x="2638" y="294"/>
+  <object id="228" x="2981" y="291"/>
+  <object id="232" x="3367" y="455"/>
  </objectgroup>
  <objectgroup id="14" name="Bat">
-  <object id="189" x="713" y="293"/>
+  <object id="189" x="784" y="203"/>
+  <object id="219" x="1406" y="136"/>
+  <object id="224" x="1842" y="444"/>
  </objectgroup>
  <objectgroup id="15" name="Key">
   <object id="188" x="3216.33" y="139.667"/>
