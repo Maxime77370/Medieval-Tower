@@ -31,7 +31,7 @@ public class Zombie extends Monstre {
     private final AnimationZombie animation = new AnimationZombie();
 
     public Zombie(int x, int y) {
-        super(x, y, 32, 32, new Texture("paix.jpg"));
+        super(x, y, 48, 48, new Texture("paix.jpg"));
     }
 
     /**

@@ -100,7 +100,6 @@ public class Archer extends Monstre {
         }
         else if (new Date().getTime() - timer.getTime() > SHOOT_INTERVAL * 1000) {
             entityManager.removeEntity(currentArrow);
-            System.out.println("delete");
             attack();
         }
 
@@ -110,29 +109,13 @@ public class Archer extends Monstre {
     }
 
     /**
-     * Collide with the left side of the screen
-     */
-    @Override
-    public void collide_left(){
-        super.collide_left();
-    }
-
-    /**
-     * Collide with the right side of the screen
-     */
-    @Override
-    public void collide_right(){
-        super.collide_right();
-    }
-
-    /**
      * Set the size and the position of the bounding box
      */
     @Override
     public void setBoundingBox() {
         // Set the bounding box of the personnage character
         boundingBox.setSize(width - 32, height - 32 );
-        boundingBox.setPosition(x + 16, y + 16);
+        boundingBox.setPosition(x + 16, y + 12);
     }
 
     /**

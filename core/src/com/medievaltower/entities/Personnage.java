@@ -64,7 +64,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private final AnimationPersonnage animation = new AnimationPersonnage();
     private final int level = 1;
 
-    public int map = 3;
+    public int map = 2;
     private final Direction currentDirection = Direction.NONE;
     private boolean isSlow = false;
     private final Map<String, Boolean> Actions = new HashMap<String, Boolean>() {{
@@ -628,7 +628,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     private void setExpEffect() {
-        this.setExp(150);
+        this.setExp(2000);
     }
 
     private void setSpeedEffect() {

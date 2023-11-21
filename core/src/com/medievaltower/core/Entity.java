@@ -173,7 +173,7 @@ public abstract class Entity extends Sprite {
         for (MapObject blockObject : Map.getInstance().getMonstersCollision()) {
             if (blockObject instanceof RectangleMapObject) {
                 Rectangle block = ((RectangleMapObject) blockObject).getRectangle();
-                if (this.getBoundingBox().overlaps(block) && (this instanceof Zombie || this instanceof Archer)) {
+                if (boundingBox.overlaps(block) && (this instanceof Zombie || this instanceof Archer)) {
                     // Ajouter les collisions horizontales pour inverser la direction
                     if (this instanceof Zombie) {
                         ((Zombie) this).invertDirection();
@@ -195,10 +195,10 @@ public abstract class Entity extends Sprite {
     private void handleVerticalCollision(Rectangle platform) {
         if (this.yVelocity > 0) { // Si l'entité se déplace vers le haut
             collide_ceiling();
-            y = (int) (platform.y - this.boundingBox.height); // Positionnez l'entité juste en dessous de la plateforme
+            y = (int) (platform.y - this.boundingBox.height + boundingBox.y - y); // Positionnez l'entité juste en dessous de la plateforme
         } else { // Si l'entité se déplace vers le bas
             collide_floor();
-            y = (int) (platform.y + platform.height); // Positionnez l'entité juste au-dessus de la plateforme
+            y = (int) (platform.y + platform.height - boundingBox.y + y); // Positionnez l'entité juste au-dessus de la plateforme
         }
         setBoundingBox(); // Mettez à jour la bounding box après avoir changé la position
     }
