@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="400" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="248">
+<map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="400" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="279">
  <tileset firstgid="1" source="tiled/castle_tileset_part3.tsx"/>
  <tileset firstgid="769" source="tiled/castle_tileset_part1.tsx"/>
  <tileset firstgid="3457" source="tiled/castle_tileset_part2.tsx"/>
@@ -29,6 +29,11 @@
  </layer>
  <objectgroup id="10" name="Zombie">
   <object id="219" x="773.333" y="460.667"/>
+  <object id="249" x="4199" y="169"/>
+  <object id="252" x="5321" y="264"/>
+  <object id="253" x="5603" y="481"/>
+  <object id="261" x="3332" y="319"/>
+  <object id="271" x="3204" y="478"/>
  </objectgroup>
  <objectgroup id="11" name="Archer">
   <object id="218" x="942.667" y="270.667"/>
@@ -36,10 +41,15 @@
   <object id="232" x="2623" y="49"/>
   <object id="242" x="3853" y="203"/>
   <object id="244" x="3768" y="44"/>
+  <object id="258" x="6134" y="262"/>
+  <object id="266" x="186" y="273"/>
+  <object id="270" x="3353" y="488"/>
  </objectgroup>
  <objectgroup id="12" name="Bat">
   <object id="217" x="1322" y="445.333"/>
   <object id="233" x="1771" y="242"/>
+  <object id="248" x="4085" y="173"/>
+  <object id="263" x="2136" y="128"/>
  </objectgroup>
  <objectgroup id="9" name="Collisions_monstres ">
   <object id="212" x="4" y="188.667" width="6.66667" height="129.333"/>
@@ -59,6 +69,19 @@
   <object id="241" x="3948" y="94" width="6" height="130"/>
   <object id="245" x="3662" y="-19" width="9" height="109"/>
   <object id="246" x="3911" y="-24" width="13" height="114"/>
+  <object id="250" x="5118" y="204" width="14" height="109"/>
+  <object id="251" x="5527" y="191" width="8" height="119"/>
+  <object id="254" x="5407" y="328" width="32" height="197"/>
+  <object id="255" x="5765" y="402" width="36" height="129"/>
+  <object id="256" x="6008" y="206" width="7" height="103"/>
+  <object id="257" x="6362" y="192" width="6" height="119"/>
+  <object id="259" x="3143" y="145" width="8" height="225"/>
+  <object id="260" x="3504" y="54" width="10" height="314"/>
+  <object id="262" x="2431" y="-5" width="9" height="224"/>
+  <object id="264" x="853" y="114" width="4" height="189"/>
+  <object id="265" x="1243" y="130" width="11" height="184"/>
+  <object id="268" x="2941" y="298" width="14" height="223"/>
+  <object id="269" x="3429" y="371" width="11" height="155"/>
  </objectgroup>
  <objectgroup id="17" name="end_game">
   <object id="247" x="6345" y="490"/>
@@ -71,6 +94,13 @@
  </objectgroup>
  <objectgroup id="16" name="Spawn_potion">
   <object id="214" x="965.333" y="503.333"/>
+  <object id="272" x="5279" y="507"/>
+  <object id="273" x="3798" y="500"/>
+  <object id="274" x="3714" y="236"/>
+  <object id="275" x="3707" y="64"/>
+  <object id="276" x="2537" y="61"/>
+  <object id="277" x="1890" y="270"/>
+  <object id="278" x="36" y="280"/>
  </objectgroup>
  <objectgroup id="7" name="Collisions_plateforme">
   <object id="1" x="3" y="528" width="302" height="17"/>
