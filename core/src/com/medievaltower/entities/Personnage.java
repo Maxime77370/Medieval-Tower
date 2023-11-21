@@ -334,7 +334,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
                     // Déterminer le type de collision
                     if (isKeyEquipped()){
                         map += 1;
-                        GameScreen.getInstance().restartGame();
+                        isDead = true;
                     }
                 }
             }
