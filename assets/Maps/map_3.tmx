@@ -199,7 +199,7 @@
   <object id="239" x="3126" y="142.667"/>
  </objectgroup>
  <objectgroup id="19" name="end_game">
-  <object id="240" x="3781.33" y="472"/>
+  <object id="240" x="3690" y="471.333"/>
  </objectgroup>
  <objectgroup id="16" name="Collisions_monstres">
   <object id="192" x="410" y="144" width="9" height="155"/>
