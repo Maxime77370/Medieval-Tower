@@ -7,7 +7,9 @@ import com.medievaltower.core.*;
 import com.medievaltower.entities.animation.AnimationPersonnage;
 import com.medievaltower.entities.monster.Arrow;
 import com.medievaltower.entities.monster.Monstre;
+import com.medievaltower.entities.potion.HealthPotion;
 import com.medievaltower.entities.potion.Potion;
+import com.medievaltower.entities.potion.SpeedPotion;
 import com.medievaltower.entities.weapon.Weapon;
 import com.medievaltower.game.Tileset;
 
@@ -53,7 +55,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private final AnimationPersonnage animation = new AnimationPersonnage();
     private final int level = 1;
     private final Direction currentDirection = Direction.NONE;
-    private final boolean isSlow = false;
+    private boolean isSlow = false;
     private final Map<String, Boolean> Actions = new HashMap<String, Boolean>() {{
         put("Left", false);
         put("Right", false);
@@ -78,6 +80,8 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private float invincibleTimer = 0;
     private boolean isDead = false;
     private boolean isAttacked;
+    private float speedEffectDuration = 0;
+
 
     /**
      * Personnage constructor
@@ -205,6 +209,20 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         this.yLast = this.y;
 
         this.animation.setStateLocal("Breath");
+
+        // Apply speed effect
+        if (isSlow) {
+            // Implement slow logic if needed
+        } else {
+            // Normal speed logic
+            if (speedEffectDuration > 0) {
+                // If the speed effect is active, adjust the speed
+                speedEffectDuration -= Gdx.graphics.getDeltaTime();
+            } else {
+                // Reset speed to normal when the effect wears off
+                speed = 256; // Adjust the speed as needed
+            }
+        }
 
         if (Actions.get("Left")) {
 
@@ -494,18 +512,6 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     /**
-     * Make the personnage character slow
-     */
-    public void setSlow() {
-        if (this.isSlow) {
-            // Upgrade the speed and make the personnage character slide
-            this.speed = 10;
-        } else {
-            this.speed = 20;
-        }
-    }
-
-    /**
      * Set the size and position of the bounding box
      */
     @Override
@@ -562,12 +568,37 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.receiveDamage(1);
         } else if (entity instanceof Potion) {
             this.addPotionInventory((Potion) entity);
-            System.out.println("Potion collision");
+            // Check the type of the potion
+            if (entity instanceof SpeedPotion) {
+                this.setSpeedEffect();
+                EntityManager.getInstance().removeEntity(entity);
+            } else if (entity instanceof HealthPotion) {
+                this.setHealthEffect();
+                EntityManager.getInstance().removeEntity(entity);
+            } else {
+                this.setExpEffect();
+                EntityManager.getInstance().removeEntity(entity);
+            }
         } else if (entity instanceof Cle) {
             this.setCleEquipped((Cle) entity);
             EntityManager.getInstance().removeEntity(entity);
             this.setExp(100);
         }
+    }
+
+    private void setHealthEffect() {
+        if (this.health < 3) {
+            this.health += 1;
+        }
+    }
+
+    private void setExpEffect() {
+        this.setExp(150);
+    }
+
+    private void setSpeedEffect() {
+        speedEffectDuration = 5; // 5 seconds
+        speed = (int) (speed*1.5); // Adjust the speed as needed
     }
 
     /**
@@ -595,4 +626,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         return this.cleEquipped != null;
     }
 
+    public void setSlow() {
+        this.isSlow = true;
+    }
 }
