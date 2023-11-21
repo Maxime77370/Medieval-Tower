@@ -72,8 +72,6 @@ public abstract class Entity extends Sprite {
         this.sprite = new Sprite(texture);
 
         setBoundingBox();
-
-        EntityManager entityManager = EntityManager.getInstance();
     }
 
     /**

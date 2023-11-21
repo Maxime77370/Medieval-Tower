@@ -16,7 +16,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public abstract class Animation {
 
-    protected String state;
+    protected String state = "";
     protected String lastState;
     protected String forceState;
     protected boolean inverse;
@@ -88,6 +88,10 @@ public abstract class Animation {
             flippedSprite.flip(true, false);
         }
         this.sprite = flippedSprite;
+    }
+
+    public String getState() {
+        return state;
     }
 
     /**

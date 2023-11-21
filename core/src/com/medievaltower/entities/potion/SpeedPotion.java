@@ -53,7 +53,5 @@ public class SpeedPotion extends Potion {
     public void update() {
         updateTexture(animation);
         setBoundingBox();
-        System.out.println(this.x);
-        System.out.println(this.y);
     }
 }

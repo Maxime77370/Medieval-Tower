@@ -517,8 +517,21 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     @Override
     public void setBoundingBox() {
         // Set the bounding box of the personnage character
-        boundingBox.setSize(width - 101, height - 17);
-        boundingBox.setPosition(x + 50, y);
+        if (animation == null){
+            boundingBox.setSize(width - 101, height - 17);
+            boundingBox.setPosition(x + 50, y);
+        }
+        else {
+            String state = animation.getState();
+            if (state.equals("Slide")) {
+                boundingBox.setSize(width - 101, height - 40);
+                boundingBox.setPosition(x + 50, y);
+            }
+            else {
+                boundingBox.setSize(width - 101, height - 17);
+                boundingBox.setPosition(x + 50, y);
+            }
+        }
     }
 
     /**

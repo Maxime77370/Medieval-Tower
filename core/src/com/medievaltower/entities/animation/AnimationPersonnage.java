@@ -267,12 +267,4 @@ public class AnimationPersonnage extends Animation {
         frame++;
         return Hanging.getTexture(frame - 1);
     }
-
-    /**
-     * Take the current state
-     * @return the current state
-     */
-    public Object getState() {
-        return state;
-    }
 }
