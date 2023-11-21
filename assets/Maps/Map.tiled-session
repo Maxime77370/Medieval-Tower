@@ -3,10 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map_3.tmx",
+    "activeFile": "map_4.tmx",
     "expandedProjectPaths": [
-        ".",
-        "tiled"
+        "tiled",
+        "."
     ],
     "fileStates": {
         "": {
@@ -56,15 +56,15 @@
         },
         "map_2.tmx": {
             "expandedObjectLayers": [
+                17,
+                20,
                 4,
-                15,
                 14,
+                15,
                 13,
                 19,
                 3,
-                17,
-                16,
-                20
+                16
             ],
             "scale": 1,
             "selectedLayer": 6,
@@ -75,29 +75,29 @@
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
-                11,
                 10,
-                15,
+                11,
                 14,
-                13,
+                15,
                 12,
-                19,
+                13,
                 18,
+                19,
                 16
             ],
             "scale": 1.5,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 1567.3333333333333,
-                "y": 129.66666666666666
+                "x": 1919.6666666666665,
+                "y": 320
             }
         },
         "map_4.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 5,
+            "scale": 1.5,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 2494,
-                "y": 320
+                "x": 554.6666666666666,
+                "y": 90.99999999999997
             }
         },
         "premiere_map.tmx": {
@@ -207,9 +207,9 @@
         "tiled/Background_2.tsx",
         "tiled/Tree-Assets.tsx",
         "map_2.tmx",
+        "map_3.tmx",
         "tiled/castle_tileset_part3.tsx",
-        "tiled/castle_tileset_part2.tsx",
-        "tiled/castle_tileset_part1.tsx"
+        "tiled/castle_tileset_part2.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
