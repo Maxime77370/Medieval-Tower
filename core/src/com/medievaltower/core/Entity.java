@@ -161,6 +161,7 @@ public abstract class Entity extends Sprite {
                         Personnage.getInstance().die();
                         handleVerticalCollision(platform);
                     } else {
+                        Personnage.getInstance().die();
                         handleHorizontalCollision(platform);
                     }
                 }

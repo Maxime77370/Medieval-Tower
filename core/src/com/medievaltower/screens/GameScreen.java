@@ -251,7 +251,7 @@ public class GameScreen implements Screen {
         updateHUD();
 
         // Draw the debug entities
-        entityManager.drawDebug(batch);
+        // entityManager.drawDebug(batch);
 
         // Draw entities
         entityManager.draw(batch);
