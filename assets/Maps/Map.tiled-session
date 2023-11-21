@@ -3,12 +3,15 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map_3.tmx",
+    "activeFile": "map_4.tmx",
     "expandedProjectPaths": [
-        ".",
-        "tiled"
+        "tiled",
+        "."
     ],
     "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
         "/Users/maximecarpentier/Library/Mobile Documents/com~apple~CloudDocs/Epitech/T-JAV-501/T-JAV-501-LIL_10/assets/Texture/Legacy-Fantasy - High Forest 2.3/Tiles.tsx": {
             "scaleInDock": 1
         },
@@ -47,8 +50,8 @@
             "scale": 1.2178,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 240.59779931023158,
-                "y": 160.1248152405978
+                "x": 238.95549351289208,
+                "y": 159.71423879126297
             }
         },
         "map_2.tmx": {
@@ -58,37 +61,43 @@
                 15,
                 14,
                 13,
-                3
+                4,
+                20,
+                3,
+                19
             ],
-            "scale": 1.5,
-            "selectedLayer": 4,
+            "scale": 1,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 1226.6666666666665,
-                "y": 319.3333333333333
+                "x": 2279,
+                "y": 438.5
             }
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
-                11,
-                10,
+                16,
                 15,
                 14,
                 13,
-                12
+                12,
+                11,
+                10,
+                19,
+                18
             ],
-            "scale": 1,
-            "selectedLayer": 4,
+            "scale": 1.5,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 288,
-                "y": 344
+                "x": 1983.3333333333333,
+                "y": 338.33333333333337
             }
         },
         "map_4.tmx": {
-            "scale": 1,
-            "selectedLayer": 1,
+            "scale": 0.5,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 633,
-                "y": 157
+                "x": 520,
+                "y": 283
             }
         },
         "premiere_map.tmx": {
@@ -133,6 +142,23 @@
             "scaleInDock": 2,
             "scaleInEditor": 1
         },
+        "tiled/castle_tileset_part2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiled/castle_tileset_part3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiled/chateau_agrandi_1.tsx": {
+            "scaleInDock": 1.5
+        },
+        "tiled/chateau_agrandi_2.tsx": {
+            "scaleInDock": 0.75
+        },
+        "tiled/chateau_agrandi_3.tsx": {
+            "scaleInDock": 1
+        },
         "tiled/toitRouge.tsx": {
             "scaleInDock": 2,
             "scaleInEditor": 1
@@ -146,6 +172,7 @@
             }
         }
     },
+    "last.externalTilesetPath": "/home/olivierpakosz/Piscines/JAVA/T-JAV-501-LIL_10/assets/Maps/tiled",
     "last.imagePath": "/home/olivierpakosz/Downloads",
     "map.height": 40,
     "map.lastUsedFormat": "tmx",
@@ -165,7 +192,9 @@
         "map_2.tmx",
         "map_3.tmx",
         "map_4.tmx",
-        "tiled/castle_tileset_part1.tsx"
+        "tiled/castle_tileset_part1.tsx",
+        "tiled/castle_tileset_part2.tsx",
+        "tiled/castle_tileset_part3.tsx"
     ],
     "project": "Map.tiled-project",
     "recentFiles": [
@@ -178,10 +207,11 @@
         "tiled/Background_2.tsx",
         "tiled/Tree-Assets.tsx",
         "map_2.tmx",
-        "tiled/castle_tileset_part1.tsx",
-        "map_4.tmx",
-        "map_3.tmx"
+        "map_3.tmx",
+        "tiled/castle_tileset_part3.tsx",
+        "tiled/castle_tileset_part2.tsx"
     ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 16,
