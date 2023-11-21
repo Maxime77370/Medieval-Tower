@@ -5,8 +5,8 @@
     },
     "activeFile": "map_3.tmx",
     "expandedProjectPaths": [
-        ".",
-        "tiled"
+        "tiled",
+        "."
     ],
     "fileStates": {
         "": {
@@ -56,48 +56,48 @@
         },
         "map_2.tmx": {
             "expandedObjectLayers": [
+                13,
                 14,
                 15,
-                13,
-                3,
-                19,
                 16,
                 17,
-                4,
-                20
+                19,
+                20,
+                3,
+                4
             ],
             "scale": 1,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 1191,
-                "y": 437.5
+                "x": 1240,
+                "y": 320
             }
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
-                14,
-                15,
+                10,
+                11,
                 12,
                 13,
-                18,
-                19,
+                14,
                 16,
-                10,
-                11
+                15,
+                18,
+                19
             ],
             "scale": 1.5,
-            "selectedLayer": 9,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 89.33333333333331,
-                "y": 403
+                "x": 2780.6666666666665,
+                "y": 365.66666666666663
             }
         },
         "map_4.tmx": {
             "scale": 0.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 518,
-                "y": 281
+                "x": 2494,
+                "y": 320
             }
         },
         "premiere_map.tmx": {
