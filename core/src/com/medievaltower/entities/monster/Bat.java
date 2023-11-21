@@ -33,6 +33,7 @@ public class Bat extends Monstre {
         super(x, y, 30, 30, new Texture("paix.jpg"));
         this.xOrigin = x;
         this.yOrigin = y;
+        this.xVelocity = 100;
     }
 
     /**
@@ -46,9 +47,15 @@ public class Bat extends Monstre {
 
         this.sinusoidalMove();
 
-        xVelocity = 0;
+        if (this.x > xOrigin + 500){
+            this.xVelocity = -this.xVelocity;
+            this.x = xOrigin + 500;
+        } else if (this.x < xOrigin - 500){
+            this.xVelocity = -this.xVelocity;
+            this.x = xOrigin - 500;
+        }
 
-        x += this.xVelocity * Gdx.graphics.getDeltaTime();
+        this.x += this.xVelocity * Gdx.graphics.getDeltaTime();
         setBoundingBox();
     }
 
