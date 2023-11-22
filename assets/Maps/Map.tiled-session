@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map_3.tmx",
+    "activeFile": "map_2.tmx",
     "expandedProjectPaths": [
         "tiled",
         "."
@@ -50,57 +50,64 @@
             "scale": 1.2178,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 240.59779931023158,
-                "y": 160.1248152405978
+                "x": 238.95549351289208,
+                "y": 159.71423879126297
             }
         },
         "map_2.tmx": {
             "expandedObjectLayers": [
-                19,
                 20,
-                3,
                 4,
+                16,
+                17,
+                19,
+                3,
                 13,
                 14,
-                15,
-                16,
-                17
+                15
             ],
             "scale": 1,
-            "selectedLayer": 6,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 1240,
-                "y": 320
+                "x": 1813,
+                "y": 331.5
             }
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
-                19,
                 10,
                 11,
+                16,
+                18,
+                19,
                 12,
                 13,
                 14,
-                15,
-                16,
-                18
+                15
             ],
             "scale": 1.5,
-            "selectedLayer": 12,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 3128,
-                "y": 365.66666666666663
+                "x": 1919.6666666666665,
+                "y": 320
             }
         },
         "map_4.tmx": {
             "expandedObjectLayers": [
-                7
+                10,
+                11,
+                16,
+                7,
+                12,
+                13,
+                8,
+                9
             ],
-            "scale": 1,
-            "selectedLayer": 7,
+            "scale": 1.5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 2847,
-                "y": 320
+                "x": 1804,
+                "y": 328.33333333333337
             }
         },
         "premiere_map.tmx": {
@@ -209,10 +216,10 @@
         "tiled/Background_1.tsx",
         "tiled/Background_2.tsx",
         "tiled/Tree-Assets.tsx",
-        "map_2.tmx",
         "tiled/castle_tileset_part3.tsx",
         "tiled/castle_tileset_part2.tsx",
-        "tiled/castle_tileset_part1.tsx"
+        "tiled/castle_tileset_part1.tsx",
+        "map_4.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
