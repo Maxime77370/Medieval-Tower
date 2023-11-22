@@ -628,7 +628,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     }
 
     private void setExpEffect() {
-        this.setExp(2000);
+        this.setExp(150);
     }
 
     private void setSpeedEffect() {
