@@ -46,8 +46,10 @@ public class EndGameScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // Afficher "Loading"
-        font.draw(batch, "Loading...", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        // Afficher les histoires
+        int mapId = Map.getInstance().getIdMap();
+        this.showStory(mapId);
+
 
         batch.end();
 
@@ -57,6 +59,11 @@ public class EndGameScreen implements Screen {
             gameScreen.restartGame();
             game.setScreen(gameScreen);
         }
+    }
+
+    private void showStory(int mapId) {
+        // Get the content of the story file txt
+        // String story = Gdx.files.internal("story/story" + mapId + ".txt").readString();
     }
 
     /**
