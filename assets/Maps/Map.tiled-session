@@ -94,8 +94,8 @@
         },
         "map_4.tmx": {
             "expandedObjectLayers": [
-                16,
                 7,
+                16,
                 11,
                 10,
                 9,
@@ -104,10 +104,10 @@
                 12
             ],
             "scale": 1.5,
-            "selectedLayer": 2,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 2964.6666666666665,
-                "y": 320
+                "x": 4199.333333333333,
+                "y": 306.33333333333337
             }
         },
         "premiere_map.tmx": {

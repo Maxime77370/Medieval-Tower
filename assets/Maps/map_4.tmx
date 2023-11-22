@@ -34,7 +34,6 @@
   <object id="253" x="5603" y="481"/>
   <object id="261" x="3332" y="319"/>
   <object id="279" x="1397" y="488"/>
-  <object id="281" x="4232" y="427"/>
  </objectgroup>
  <objectgroup id="11" name="Archer">
   <object id="218" x="942.667" y="270.667"/>
@@ -73,7 +72,7 @@
   <object id="250" x="5118" y="204" width="14" height="109"/>
   <object id="251" x="5527" y="191" width="8" height="119"/>
   <object id="254" x="5407" y="328" width="32" height="197"/>
-  <object id="255" x="5765" y="402" width="36" height="129"/>
+  <object id="255" x="5765" y="356.667" width="12" height="174.333"/>
   <object id="256" x="6008" y="206" width="7" height="103"/>
   <object id="257" x="6362" y="192" width="6" height="119"/>
   <object id="259" x="3143" y="145" width="8" height="225"/>
