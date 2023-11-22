@@ -59,7 +59,10 @@ public class Map {
     public Map(int mapId) {
         this.idMap = mapId;
         instance = this;
-        loadMap(mapId);
+        if (mapId < 5) {
+           loadMap(mapId);
+        }
+
     }
 
     /**
@@ -107,6 +110,7 @@ public class Map {
         // Dispose of the map when it is no longer needed
         tiledMap.dispose();
         tiledMapRenderer.dispose();
+        musique.dispose();
     }
 
     /**

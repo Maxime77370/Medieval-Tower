@@ -63,6 +63,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private final float invincibleDuration = 3;
     private final AnimationPersonnage animation = new AnimationPersonnage();
     private final int level = 1;
+    private int deathCount = 0;
 
     public int map = 2;
     private final Direction currentDirection = Direction.NONE;
@@ -388,6 +389,10 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         }
     }
 
+    public int getDeathCount() {
+        return this.deathCount;
+    }
+
     /**
      * Method to activate invincibility
      */
@@ -643,6 +648,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      */
     public void die() {
         this.isDead = true;
+        this.deathCount += 1;
     }
 
     /**
@@ -686,6 +692,10 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
         this.yVelocity = 0;
         this.invincibleTimer = 0;
         this.speedEffectDuration = 0;
+    }
+
+    public void resetPersonnage() {
+        instance = null;
     }
 
     public int getExpRequiredForNextLevel() {

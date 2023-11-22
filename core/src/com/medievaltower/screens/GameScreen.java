@@ -49,9 +49,9 @@ public class GameScreen implements Screen {
     private final Label monsterCountLabel; // Label for monster count
     private final Label keyLabel; // Label for key
     private final Label potionCountLabel; // Label for potion
-    private final Label inventoryCountLabel; // Label for inventory
     private final Chronometre chronometre = new Chronometre();
     private final Label endLabel; // Label for end game
+    private final Label countDeathLabel;
 
     /**
      * GameScreen constructor
@@ -155,24 +155,27 @@ public class GameScreen implements Screen {
 
         stage.addActor(expTable);
 
-
-        // Load textures for HUD elements
-        Texture inventoryTexture = new Texture("inventory.png"); // Replace with your inventory icon
         Texture potionTexture = new Texture("potion.png"); // Replace with your potion icon
         Texture monsterTexture = new Texture("monster.png"); // Replace with your monster icon
         Texture keyTexture = new Texture("Texture/Key/key.png"); // Replace with your key icon
+        Texture death = new Texture("death.png"); // Replace with your key icon
 
 
         // Add a separator
         table.row().padTop(5);
 
-        // Display inventory icon
-        Image inventoryImage = new Image(inventoryTexture);
-        table.add(inventoryImage).pad(5).width(50).height(50);
+        // display key icon
+        Image keyImage = new Image(keyTexture);
+        table.add(keyImage).pad(5).width(50).height(50);
 
-        // Display inventory count (replace with the actual count)
-        inventoryCountLabel = new Label("x" + personnage.getWeaponInventory().size(), new Label.LabelStyle(font, Color.WHITE));
-        table.add(inventoryCountLabel).pad(5);
+        // Display Key
+        if (Personnage.getInstance().isKeyEquipped()) {
+            keyLabel = new Label("FOUND", new Label.LabelStyle(font, Color.GREEN));
+            table.add(keyLabel).pad(10);
+        } else {
+            keyLabel = new Label("NOT FOUND", new Label.LabelStyle(font, Color.RED));
+            table.add(keyLabel).pad(10);
+        }
 
         // Add another separator
         table.row().padTop(10);
@@ -195,18 +198,11 @@ public class GameScreen implements Screen {
 
         table.row().padTop(10);
 
-        // display key icon
-        Image keyImage = new Image(keyTexture);
-        table.add(keyImage).pad(5).width(50).height(50);
+        Image deathImage = new Image(death);
+        table.add(deathImage).pad(5).width(50).height(50);
+        countDeathLabel = new Label("x" + personnage.getDeathCount(), new Label.LabelStyle(font, Color.RED));
+        table.add(countDeathLabel).pad(5);
 
-
-        if (Personnage.getInstance().isKeyEquipped()) {
-            keyLabel = new Label("FOUND", new Label.LabelStyle(font, Color.GREEN));
-            table.add(keyLabel).pad(10);
-        } else {
-            keyLabel = new Label("NOT FOUND", new Label.LabelStyle(font, Color.RED));
-            table.add(keyLabel).pad(10);
-        }
 
         // display end game message on the bloc end game
         if (Personnage.getInstance().isKeyEquipped()) {
@@ -421,11 +417,11 @@ public class GameScreen implements Screen {
             keyLabel.setStyle(new Label.LabelStyle(font, Color.RED));
         }
 
+        // Update the death count
+        countDeathLabel.setText("Death count : x" + personnage.getDeathCount());
+
         // Update the heart
         updateHearts();
-
-        // Display inventory count (replace with the actual count)
-        inventoryCountLabel.setText("x" + personnage.getWeaponInventory().size());
 
         // Display potion count (replace with the actual count)
         potionCountLabel.setText("x" + EntityManager.getInstance().getNumberOfPotions());
