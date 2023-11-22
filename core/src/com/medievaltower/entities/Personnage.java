@@ -287,18 +287,22 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
             this.animation.setStateLocal("InJump");
         }
 
-        if (Actions.get("Down")) {
-            if (isJumping) {
-                this.yVelocity -= speed * Gdx.graphics.getDeltaTime() / 2;
-                this.animation.setStateLocal("AttackFromAir");
-            }
-        }
-
         if (Actions.get("Space")) {
             this.isAttacked = true;
             this.attack();
         } else {
+            if (this.isAttacked) {
+                this.animation.setForceState(null);
+            }
             this.isAttacked = false;
+        }
+
+        if (Actions.get("Down")) {
+            if (isJumping) {
+                this.yVelocity -= speed * Gdx.graphics.getDeltaTime() / 2;
+                this.animation.setStateLocal("AttackFromAir");
+                this.isAttacked = true;
+            }
         }
 
         if (isInvincible) {
