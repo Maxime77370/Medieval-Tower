@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Array;
@@ -50,6 +51,7 @@ public class GameScreen implements Screen {
     private final Label potionCountLabel; // Label for potion
     private final Label inventoryCountLabel; // Label for inventory
     private final Chronometre chronometre = new Chronometre();
+    private final Label endLabel; // Label for end game
 
     /**
      * GameScreen constructor
@@ -206,6 +208,24 @@ public class GameScreen implements Screen {
             table.add(keyLabel).pad(10);
         }
 
+        // display end game message on the bloc end game
+        if (Personnage.getInstance().isKeyEquipped()) {
+            endLabel = new Label("Press F to continue", new Label.LabelStyle(font, Color.WHITE));
+        } else {
+            endLabel = new Label("You need to find the key...", new Label.LabelStyle(font, Color.WHITE));
+        }
+
+        // Set position to the end bloc
+        MapObjects enblocs = Map.getInstance().getEndCollision();
+
+        // get the end blocs position
+        float x = enblocs.get(0).getProperties().get("x", Float.class);
+        float y = enblocs.get(0).getProperties().get("y", Float.class);
+
+        endLabel.setPosition(x, y);
+
+        stage.addActor(endLabel);
+
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -253,6 +273,26 @@ public class GameScreen implements Screen {
         // Update the HUD
         updateHUD();
 
+        // Set position to the end bloc
+        MapObjects enblocs = Map.getInstance().getEndCollision();
+
+        float x = enblocs.get(0).getProperties().get("x", Float.class) - 100;
+        float y = enblocs.get(0).getProperties().get("y", Float.class) + 50; // Par exemple, 50 pixels au-dessus du bloc
+
+        String message;
+
+        if (Personnage.getInstance().isKeyEquipped()) {
+            message = "COME TO THE NEXT LEVEL";
+        } else {
+            message = "YOU NEED TO FIND THE KEY";
+        }
+
+        batch.begin();
+        font.draw(batch, message, x, y);
+        batch.end();
+
+        stage.addActor(endLabel);
+
         // Draw the debug entities
         // entityManager.drawDebug(batch);
 
@@ -268,6 +308,12 @@ public class GameScreen implements Screen {
         if (personnage.isDead()) {
             chronometre.stop();
             ((Game) Gdx.app.getApplicationListener()).setScreen(new DeathScreen(game));
+        }
+
+        // if player finish a level
+        if (personnage.isFinish()) {
+            chronometre.stop();
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new EndGameScreen(game));
         }
 
 

@@ -91,6 +91,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
     private boolean isDead = false;
     private boolean isAttacked;
     private float speedEffectDuration = 0;
+    private boolean chargeLoadingScreen = false;
 
 
     /**
@@ -334,7 +335,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
                     // Déterminer le type de collision
                     if (isKeyEquipped()){
                         map += 1;
-                        isDead = true;
+                        chargeLoadingScreen = true;
                     }
                 }
             }
@@ -667,6 +668,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     public void reset() {
         this.niveauPersonnage.setHearts(3);
+        this.chargeLoadingScreen = false;
         this.isDead = false;
         this.isInvincible = false;
         this.isJumping = false;
@@ -704,5 +706,9 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
     public int getMaxLevel() {
         return niveauPersonnage.getMaxLevel();
+    }
+
+    public boolean isFinish() {
+        return chargeLoadingScreen;
     }
 }
