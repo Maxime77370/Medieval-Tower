@@ -215,6 +215,28 @@ public class GameScreen implements Screen {
             endLabel = new Label("You need to find the key...", new Label.LabelStyle(font, Color.WHITE));
         }
 
+        if (Map.getInstance().getIdMap() == 2) {
+            MapObjects text_jump = Map.getInstance().getTutoJump();
+            MapObjects text_attack = Map.getInstance().getTutoAttack();
+            MapObjects text_slide = Map.getInstance().getTutoSlide();
+
+            float x_jump = text_jump.get(0).getProperties().get("x", Float.class);
+            float y_jump = text_jump.get(0).getProperties().get("y", Float.class);
+
+            float x_attack = text_attack.get(0).getProperties().get("x", Float.class);
+            float y_attack = text_attack.get(0).getProperties().get("y", Float.class);
+
+            float x_slide = text_slide.get(0).getProperties().get("x", Float.class);
+            float y_slide = text_slide.get(0).getProperties().get("y", Float.class);
+
+
+            batch.begin();
+            font.draw(batch, "Press Z or ↑ to jump", x_jump, y_jump);
+            font.draw(batch, "Press Space to attack", x_attack, y_attack);
+            font.draw(batch, "Press and keep <- or -> and press ↓", x_slide, y_slide);
+            batch.end();
+        }
+
         // Set position to the end bloc
         MapObjects enblocs = Map.getInstance().getEndCollision();
 
@@ -287,11 +309,36 @@ public class GameScreen implements Screen {
             message = "YOU NEED TO FIND THE KEY";
         }
 
+        if (Map.getInstance().getIdMap() == 2) {
+            MapObjects text_jump = Map.getInstance().getTutoJump();
+            MapObjects text_attack = Map.getInstance().getTutoAttack();
+            MapObjects text_slide = Map.getInstance().getTutoSlide();
+
+            float x_jump = text_jump.get(0).getProperties().get("x", Float.class);
+            float y_jump = text_jump.get(0).getProperties().get("y", Float.class);
+
+            float x_attack = text_attack.get(0).getProperties().get("x", Float.class);
+            float y_attack = text_attack.get(0).getProperties().get("y", Float.class);
+
+            float x_slide = text_slide.get(0).getProperties().get("x", Float.class);
+            float y_slide = text_slide.get(0).getProperties().get("y", Float.class);
+
+            String message_jump = "Press Z Q S D to move.";
+            String message_attack = "Press Space to attack monsters.";
+            String message_slide = "Press and keep Q or D and press S to slide.";
+            batch.begin();
+            font.draw(batch, message_jump, x_jump - 80, y_jump + 30);
+            font.draw(batch, message_attack, x_attack, y_attack + 30);
+            font.draw(batch, message_slide, x_slide - 90, y_slide + 20);
+            batch.end();
+        }
+
         batch.begin();
         font.draw(batch, message, x, y);
         batch.end();
 
         stage.addActor(endLabel);
+
 
         // Draw the debug entities
         // entityManager.drawDebug(batch);

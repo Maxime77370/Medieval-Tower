@@ -19,7 +19,9 @@ import com.medievaltower.entities.potion.ExpPotion;
 import com.medievaltower.entities.potion.HealthPotion;
 import com.medievaltower.entities.potion.SpeedPotion;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Map class
@@ -29,6 +31,7 @@ import java.util.HashMap;
  */
 public class Map {
     private static Map instance;
+    private int idMap;
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer tiledMapRenderer;
     private MapObjects collisionPlateforme;
@@ -41,6 +44,9 @@ public class Map {
     private MapObjects spawnKey;
     private MapObjects collisionMort;
     private MapObjects spawnPotions;
+    private MapObjects tuto_jump;
+    private MapObjects tuto_attack;
+    private MapObjects tuto_slide;
 
     /**
      * Map constructor
@@ -49,6 +55,7 @@ public class Map {
      * @param mapId : the id of the map to load
      */
     public Map(int mapId) {
+        this.idMap = mapId;
         instance = this;
         loadMap(mapId);
     }
@@ -121,6 +128,19 @@ public class Map {
         this.spawnKey = tiledMap.getLayers().get("Key").getObjects();
         this.collisionMort = tiledMap.getLayers().get("Collisions_mort").getObjects();
         this.spawnPotions = tiledMap.getLayers().get("Spawn_potion").getObjects();
+        if (this.idMap == 2) {
+            this.tuto_jump = tiledMap.getLayers().get("texte_jump").getObjects();
+            this.tuto_attack = tiledMap.getLayers().get("texte_attack").getObjects();
+            this.tuto_slide = tiledMap.getLayers().get("texte_slide").getObjects();
+        }
+    }
+    
+    public int getIdMap() {
+        return idMap;
+    }
+
+    public void setIdMap(int idMap) {
+        this.idMap = idMap;
     }
 
     /**
@@ -167,6 +187,18 @@ public class Map {
     }
 
     public MapObjects getEndCollision(){return collisionLevel;}
+
+    public MapObjects getTutoJump() {
+        return this.tuto_jump;
+    }
+
+    public MapObjects getTutoAttack() {
+        return this.tuto_attack;
+    }
+
+    public MapObjects getTutoSlide() {
+        return this.tuto_slide;
+    }
 
     /**
      * Create all instances of the elements with their position

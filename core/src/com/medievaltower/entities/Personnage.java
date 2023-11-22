@@ -335,6 +335,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
                     // Déterminer le type de collision
                     if (isKeyEquipped()){
                         map += 1;
+                        com.medievaltower.levels.Map.getInstance().setIdMap(map);
                         chargeLoadingScreen = true;
                     }
                 }
