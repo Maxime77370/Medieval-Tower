@@ -135,7 +135,7 @@ public class Map {
             musique.dispose();
         }
         // Charger la musique
-        musique = Gdx.audio.newMusic(Gdx.files.internal("Maps/Sound_" + mapId + ".mp3"));
+        musique = Gdx.audio.newMusic(Gdx.files.internal("Sound/Sound_" + mapId + ".mp3"));
         // Configurer la boucle infinie de la musique
         musique.setLooping(true);
         // Démarrer la musique
