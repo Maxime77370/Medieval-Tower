@@ -65,17 +65,23 @@ public abstract class Animation {
         }
     }
 
+    public void setForceState(String state) {
+       forceState = state;
+    }
+
     /**
      * Set the global state of the animation
      */
-    public void setStateGlobal() {
-        if (forceState != null) {
+    public boolean setStateGlobal() {
+        if (forceState == null) {
             if (this.lastState != this.state) {
                 frame = 0;
                 frameTimer = 0;
                 lastState = this.state;
+                return true;
             }
         }
+        return false;
     }
 
     /**

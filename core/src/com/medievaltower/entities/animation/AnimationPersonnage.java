@@ -42,10 +42,8 @@ public class AnimationPersonnage extends Animation {
         float delta = Gdx.graphics.getDeltaTime();
         this.frameTimer += delta;
 
-        setStateGlobal();
-
         // Adjust the frame duration to control the speed of the animation
-        if (frameTimer > frameDuration) {
+        if (frameTimer > frameDuration || setStateGlobal()) {
             frameTimer -= frameDuration;
             TextureRegion sprite = null;
             switch (this.state) {
@@ -196,8 +194,10 @@ public class AnimationPersonnage extends Animation {
      * @return the texture of the animation
      */
     public TextureRegion animationEndAttackFromAir() {
+        forceState = "EndAttackFromAir";
         if (frame >= 4) {
             frame = 0;
+            forceState = null;
         }
         frame++;
         return AttackFromAirTile.getTexture(frame + 2);

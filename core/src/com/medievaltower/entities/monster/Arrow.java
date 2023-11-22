@@ -64,9 +64,5 @@ public class Arrow extends Entity {
      * @param entity
      */
     public void collide(Entity entity){
-        if (entity instanceof Personnage){
-            Personnage personnage = (Personnage) entity;
-            personnage.receiveDamage(1);
-        }
     }
 }

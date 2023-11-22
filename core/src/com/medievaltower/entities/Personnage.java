@@ -240,6 +240,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
             if (isHanging) {
                 this.animation.setStateLocal("Hanging", true);
+                this.animation.setStateGlobal();
             } else if (Actions.get("Down") && !isJumping) {
                 if (!isSliding) {
                     this.xVelocity *= 2f;
@@ -254,6 +255,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
 
             if (isHanging) {
                 this.animation.setStateLocal("Hanging", false);
+                this.animation.setStateGlobal();
             } else if (Actions.get("Down") && !isJumping) {
                 if (!isSliding) {
                     this.xVelocity *= 2f;
@@ -380,6 +382,7 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      */
     public void receiveDamage(int damage) {
         if (!this.isInvincible) {
+            animation.setStateLocal("Hurt");
             this.niveauPersonnage.loseHeart(damage);
             if (this.getHealth() <= 0) {
                 this.isDead = true;
@@ -569,6 +572,10 @@ public class Personnage extends Entity implements MovableEntity, AttackableEntit
      */
     @Override
     public void collide_floor() {
+        if (isJumping && Actions.get("Down")) {
+            this.animation.setForceState(null);
+            this.animation.setStateLocal("EndAttackFromAir");
+        }
         this.isJumping = false;
         super.collide_floor();
     }
