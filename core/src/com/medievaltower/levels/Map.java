@@ -1,6 +1,7 @@
 package com.medievaltower.levels;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapObject;
@@ -41,6 +42,7 @@ public class Map {
     private MapObjects spawnKey;
     private MapObjects collisionMort;
     private MapObjects spawnPotions;
+    private Music musique;
 
     /**
      * Map constructor
@@ -121,6 +123,16 @@ public class Map {
         this.spawnKey = tiledMap.getLayers().get("Key").getObjects();
         this.collisionMort = tiledMap.getLayers().get("Collisions_mort").getObjects();
         this.spawnPotions = tiledMap.getLayers().get("Spawn_potion").getObjects();
+
+        if (musique != null) {
+            musique.dispose();
+        }
+        // Charger la musique
+        musique = Gdx.audio.newMusic(Gdx.files.internal("Maps/Sound_" + mapId + ".mp3"));
+        // Configurer la boucle infinie de la musique
+        musique.setLooping(true);
+        // Démarrer la musique
+        musique.play();
     }
 
     /**
