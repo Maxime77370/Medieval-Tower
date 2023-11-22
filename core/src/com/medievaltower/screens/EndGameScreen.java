@@ -4,9 +4,13 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.medievaltower.game.MedievalTower;
 import com.medievaltower.levels.Map;
@@ -21,8 +25,14 @@ public class EndGameScreen implements Screen {
     public EndGameScreen(MedievalTower game) {
         this.game = game;
         this.batch = new SpriteBatch();
-        this.font = new BitmapFont();
         this.startTime = TimeUtils.millis();
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("pixel.ttf"));
+
+        // Create the BitmapFont using FreeTypeFontGenerator
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 64; // Increase font size for a larger title
+        font = generator.generateFont(parameter);
     }
 
     /**
@@ -48,8 +58,8 @@ public class EndGameScreen implements Screen {
 
         // Afficher les histoires
         int mapId = Map.getInstance().getIdMap();
-        this.showStory(mapId);
-
+        showStory(mapId-1);
+  
 
         batch.end();
 
@@ -62,9 +72,22 @@ public class EndGameScreen implements Screen {
     }
 
     private void showStory(int mapId) {
-        // Get the content of the story file txt
-        // String story = Gdx.files.internal("story/story" + mapId + ".txt").readString();
+    if (Gdx.files.internal("Story/" + mapId + ".txt").exists()) {
+        String story = Gdx.files.internal("Story/" + mapId + ".txt").readString();
+
+        // Utiliser GlyphLayout pour mesurer la taille du texte
+        GlyphLayout layout = new GlyphLayout();
+        layout.setText(font, story, Color.WHITE, Gdx.graphics.getWidth(), Align.center, true);
+
+        // Calculer la position Y centrée, en tenant compte des marges si nécessaire
+        float textY = (Gdx.graphics.getHeight() + layout.height) / 2f; // Centré verticalement, ajuster si nécessaire
+
+        // Dessiner le texte centré horizontalement
+        font.draw(batch, layout, 0, textY);
+    } else {
+        System.out.println("le fichier n'existe pas : " + mapId);
     }
+}
 
     /**
      * @param width
