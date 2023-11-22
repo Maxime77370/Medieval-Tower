@@ -505,7 +505,7 @@ public class GameScreen implements Screen {
         // Réinitialiser toutes les entités, états et variables nécessaires
         entityManager.reset();
         personnage.reset();
-        map.loadMap(personnage.map);
+        map.loadMap(map.getIdMap());
         map.createEntities();
     }
 }

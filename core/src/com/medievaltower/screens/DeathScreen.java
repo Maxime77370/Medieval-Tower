@@ -76,7 +76,7 @@ public class DeathScreen implements Screen {
         btnRestart.addListener(event -> {
             if (event.isHandled()) {
                 GameScreen gameScreen = GameScreen.getInstance();
-                Map.getInstance().loadMap(3);
+                Map.getInstance().loadMap(Map.getInstance().getIdMap());
                 gameScreen.restartGame();
                 game.setScreen(gameScreen);
             }

@@ -32,6 +32,7 @@ public class Zombie extends Monstre {
 
     public Zombie(int x, int y) {
         super(x, y, 48, 48, new Texture("paix.jpg"));
+        this.speed = 200;
     }
 
     /**
